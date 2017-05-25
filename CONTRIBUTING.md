@@ -42,3 +42,35 @@ git clone git@github.com:data-creative/tonebase-api.git
 cd tonebase-api/
 bundle install
 ````
+
+## Developing
+
+Run a local web server:
+
+```` sh
+rails s
+````
+
+Run a local rails console:
+
+```` sh
+rails c
+````
+
+## Testing
+
+Run tests:
+
+```` sh
+bundle exec rspec spec/
+````
+
+## Deploying
+
+Gain access to the Heroku application called "tonebase-api", then deploy when ready:
+
+```` sh
+git pull origin master
+git push origin master
+git push heroku master
+````
