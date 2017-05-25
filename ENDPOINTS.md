@@ -1,0 +1,59 @@
+# Web Service Documentation
+
+## API Endpoints
+
+Dev Group	|	Primary Resource	|	Action	|	Request Method	|	Endpoint URL
+---	|	---	|	---	|	---	|	---
+1-Core	|	Artist (User)	|	1-List	|	GET	|	/api/artists
+1-Core	|	Artist (User)	|	3-Show	|	GET	|	/api/artists/:id
+1-Core	|	Artist (User)	|	4-Update	|	PUT	|	/api/artists/:id
+1-Core	|	Artist (User)	|	5-Destroy	|	DELETE	|	/api/artists/:id
+1-Core	|	Instrument	|	1-List	|	GET	|	/api/instruments
+1-Core	|	Instrument	|	2-Create	|	POST	|	/api/instruments
+1-Core	|	Instrument	|	3-Show	|	GET	|	/api/instruments/:id
+1-Core	|	Instrument	|	4-Update	|	PUT	|	/api/instruments/:id
+1-Core	|	Instrument	|	5-Destroy	|	DELETE	|	/api/instruments/:id
+1-Core	|	User	|	1-List	|	GET	|	/api/users
+1-Core	|	User	|	2-Create	|	POST	|	/api/users
+1-Core	|	User	|	3-Show	|	GET	|	/api/users/:id
+1-Core	|	User	|	4-Update	|	PUT	|	/api/users/:id
+1-Core	|	User	|	5-Destroy	|	DELETE	|	/api/users/:id
+2-Comms	|	Ad	|	1-List	|	GET	|	/api/ads
+2-Comms	|	Ad	|	2-Create	|	POST	|	/api/ads
+2-Comms	|	Ad	|	3-Show	|	GET	|	/api/ads/:id
+2-Comms	|	Ad	|	4-Update	|	PUT	|	/api/ads/:id
+2-Comms	|	Ad	|	5-Destroy	|	DELETE	|	/api/ads/:id
+2-Comms	|	AdPlacement	|	1-List	|	GET	|	/api/ads/:id/placements
+2-Comms	|	AdPlacement	|	2-Create	|	POST	|	/api/ads/:id/placements
+2-Comms	|	AdPlacement	|	3-Show	|	GET	|	/api/ads/:id/placements/:id
+2-Comms	|	AdPlacement	|	4-Update	|	PUT	|	/api/ads/:id/placements/:id
+2-Comms	|	AdPlacement	|	5-Destroy	|	DELETE	|	/api/ads/:id/placements/:id
+2-Comms	|	Advertiser	|	1-List	|	GET	|	/api/advertisers
+2-Comms	|	Advertiser	|	2-Create	|	POST	|	/api/advertisers
+2-Comms	|	Advertiser	|	3-Show	|	GET	|	/api/advertisers/:id
+2-Comms	|	Advertiser	|	4-Update	|	PUT	|	/api/advertisers/:id
+2-Comms	|	Advertiser	|	5-Destroy	|	DELETE	|	/api/advertisers/:id
+2-Comms	|	Alert	|	1-List	|	GET	|	/api/alerts
+2-Comms	|	Alert	|	2-Create	|	POST	|	/api/alerts
+2-Comms	|	Alert	|	3-Show	|	GET	|	/api/alerts/:id
+2-Comms	|	Alert	|	4-Update	|	PUT	|	/api/alerts/:id
+2-Comms	|	Alert	|	5-Destroy	|	DELETE	|	/api/alerts/:id
+2-Comms	|	UserAlert	|	1-List	|	GET	|	/api/users/:id/alerts
+2-Comms	|	UserAlert	|	2-Create	|	POST	|	/api/users/:id/alerts
+2-Comms	|	UserAlert	|	3-Show	|	GET	|	/api/users/:id/alerts/:id
+2-Comms	|	UserAlert	|	4-Update	|	PUT	|	/api/users/:id/alerts/:id
+2-Comms	|	UserAlert	|	5-Destroy	|	DELETE	|	/api/users/:id/alerts/:id
+3-Interactivity	|	Favorite	|	2-Create	|	POST	|	/api/favorites
+3-Interactivity	|	Favorite	|	5-Destroy	|	DELETE	|	/api/favorites
+3-Interactivity	|	Follow	|	2-Create	|	POST	|	/api/follow
+3-Interactivity	|	Follow	|	5-Destroy	|	DELETE	|	/api/follow
+3-Interactivity	|	Video	|	1-List	|	GET	|	/api/videos
+3-Interactivity	|	Video	|	2-Create	|	POST	|	/api/videos
+3-Interactivity	|	Video	|	3-Show	|	GET	|	/api/videos/:id
+3-Interactivity	|	Video	|	4-Update	|	PUT	|	/api/videos/:id
+3-Interactivity	|	Video	|	5-Destroy	|	DELETE	|	/api/videos/:id
+3-Interactivity	|	View	|	1-List	|	GET	|	/api/views/
+3-Interactivity	|	View	|	2-Create	|	POST	|	/api/views/
+3-Interactivity	|	View	|	3-Show	|	GET	|	/api/views/:id
+4-Payments	|	Payment	|	1-List	|	GET	|	/api/payments
+4-Payments	|	Payment	|	3-Show	|	GET	|	/api/payments/:id
