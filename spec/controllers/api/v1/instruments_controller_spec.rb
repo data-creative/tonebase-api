@@ -11,12 +11,12 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
       expect(response.status).to eql(200)
     end
 
-    it "should include an 'instruments' array" do
-      expect(parsed_response["instruments"]).to be_kind_of(Array)
+    it "should return an array" do
+      expect(parsed_response).to be_kind_of(Array)
     end
 
     it "should include all instruments" do
-      instrument_names = parsed_response["instruments"].map{|i| i["name"]}
+      instrument_names = parsed_response.map{|i| i["name"]}
       expect(instrument_names).to include(instrument.name)
     end
   end
@@ -29,11 +29,11 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
     end
 
     it "should include an 'instrument' object" do
-      expect(parsed_response["instrument"]).to be_kind_of(Hash)
+      expect(parsed_response).to be_kind_of(Hash)
     end
 
     it "should include the requested instrument" do
-      expect(parsed_response["instrument"]["name"]).to eql(instrument.name)
+      expect(parsed_response["name"]).to eql(instrument.name)
     end
   end
 
