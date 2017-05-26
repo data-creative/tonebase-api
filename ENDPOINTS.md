@@ -1,18 +1,69 @@
 # Web Service Documentation
 
-## API Endpoints
+This document provides a reference for how the Client Application should expect to interface with the API Server.
 
-Dev Group	|	Primary Resource	|	Action	|	Request Method	|	Endpoint URL
+NOTE: The API's current operating version is `v1`, so all endpoint URLs in this document assume a prefix of `/api/v1`.
+
+## Resources
+
+Each section below describes a class of resource within the scope of this system, as well as an example JSON representation of that resource, and a list of operations available to be performed on that resource.
+
+### Instrument
+
+A musical instrument.
+
+Example:
+
+```` js
+{
+  name: "Sitar",
+  description: "The sitar is a plucked stringed instrument used mainly in Hindustani music and Indian classical music."
+}
+````
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /instruments
+Create | POST | /instruments
+Show | GET | /instruments/:id
+Update | PUT | /instruments/:id
+Destroy	|	DELETE | /instruments/:id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+### Unimplemented
+
+This table contains a list of API endpoints planned but not yet implemented.
+
+Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 ---	|	---	|	---	|	---	|	---
-1-Core	|	Artist (User)	|	1-List	|	GET	|	/api/artists
+1-Core	|	Artist (User)	|	1-List | GET | /api/artists
 1-Core	|	Artist (User)	|	3-Show	|	GET	|	/api/artists/:id
 1-Core	|	Artist (User)	|	4-Update	|	PUT	|	/api/artists/:id
 1-Core	|	Artist (User)	|	5-Destroy	|	DELETE	|	/api/artists/:id
-1-Core	|	Instrument	|	1-List	|	GET	|	/api/instruments
-1-Core	|	Instrument	|	2-Create	|	POST	|	/api/instruments
-1-Core	|	Instrument	|	3-Show	|	GET	|	/api/instruments/:id
-1-Core	|	Instrument	|	4-Update	|	PUT	|	/api/instruments/:id
-1-Core	|	Instrument	|	5-Destroy	|	DELETE	|	/api/instruments/:id
 1-Core	|	User	|	1-List	|	GET	|	/api/users
 1-Core	|	User	|	2-Create	|	POST	|	/api/users
 1-Core	|	User	|	3-Show	|	GET	|	/api/users/:id
