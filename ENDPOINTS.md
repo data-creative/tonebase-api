@@ -4,6 +4,33 @@ This document provides a reference for how the Client Application should expect 
 
 NOTE: The API's current operating version is `v1`, so all endpoint URLs in this document assume a prefix of `/api/v1`.
 
+## Requests
+
+### POST Request Parameters
+
+When issuing POST requests to a particular endpoint, pass parameters for the given resource nested inside an object named after that resource. For example, the request `POST api/v1/things` should pass a request body which resembles the following:
+
+```` js
+{
+  thing: { // <-- name this object after the resource you are trying to create!
+    name: "My Thing",
+    description: "A thing."
+  }
+}
+````
+
+## Responses
+
+The API uses the following HTTP response codes:
+
+code | major status | minor status
+--- | ---
+200 | Success | OK
+201 | Success | Created
+422 | Client Error | Unprocessable
+
+The API also returns descriptive error messages, when applicable.
+
 ## Resources
 
 Each section below describes a class of resource within the scope of this system, as well as an example JSON representation of that resource, and a list of operations available to be performed on that resource.

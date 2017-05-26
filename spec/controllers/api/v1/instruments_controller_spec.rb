@@ -7,7 +7,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
   describe "GET #index" do
     let(:response){  get(:index, params: {format: 'json'})  }
 
-    it "should be successful" do
+    it "should be successful (ok)" do
       expect(response.status).to eql(200)
     end
 
@@ -24,7 +24,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
   describe "GET #show" do
     let(:response){  get(:show, params: {format: 'json', id: instrument.id})  }
 
-    it "should be successful" do
+    it "should be successful (ok)" do
       expect(response.status).to eql(200)
     end
 
@@ -38,11 +38,46 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:instrument_params){ {name: "Tambourine", description: "Shake it."} }
-    let!(:response){ post(:create, params: {format: 'json', instrument: instrument_params}) }
+    context "with valid params" do
+      let(:instrument_params){ {name: "Tambourine", description: "Shake it."} }
+      let!(:response){ post(:create, params: {format: 'json', instrument: instrument_params}) }
 
-    it "should create a new instrument" do
-      expect(Instrument.count).to eql(2)
+      it "should be successful (created)" do
+        expect(response.status).to eql(201)
+        expect(response.message).to eql("Created")
+      end
+
+      it "should create a new instrument" do
+        expect(Instrument.count).to eql(2)
+      end
+    end
+
+    context "with invalid params (duplicate instrument name)" do
+      let(:instrument_params){ {name: instrument.name, description: "Shake it."} }
+      let!(:response){ post(:create, params: {format: 'json', instrument: instrument_params}) }
+
+      it "should be unsuccessful (unprocessable_entity)" do
+        expect(response.status).to eql(422)
+        expect(response.message).to eql("Unprocessable Entity")
+      end
+
+      it "should return a uniqueness validation error message" do
+        expect(parsed_response["name"]).to include("has already been taken")
+      end
+    end
+
+    context "with invalid params (no instrument name)" do
+      let(:instrument_params){ {name: "", description: "Shake it."} }
+      let!(:response){ post(:create, params: {format: 'json', instrument: instrument_params}) }
+
+      it "should be unsuccessful (unprocessable_entity)" do
+        expect(response.status).to eql(422)
+        expect(response.message).to eql("Unprocessable Entity")
+      end
+
+      it "should return a presence validation error message" do
+        expect(parsed_response["name"]).to include("can't be blank")
+      end
     end
   end
 

@@ -1,6 +1,6 @@
 class Api::V1::InstrumentsController < ApplicationController
-  # @example GET /api/v1/instruments.json
 
+  # GET /api/v1/instruments
   def index
     instruments = Instrument.all
     @response = {instruments: instruments.map{|instrument| instrument.as_json } }
@@ -10,6 +10,7 @@ class Api::V1::InstrumentsController < ApplicationController
     end
   end
 
+  # GET /api/v1/instruments/:id
   def show
     instrument = Instrument.find(params[:id])
     @response = {instrument: instrument.as_json}
@@ -19,13 +20,18 @@ class Api::V1::InstrumentsController < ApplicationController
     end
   end
 
+  # POST /api/v1/instruments
   def create
-    instrument = Instrument.create!(instrument_params)
+    @instrument = Instrument.new(instrument_params)
 
-    @response = {instrument: instrument.as_json}
+    @response = {instrument: @instrument.as_json}
 
     respond_to do |format|
-      format.json { render json: JSON.pretty_generate(@response) }
+      if @instrument.save
+        format.json { render json: JSON.pretty_generate(@response), status: :created}
+      else
+        format.json { render json: @instrument.errors, status: :unprocessable_entity }
+      end
     end
   end
 
