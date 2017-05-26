@@ -12,4 +12,20 @@ class Api::V1::InstrumentsController < ApplicationController
       format.json { render json: JSON.pretty_generate(@response) }
     end
   end
+
+  def show
+    instrument = Instrument.find(params[:id])
+
+    @response = {
+      instrument: {
+        id: instrument.id,
+        name: instrument.name,
+        description: instrument.description
+      }
+    }
+
+    respond_to do |format|
+      format.json { render json: JSON.pretty_generate(@response) }
+    end
+  end
 end
