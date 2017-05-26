@@ -18,4 +18,18 @@ class Api::V1::InstrumentsController < ApplicationController
       format.json { render json: JSON.pretty_generate(@response) }
     end
   end
+
+  def create
+    instrument = Instrument.create!(instrument_params)
+
+    @response = {instrument: instrument.as_json}
+
+    respond_to do |format|
+      format.json { render json: JSON.pretty_generate(@response) }
+    end
+  end
+
+  def instrument_params
+    params.require(:instrument).permit(:name, :description)
+  end
 end

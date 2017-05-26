@@ -4,7 +4,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
   let!(:instrument){ create(:instrument) }
   let(:parsed_response){ JSON.parse(response.body) }
 
-  describe "#index" do
+  describe "GET #index" do
     let(:response){  get(:index, params: {format: 'json'})  }
 
     it "should be successful" do
@@ -21,7 +21,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
     end
   end
 
-  describe "#show" do
+  describe "GET #show" do
     let(:response){  get(:show, params: {format: 'json', id: instrument.id})  }
 
     it "should be successful" do
@@ -36,4 +36,21 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
       expect(parsed_response["instrument"]["name"]).to eql(instrument.name)
     end
   end
+
+  describe "POST #create" do
+    let(:instrument_params){ {name: "Tambourine", description: "Shake it."} }
+    let!(:response){ post(:create, params: {format: 'json', instrument: instrument_params}) }
+
+    it "should create a new instrument" do
+      expect(Instrument.count).to eql(2)
+    end
+  end
+
+  #describe "PUT #update" do
+  #  let(:response){  put(:destroy, params: {format: 'json', id: instrument.id})  }
+  #end
+
+  #describe "DELETE #destroy" do
+  #  let(:response){  delete(:destroy, params: {format: 'json', id: instrument.id})  }
+  #end
 end
