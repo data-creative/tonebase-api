@@ -2,11 +2,8 @@ class Api::V1::InstrumentsController < ApplicationController
   # @example GET /api/v1/instruments.json
 
   def index
-    @response = {
-      instruments: [
-        {id: 1, name: "Guitar", description: "An instrument with six strings."}
-      ]
-    }
+    instruments = Instrument.all
+    @response = {instruments: instruments.map{|instrument| instrument.as_json } }
 
     respond_to do |format|
       format.json { render json: JSON.pretty_generate(@response) }
@@ -15,14 +12,7 @@ class Api::V1::InstrumentsController < ApplicationController
 
   def show
     instrument = Instrument.find(params[:id])
-
-    @response = {
-      instrument: {
-        id: instrument.id,
-        name: instrument.name,
-        description: instrument.description
-      }
-    }
+    @response = {instrument: instrument.as_json}
 
     respond_to do |format|
       format.json { render json: JSON.pretty_generate(@response) }
