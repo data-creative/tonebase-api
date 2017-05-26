@@ -29,7 +29,7 @@ Configure documentation generator:
 bundle exec yard doc
 ````
 
-Configure test suite and [factories](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#rspec):
+Configure test suite and [factories](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#rspec) and [matchers](https://github.com/thoughtbot/shoulda-matchers):
 
 ```` sh
 bundle exec rails generate rspec:install
@@ -43,8 +43,21 @@ end
 ````
 
 ```` rb
-# rails_helper
+# spec/rails_helper.rb
 require 'support/factory_girl'
+
+# RSpec.configure do |config|
+  # ...
+
+  # Configure Shoulda Matchers
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+
+      with.library :rails
+    end
+  end
+# end
 ````
 
 Create local databases:
