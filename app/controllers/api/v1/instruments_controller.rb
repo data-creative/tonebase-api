@@ -1,7 +1,7 @@
 class Api::V1::InstrumentsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
-  before_action :set_instrument, only: [:show, :destroy]
+  before_action :set_instrument, only: [:show, :update, :destroy]
 
   #
   # GET /api/v1/instruments
@@ -34,6 +34,19 @@ class Api::V1::InstrumentsController < ApplicationController
         format.json { render json: instrument, status: :created}
       else
         format.json { render json: instrument.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  #
+  # PUT /api/v1/instruments/:id
+  #
+  def update
+    respond_to do |format|
+      if @instrument.update(instrument_params)
+        format.json { render json: @instrument, status: :ok}
+      else
+        format.json { render json: @instrument.errors, status: :unprocessable_entity }
       end
     end
   end
