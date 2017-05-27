@@ -1,6 +1,8 @@
 class Api::V1::InstrumentsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
+  before_action :set_instrument, only: [:show, :destroy]
+
   #
   # GET /api/v1/instruments
   #
@@ -16,10 +18,8 @@ class Api::V1::InstrumentsController < ApplicationController
   # GET /api/v1/instruments/:id
   #
   def show
-    instrument = Instrument.find(params[:id])
-
     respond_to do |format|
-      format.json { render json: instrument }
+      format.json { render json: @instrument }
     end
   end
 
@@ -38,10 +38,25 @@ class Api::V1::InstrumentsController < ApplicationController
     end
   end
 
+  #
+  # DELETE /api/v1/instruments/:id
+  #
+  def destroy
+    @instrument.destroy
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
 private
 
   def render_404
     render json: {"id": ["not found"]}, status: :not_found
+  end
+
+  def set_instrument
+    @instrument = Instrument.find(params[:id])
   end
 
   def instrument_params

@@ -100,7 +100,16 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
   #  let(:response){  put(:destroy, params: {format: 'json', id: instrument.id})  }
   #end
 
-  #describe "DELETE #destroy" do
-  #  let(:response){  delete(:destroy, params: {format: 'json', id: instrument.id})  }
-  #end
+  describe "DELETE #destroy" do
+    let!(:response){  delete(:destroy, params: {format: 'json', id: instrument.id})  }
+
+    it "should be successful (destroyed)" do
+      expect(response.status).to eql(204)
+      expect(response.message).to eql("No Content")
+    end
+
+    it "should delete the resource" do
+      expect(Instrument.count).to eql(0)
+    end
+  end
 end

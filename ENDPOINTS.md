@@ -23,12 +23,13 @@ When issuing POST requests to a particular endpoint, pass parameters for the giv
 
 The API uses the following HTTP response codes:
 
-code | major status | minor status
---- | ---
-200 | Success | OK
-201 | Success | Created
-404 | Client Error | Not found
-422 | Client Error | Unprocessable
+code | major status | minor status | description
+--- | --- | ---
+200 | Success | OK | The resource(s) were returned successfully.
+201 | Success | Created | The resource was created successfully.
+204 | Success | No Content | The resource was destroyed successfully.
+404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct.
+422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
 
 When there are Client Errors, the API also returns descriptive error messages, such as:
 
