@@ -62,7 +62,7 @@ List | GET | /instruments
 Create | POST | /instruments
 Show | GET | /instruments/:id
 Update | PUT | /instruments/:id
-Destroy	|	DELETE | /instruments/:id
+Destroy | DELETE | /instruments/:id
 
 
 
