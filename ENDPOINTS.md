@@ -34,7 +34,7 @@ code | major status | minor status | description
 When there are Client Errors, the API also returns descriptive error messages, such as:
 
   + `{"id": ["not found"]}`
-  + `{"name": ["not found"]}`
+  + `{"name": ["can't be blank"]}`
   + `{"name": ["has already been taken"]}`
 
 ## Resources
