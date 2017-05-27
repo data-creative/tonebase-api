@@ -14,3 +14,4 @@
   + [ActiveRecord Validations](http://guides.rubyonrails.org/active_record_validations.html)
   + [Rack Response Status Codes](https://gist.github.com/mlanett/a31c340b132ddefa9cca)
   + [Shoulda Matchers - Model Uniqueness Validations](https://github.com/thoughtbot/shoulda-matchers/blob/master/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb#L88-L98)
+  + [Converting errors into 404 responses](https://stackoverflow.com/a/32328224/670433)

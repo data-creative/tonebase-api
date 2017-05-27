@@ -22,18 +22,33 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
   end
 
   describe "GET #show" do
-    let(:response){  get(:show, params: {format: 'json', id: instrument.id})  }
+    context "with valid params" do
+      let(:response){  get(:show, params: {format: 'json', id: instrument.id})  }
 
-    it "should be successful (ok)" do
-      expect(response.status).to eql(200)
+      it "should be successful (ok)" do
+        expect(response.status).to eql(200)
+      end
+
+      it "should return an object" do
+        expect(parsed_response).to be_kind_of(Hash)
+      end
+
+      it "should include the requested instrument" do
+        expect(parsed_response["name"]).to eql(instrument.name)
+      end
     end
 
-    it "should include an 'instrument' object" do
-      expect(parsed_response).to be_kind_of(Hash)
-    end
+    context "with invalid params (wrong id)" do
+      let(:response){  get(:show, params: {format: 'json', id: instrument.id * 40 })  }
 
-    it "should include the requested instrument" do
-      expect(parsed_response["name"]).to eql(instrument.name)
+      it "should be unsuccessful (not_found)" do
+        expect(response.status).to eql(404)
+        expect(response.message).to eql("Not Found")
+      end
+
+      it "should return a 'not found' error message" do
+        expect(parsed_response["id"]).to include("not found")
+      end
     end
   end
 

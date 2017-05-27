@@ -27,9 +27,14 @@ code | major status | minor status
 --- | ---
 200 | Success | OK
 201 | Success | Created
+404 | Client Error | Not found
 422 | Client Error | Unprocessable
 
-The API also returns descriptive error messages, when applicable.
+When there are Client Errors, the API also returns descriptive error messages, such as:
+
+  + `{"id": ["not found"]}`
+  + `{"name": ["not found"]}`
+  + `{"name": ["has already been taken"]}`
 
 ## Resources
 
