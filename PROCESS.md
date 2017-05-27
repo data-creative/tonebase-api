@@ -2,6 +2,8 @@
 
 This document describes the commands used to create this project from scratch.
 
+## Setup
+
 Generate a new rails app:
 
 ```` sh
@@ -27,10 +29,35 @@ Configure documentation generator:
 bundle exec yard doc
 ````
 
-Configure test suite:
+Configure test suite and [factories](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#rspec) and [matchers](https://github.com/thoughtbot/shoulda-matchers):
 
 ```` sh
 bundle exec rails generate rspec:install
+````
+
+```` rb
+# spec/support/factory_girl.rb
+RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+end
+````
+
+```` rb
+# spec/rails_helper.rb
+require 'support/factory_girl'
+
+# RSpec.configure do |config|
+  # ...
+
+  # Configure Shoulda Matchers
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+
+      with.library :rails
+    end
+  end
+# end
 ````
 
 Create local databases:
@@ -43,4 +70,10 @@ Create new app called "tonebase-api" within the tonebase heroku organization. Th
 
 ```` sh
 heroku git:remote -a tonebase-api
+````
+
+## Development
+
+```` sh
+rails g model instrument name:string:uniq description:text
 ````
