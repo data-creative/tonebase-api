@@ -43,6 +43,26 @@ cd tonebase-api/
 bundle install
 ````
 
+## Setup Database
+
+Setup the database:
+
+```` sh
+bin/rake db:setup
+````
+
+Seed the database:
+
+```` sh
+bin/rake db:seed
+````
+
+Migrate the database, if necessary:
+
+```` sh
+bin/rake db:migrate
+````
+
 ## Developing
 
 Run a local web server:
@@ -73,4 +93,16 @@ Gain access to the Heroku application called "tonebase-api", then deploy when re
 git pull origin master
 git push origin master
 git push heroku master
+````
+
+If deploying for the first time, seed the production database:
+
+```` sh
+heroku run "bin/rake db:seed"
+````
+
+If the changes require a database migration, run:
+
+```` sh
+heroku run "bin/rake db:migrate"
 ````
