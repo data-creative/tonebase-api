@@ -64,8 +64,30 @@ Show | GET | /instruments/:id
 Update | PUT | /instruments/:id
 Destroy | DELETE | /instruments/:id
 
+### Advertiser
 
+An organization seeking a targeted audience.
 
+Example:
+
+```` js
+{
+  name: "Fendie",
+  description: "The leader in Sitar manufacturing and distribution.",
+  url: "https://www.fendie.com/",
+  contact: {} // an unstructured object optionally containing contact information like a sales representative's name and phone number and email address.
+}
+````
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /advertisers
+Create | POST | /advertisers
+Show | GET | /advertisers/:id
+Update | PUT | /advertisers/:id
+Destroy | DELETE | /advertisers/:id
 
 
 
@@ -112,11 +134,6 @@ Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 2-Comms	|	AdPlacement	|	3-Show	|	GET	|	/api/ads/:id/placements/:id
 2-Comms	|	AdPlacement	|	4-Update	|	PUT	|	/api/ads/:id/placements/:id
 2-Comms	|	AdPlacement	|	5-Destroy	|	DELETE	|	/api/ads/:id/placements/:id
-2-Comms	|	Advertiser	|	1-List	|	GET	|	/api/advertisers
-2-Comms	|	Advertiser	|	2-Create	|	POST	|	/api/advertisers
-2-Comms	|	Advertiser	|	3-Show	|	GET	|	/api/advertisers/:id
-2-Comms	|	Advertiser	|	4-Update	|	PUT	|	/api/advertisers/:id
-2-Comms	|	Advertiser	|	5-Destroy	|	DELETE	|	/api/advertisers/:id
 2-Comms	|	Alert	|	1-List	|	GET	|	/api/alerts
 2-Comms	|	Alert	|	2-Create	|	POST	|	/api/alerts
 2-Comms	|	Alert	|	3-Show	|	GET	|	/api/alerts/:id
