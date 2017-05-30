@@ -17,3 +17,4 @@
   + [Converting errors into 404 responses](https://stackoverflow.com/a/32328224/670433)
   + [Serialized attributes in a factory](http://www.rubycoloredglasses.com/2012/06/add-a-serialized-hash-attribute-to-a-factory_girl-definition/)
   + [ActionController Parameters](http://api.rubyonrails.org/classes/ActionController/Parameters.html)
+  + [RSpec Shared Example](https://relishapp.com/rspec/rspec-core/v/2-0/docs/example-groups/shared-example-group)

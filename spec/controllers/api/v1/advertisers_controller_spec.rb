@@ -1,37 +1,29 @@
 require 'rails_helper'
+require_relative '../../../support/api/v1/responses/list'
+require_relative '../../../support/api/v1/responses/show'
+require_relative '../../../support/api/v1/responses/create'
+require_relative '../../../support/api/v1/responses/update'
+require_relative '../../../support/api/v1/responses/destroy'
 
 RSpec.describe Api::V1::AdvertisersController, type: :controller do
   let!(:advertiser){ create(:advertiser) }
-  let(:parsed_response){ JSON.parse(response.body) }
 
-  describe "GET #index" do
+  describe "GET #index", "response" do
     let(:response){  get(:index, params: {format: 'json'})  }
 
-    it "should be successful (ok)" do
-      expect(response.status).to eql(200)
-    end
+    it_behaves_like "a list response"
 
-    it "should return an array" do
-      expect(parsed_response).to be_kind_of(Array)
-    end
-
-    it "should include all advertisers" do
-      advertiser_names = parsed_response.map{|i| i["name"]}
-      expect(advertiser_names).to include(advertiser.name)
+    it "should include all resources" do
+      expect(parsed_response.map{|h| h["name"]}).to include(advertiser.name)
+      expect(parsed_response.count).to eql(Advertiser.count)
     end
   end
 
-  describe "GET #show" do
+  describe "GET #show", "response" do
     context "with valid params" do
       let(:response){  get(:show, params: {format: 'json', id: advertiser.id})  }
 
-      it "should be successful (ok)" do
-        expect(response.status).to eql(200)
-      end
-
-      it "should return an object" do
-        expect(parsed_response).to be_kind_of(Hash)
-      end
+      it_behaves_like "a successful show response"
 
       it "should include the requested resource" do
         expect(parsed_response["name"]).to eql(advertiser.name)
@@ -41,91 +33,59 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
     context "with invalid params (wrong id)" do
       let(:response){  get(:show, params: {format: 'json', id: advertiser.id * 40 })  }
 
-      it "should be unsuccessful (not_found)" do
-        expect(response.status).to eql(404)
-        expect(response.message).to eql("Not Found")
-      end
-
-      it "should return a 'not found' error message" do
-        expect(parsed_response["id"]).to include("not found")
-      end
+      it_behaves_like "a resource not found response"
     end
   end
 
-  describe "POST #create" do
+  describe "POST #create", "response" do
     context "with valid params" do
       let(:advertiser_params){ {name: "Strattle", description: "A sitar distribution company."} }
-      let!(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
+      let(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
 
-      it "should be successful (created)" do
-        expect(response.status).to eql(201)
-        expect(response.message).to eql("Created")
-      end
-
-      it "should create a new resource" do
-        expect(Advertiser.count).to eql(2)
-      end
+      it_behaves_like "a successful resource creation response", Advertiser
     end
 
-    context "with valid params, including a metadata object" do
-      let(:advertiser_params){ {name: "Strattle", description: "A sitar distribution company.", metadata: {contact:{name:"Jay", phone: "123456789", emailed_on:["2017-05-01", "2017-05-02", "2017-05-03"]}} } }
-      let!(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
+    context "with valid metadata" do
+      let(:advertiser_params){ {name: "Strattle", metadata: {contact:{name:"Jay", phone: "123456789", emailed_on:["2017-05-01", "2017-05-02", "2017-05-03"]}} } }
+      let(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
 
-      it "should be successful (created)" do
-        expect(response.status).to eql(201)
-        expect(response.message).to eql("Created")
-      end
-
-      it "should create a new resource" do
-        expect(Advertiser.count).to eql(2)
-      end
+      it_behaves_like "a successful resource creation response", Advertiser
 
       it "should persist the unstructured metadata" do
+        response
         advertiser = Advertiser.last
         expect(advertiser.metadata.deep_symbolize_keys).to eql(advertiser_params[:metadata])
       end
     end
 
     context "with invalid params (duplicate name)" do
-      let(:advertiser_params){ {name: advertiser.name, description: "A sitar distribution company."} }
-      let!(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
+      let(:advertiser_params){ {name: advertiser.name} }
+      let(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
 
-      it "should be unsuccessful (unprocessable_entity)" do
-        expect(response.status).to eql(422)
-        expect(response.message).to eql("Unprocessable Entity")
-      end
+      it_behaves_like "an unprocessable resource response"
 
-      it "should return a uniqueness validation error message" do
-        expect(parsed_response["name"]).to include("has already been taken")
-      end
+      it_behaves_like "a uniqueness validation error response", :name
     end
 
-    context "with invalid params (missing name)" do
-      let(:advertiser_params){ {name: "", description: "A sitar distribution company."} }
-      let!(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
+    context "with invalid params (blank name)" do
+      let(:advertiser_params){ {name: ""} }
+      let(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
 
-      it "should be unsuccessful (unprocessable_entity)" do
-        expect(response.status).to eql(422)
-        expect(response.message).to eql("Unprocessable Entity")
-      end
+      it_behaves_like "an unprocessable resource response"
 
-      it "should return a presence validation error message" do
-        expect(parsed_response["name"]).to include("can't be blank")
-      end
+      it_behaves_like "a presence validation error response", :name
     end
   end
 
-  describe "PUT #update" do
+  describe "PUT #update", "response" do
     context "with valid params" do
       let(:advertiser_params){ {description: "A sitar distribution company."} }
-      let!(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
+      let(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
 
-      it "should be successful (updated)" do
-        expect(response.status).to eql(200)
-        expect(response.message).to eql("OK")
-      end
+      it_behaves_like "a successful resource update response"
 
       it "should update the resource" do
+        response
         advertiser.reload
         expect(advertiser.description).to eql(advertiser_params[:description])
       end
@@ -133,44 +93,27 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
 
     context "with invalid params (blank name)" do
       let(:advertiser_params){ {name: ""} }
-      let!(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
+      let(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
 
-      it "should be unsuccessful (unprocessable_entity)" do
-        expect(response.status).to eql(422)
-        expect(response.message).to eql("Unprocessable Entity")
-      end
+      it_behaves_like "an unprocessable resource response"
 
-      it "should return a presence validation error message" do
-        expect(parsed_response["name"]).to include("can't be blank")
-      end
+      it_behaves_like "a presence validation error response", :name
     end
 
     context "with invalid params (duplicate name)" do
       let!(:other_advertiser){ create(:advertiser, name: "My Other Advertiser")}
       let(:advertiser_params){ {name: other_advertiser.name} }
-      let!(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
+      let(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
 
-      it "should be unsuccessful (unprocessable_entity)" do
-        expect(response.status).to eql(422)
-        expect(response.message).to eql("Unprocessable Entity")
-      end
+      it_behaves_like "an unprocessable resource response"
 
-      it "should return a presence validation error message" do
-        expect(parsed_response["name"]).to include("has already been taken")
-      end
+      it_behaves_like "a uniqueness validation error response", :name
     end
   end
 
   describe "DELETE #destroy" do
-    let!(:response){  delete(:destroy, params: {format: 'json', id: advertiser.id})  }
+    let(:response){  delete(:destroy, params: {format: 'json', id: advertiser.id})  }
 
-    it "should be successful (destroyed)" do
-      expect(response.status).to eql(204)
-      expect(response.message).to eql("No Content")
-    end
-
-    it "should delete the resource" do
-      expect(Advertiser.count).to eql(0)
-    end
+    it_behaves_like "a successful resource destruction response", Advertiser
   end
 end
