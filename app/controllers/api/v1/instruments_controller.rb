@@ -1,6 +1,4 @@
-class Api::V1::InstrumentsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
-
+class Api::V1::InstrumentsController < Api::V1::ApiController
   before_action :set_instrument, only: [:show, :update, :destroy]
 
   #
@@ -63,10 +61,6 @@ class Api::V1::InstrumentsController < ApplicationController
   end
 
 private
-
-  def render_404
-    render json: {"id": ["not found"]}, status: :not_found
-  end
 
   def set_instrument
     @instrument = Instrument.find(params[:id])

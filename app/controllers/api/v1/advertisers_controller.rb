@@ -1,6 +1,4 @@
-class Api::V1::AdvertisersController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
-
+class Api::V1::AdvertisersController < Api::V1::ApiController
   before_action :set_advertiser, only: [:show, :update, :destroy]
 
   #
@@ -63,10 +61,6 @@ class Api::V1::AdvertisersController < ApplicationController
   end
 
 private
-
-  def render_404
-    render json: {"id": ["not found"]}, status: :not_found
-  end
 
   def set_advertiser
     @advertiser = Advertiser.find(params[:id])
