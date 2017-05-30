@@ -6,7 +6,7 @@ shared_examples_for "a successful resource destruction response" do |model_class
     expect(response.message).to eql("No Content")
   end
 
-  it "should create a new resource" do
+  it "should destroy the specified resource" do
     expect{response}.to change{model_class.count}.by(-1)
   end
 end

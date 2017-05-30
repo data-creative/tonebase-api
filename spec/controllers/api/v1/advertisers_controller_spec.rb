@@ -31,7 +31,7 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
     end
 
     context "with invalid params (wrong id)" do
-      let(:response){  get(:show, params: {format: 'json', id: advertiser.id * 40 })  }
+      let(:response){  get(:show, params: {format: 'json', id: "OOPS" })  }
 
       it_behaves_like "a resource not found response"
     end
@@ -91,6 +91,13 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
       end
     end
 
+    context "with invalid params (wrong id)" do
+      let(:advertiser_params){ {description: "A sitar distribution company."} }
+      let(:response){ put(:update, params: {format: 'json', id: "OOPS", advertiser: advertiser_params}) }
+
+      it_behaves_like "a resource not found response"
+    end
+
     context "with invalid params (blank name)" do
       let(:advertiser_params){ {name: ""} }
       let(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
@@ -111,9 +118,17 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    let(:response){  delete(:destroy, params: {format: 'json', id: advertiser.id})  }
+  describe "DELETE #destroy", "response" do
+    context "with valid params" do
+      let(:response){  delete(:destroy, params: {format: 'json', id: advertiser.id})  }
 
-    it_behaves_like "a successful resource destruction response", Advertiser
+      it_behaves_like "a successful resource destruction response", Advertiser
+    end
+
+    context "with invalid params (wrong id)" do
+      let(:response){  delete(:destroy, params: {format: 'json', id: "OOPS"})  }
+
+      it_behaves_like "a resource not found response"
+    end
   end
 end
