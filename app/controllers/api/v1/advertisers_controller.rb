@@ -1,63 +1,30 @@
 class Api::V1::AdvertisersController < Api::V1::ApiController
   before_action :set_advertiser, only: [:show, :update, :destroy]
 
-  #
   # GET /api/v1/advertisers
-  #
   def index
-    advertisers = Advertiser.all
-
-    respond_to do |format|
-      format.json { render json: advertisers }
-    end
+    render_json(Advertiser.all)
   end
 
-  #
   # GET /api/v1/advertisers/:id
-  #
   def show
-    respond_to do |format|
-      format.json { render json: @advertiser }
-    end
+    render_json(@advertiser)
   end
 
-  #
   # POST /api/v1/advertisers
-  #
   def create
     advertiser = Advertiser.new(advertiser_params)
-
-    respond_to do |format|
-      if advertiser.save
-        format.json { render json: advertiser, status: :created}
-      else
-        format.json { render json: advertiser.errors, status: :unprocessable_entity }
-      end
-    end
+    save_and_render_json(advertiser)
   end
 
-  #
   # PUT /api/v1/advertisers/:id
-  #
   def update
-    respond_to do |format|
-      if @advertiser.update(advertiser_params)
-        format.json { render json: @advertiser, status: :ok}
-      else
-        format.json { render json: @advertiser.errors, status: :unprocessable_entity }
-      end
-    end
+    update_and_render_json(@advertiser, advertiser_params)
   end
 
-  #
   # DELETE /api/v1/advertisers/:id
-  #
   def destroy
-    @advertiser.destroy
-
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    destroy_and_render_json(@advertiser)
   end
 
 private
