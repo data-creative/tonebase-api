@@ -18,7 +18,7 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
     it "should include all advertisers" do
       advertiser_names = parsed_response.map{|i| i["name"]}
       expect(advertiser_names).to include(advertiser.name)
-    end ###
+    end
   end
 
   describe "GET #show" do
@@ -64,6 +64,25 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
 
       it "should create a new resource" do
         expect(Advertiser.count).to eql(2)
+      end
+    end
+
+    context "with valid params, including a metadata object" do
+      let(:advertiser_params){ {name: "Strattle", description: "A sitar distribution company.", metadata: {contact:{name:"Jay", phone: "123456789", emailed_on:["2017-05-01", "2017-05-02", "2017-05-03"]}} } }
+      let!(:response){ post(:create, params: {format: 'json', advertiser: advertiser_params}) }
+
+      it "should be successful (created)" do
+        expect(response.status).to eql(201)
+        expect(response.message).to eql("Created")
+      end
+
+      it "should create a new resource" do
+        expect(Advertiser.count).to eql(2)
+      end
+
+      it "should persist the unstructured metadata" do
+        advertiser = Advertiser.last
+        expect(advertiser.metadata.deep_symbolize_keys).to eql(advertiser_params[:metadata])
       end
     end
 
@@ -128,7 +147,7 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
 
     context "with invalid params (duplicate name)" do
       let!(:other_advertiser){ create(:advertiser, name: "My Other Advertiser")}
-      let(:advertiser_params){ {name: advertiser_params.name} }
+      let(:advertiser_params){ {name: other_advertiser.name} }
       let!(:response){ put(:update, params: {format: 'json', id: advertiser.id, advertiser: advertiser_params}) }
 
       it "should be unsuccessful (unprocessable_entity)" do

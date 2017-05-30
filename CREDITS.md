@@ -15,3 +15,5 @@
   + [Rack Response Status Codes](https://gist.github.com/mlanett/a31c340b132ddefa9cca)
   + [Shoulda Matchers - Model Uniqueness Validations](https://github.com/thoughtbot/shoulda-matchers/blob/master/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb#L88-L98)
   + [Converting errors into 404 responses](https://stackoverflow.com/a/32328224/670433)
+  + [Serialized attributes in a factory](http://www.rubycoloredglasses.com/2012/06/add-a-serialized-hash-attribute-to-a-factory_girl-definition/)
+  + [ActionController Parameters](http://api.rubyonrails.org/classes/ActionController/Parameters.html)
