@@ -45,6 +45,13 @@ Each section below describes a class of resource within the scope of this system
 
 A musical instrument.
 
+Attributes:
+
+name | type | description
+--- | --- | ---
+name | String | The instrument name.
+description | Text | A description of the instrument.
+
 Example:
 
 ```` js
@@ -66,7 +73,16 @@ Destroy | DELETE | /instruments/:id
 
 ### Advertiser
 
-An organization seeking a targeted audience.
+An organization seeking a targeted audience for their product advertisement(s).
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+name | String | The organization's name.
+description | Text | A description of the organization.
+url | String | The organization's website.
+metadata | Object | An unstructured place to store other information about the organization.
 
 Example:
 
@@ -75,7 +91,7 @@ Example:
   name: "Fendie",
   description: "The leader in Sitar manufacturing and distribution.",
   url: "https://www.fendie.com/",
-  contact: {} // an unstructured object optionally containing contact information like a sales representative's name and phone number and email address.
+  metadata: {}
 }
 ````
 
