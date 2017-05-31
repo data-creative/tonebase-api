@@ -15,12 +15,12 @@ RSpec.describe Api::V1::AdsController, type: :controller do
   end
 
   describe "POST #create" do
-    it_behaves_like "a create endpoint which validates associations", Ad, [Advertiser], {
-      title: "Buy a Fendie",
-      message: "Fendie sitars are the best.",
-      url: "https://www.fendie.com/promo",
-      image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
-    }
+    #it_behaves_like "a create endpoint which validates associations", Ad, [Advertiser], {
+    #  title: "Buy a Fendie",
+    #  content: "Fendie sitars are the best.",
+    #  url: "https://www.fendie.com/promo",
+    #  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+    #}
 
     it_behaves_like "a create endpoint which validates presence", Ad, :title
     it_behaves_like "a create endpoint which validates uniqueness", Ad, :title

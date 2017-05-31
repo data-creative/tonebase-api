@@ -121,7 +121,7 @@ name | type | description
 --- | --- | ---
 advertiser_id | Integer | References the advertiser who placed this ad.
 title | String | A display title.
-message | Text | The ad's content.
+content | Text | The ad's content.
 url | String | Where the ad redirects the user.
 image_url | String | The ad's image source.
 
@@ -141,7 +141,7 @@ Example POST/PUT request body:
 {
   advertiser_id: 1,
   title: "Buy a Fendie",
-  message: "Fendie sitars are the best.",
+  content: "Fendie sitars are the best.",
   url: "https://www.fendie.com/promo",
   image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
 }
