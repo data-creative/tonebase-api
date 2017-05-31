@@ -15,14 +15,25 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
   end
 
   describe "POST #create" do
-    it_behaves_like "a create endpoint", Advertiser, {
-      name: "Strattle",
-      description: "A sitar distribution company.",
-      metadata: {contact: {name:"Jay", phone: "123456789", emailed_on:["2017-05-01", "2017-05-02", "2017-05-03"]} }
-    }
+    it_behaves_like "a create endpoint", Advertiser do
+      let(:resource_params){
+        {
+          name: "Strattle",
+          description: "A sitar distribution company.",
+          metadata: {contact: {name:"Jay", phone: "123456789", emailed_on:["2017-05-01", "2017-05-02", "2017-05-03"]} }
 
-    it_behaves_like "a create endpoint which validates presence", Advertiser, :name
-    it_behaves_like "a create endpoint which validates uniqueness", Advertiser, :name
+        }
+      }
+    end
+
+    it_behaves_like "a create endpoint which validates presence", Advertiser, [:name] do
+      let(:resource_params){ {name: ""} }
+    end
+
+    it_behaves_like "a create endpoint which validates uniqueness", Advertiser, [:name] do
+      let!(:other_advertiser){ create(:advertiser) }
+      let(:resource_params){ {name: other_advertiser.name} }
+    end
   end
 
   describe "PUT #update" do
