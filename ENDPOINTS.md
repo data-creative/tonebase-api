@@ -13,11 +13,6 @@ Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 1-Core	|	User	|	3-Show	|	GET	|	/api/users/:id
 1-Core	|	User	|	4-Update	|	PUT	|	/api/users/:id
 1-Core	|	User	|	5-Destroy	|	DELETE	|	/api/users/:id
-2-Comms	|	Ad	|	1-List	|	GET	|	/api/ads
-2-Comms	|	Ad	|	2-Create	|	POST	|	/api/ads
-2-Comms	|	Ad	|	3-Show	|	GET	|	/api/ads/:id
-2-Comms	|	Ad	|	4-Update	|	PUT	|	/api/ads/:id
-2-Comms	|	Ad	|	5-Destroy	|	DELETE	|	/api/ads/:id
 2-Comms	|	AdPlacement	|	1-List	|	GET	|	/api/ads/:id/placements
 2-Comms	|	AdPlacement	|	2-Create	|	POST	|	/api/ads/:id/placements
 2-Comms	|	AdPlacement	|	3-Show	|	GET	|	/api/ads/:id/placements/:id

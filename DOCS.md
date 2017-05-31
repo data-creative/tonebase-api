@@ -52,15 +52,6 @@ name | type | description
 name | String | The instrument name.
 description | Text | A description of the instrument.
 
-Example:
-
-```` js
-{
-  name: "Sitar",
-  description: "The sitar is a plucked stringed instrument used mainly in Hindustani music and Indian classical music."
-}
-````
-
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -70,6 +61,15 @@ Create | POST | /instruments
 Show | GET | /instruments/:id
 Update | PUT | /instruments/:id
 Destroy | DELETE | /instruments/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  name: "Sitar",
+  description: "The sitar is a plucked stringed instrument used mainly in Hindustani music and Indian classical music."
+}
+````
 
 ### Advertiser
 
@@ -84,17 +84,6 @@ description | Text | A description of the organization.
 url | String | The organization's website.
 metadata | Object | An unstructured place to store other information about the organization.
 
-Example:
-
-```` js
-{
-  name: "Fendie",
-  description: "The leader in Sitar manufacturing and distribution.",
-  url: "https://www.fendie.com/",
-  metadata: {}
-}
-````
-
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -104,3 +93,56 @@ Create | POST | /advertisers
 Show | GET | /advertisers/:id
 Update | PUT | /advertisers/:id
 Destroy | DELETE | /advertisers/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  name: "Fendie",
+  description: "The leader in Sitar manufacturing and distribution.",
+  url: "https://www.fendie.com/",
+  metadata: {
+    contacts:[{
+      name: "Brian",
+      email:"someone@fendie.com",
+      contacted_on:["2017-05-01", "2017-05-15"]
+    }]
+  }
+}
+````
+
+### Ad
+
+A message promoting an advertiser's product or service.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+advertiser_id | Integer | References the advertiser who placed this ad.
+title | String | A display title.
+message | Text | The ad's content.
+url | String | Where the ad redirects the user.
+image_url | String | The ad's image source.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /ads
+Create | POST | /ads
+Show | GET | /ads/:id
+Update | PUT | /ads/:id
+Destroy | DELETE | /ads/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  advertiser_id: 1,
+  title: "Buy a Fendie",
+  message: "Fendie sitars are the best.",
+  url: "https://www.fendie.com/promo",
+  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+}
+````
