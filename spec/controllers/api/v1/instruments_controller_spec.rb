@@ -7,7 +7,7 @@ require_relative '../../../support/api/v1/destroy'
 
 RSpec.describe Api::V1::InstrumentsController, type: :controller do
   describe "GET #index" do
-    it_behaves_like "an index", Instrument, :name
+    it_behaves_like "an index endpoint", Instrument, :name
   end
 
   describe "GET #show" do

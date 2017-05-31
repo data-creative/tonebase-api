@@ -1,6 +1,6 @@
 require_relative "./response"
 
-shared_examples_for "an index" do |model_class, attribute_name|
+shared_examples_for "an index endpoint" do |model_class, attribute_name|
   let!(:resource) { create(model_class.name.downcase.to_sym) }
 
   describe "response" do

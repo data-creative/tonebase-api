@@ -7,7 +7,7 @@ require_relative '../../../support/api/v1/destroy'
 
 RSpec.describe Api::V1::AdvertisersController, type: :controller do
   describe "GET #index" do
-    it_behaves_like "an index", Advertiser, :name
+    it_behaves_like "an index endpoint", Advertiser, :name
   end
 
   describe "GET #show" do
