@@ -1,6 +1,5 @@
-require_relative "./response"
-require_relative './create/presence_validation'
-require_relative './create/uniqueness_validation'
+require_relative './create/presence_validation' # allows controller spec to avoid separately loading this file (for convenience and brevity)
+require_relative './create/uniqueness_validation' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 
 shared_examples_for "a create endpoint" do |model_class, resource_params|
   let!(:resource) { create(model_class.name.downcase.to_sym) }

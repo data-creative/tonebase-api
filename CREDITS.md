@@ -18,3 +18,6 @@
   + [Serialized attributes in a factory](http://www.rubycoloredglasses.com/2012/06/add-a-serialized-hash-attribute-to-a-factory_girl-definition/)
   + [ActionController Parameters](http://api.rubyonrails.org/classes/ActionController/Parameters.html)
   + [RSpec Shared Example](https://relishapp.com/rspec/rspec-core/v/2-0/docs/example-groups/shared-example-group)
+  + [Factory Girl Traits](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#traits)
+  + [RSpec Formatting](https://relishapp.com/rspec/rspec-core/v/2-6/docs/command-line/format-option)
+  + [RSpec Inclusion Matcher](https://relishapp.com/rspec/rspec-expectations/v/2-0/docs/matchers/include-matcher)
