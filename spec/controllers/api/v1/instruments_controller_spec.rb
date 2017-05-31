@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 require_relative '../../../support/api/v1/index'
 require_relative '../../../support/api/v1/show'
 require_relative '../../../support/api/v1/create'
