@@ -3,11 +3,7 @@ require 'rails_helper'
 require_relative '../../../support/api/v1/index'
 require_relative '../../../support/api/v1/show'
 require_relative '../../../support/api/v1/create'
-require_relative '../../../support/api/v1/create/presence_validation'
-require_relative '../../../support/api/v1/create/uniqueness_validation'
 require_relative '../../../support/api/v1/update'
-require_relative '../../../support/api/v1/update/presence_validation'
-require_relative '../../../support/api/v1/update/uniqueness_validation'
 require_relative '../../../support/api/v1/destroy'
 
 RSpec.describe Api::V1::InstrumentsController, type: :controller do
