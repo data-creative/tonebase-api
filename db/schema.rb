@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20170531221454) do
     t.string   "name",        null: false
     t.text     "description"
     t.string   "url"
-    t.text     "metadata"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["name"], name: "index_advertisers_on_name", unique: true, using: :btree
