@@ -4,12 +4,14 @@ ToneBase 1.0 is a web-based information system designed to facilitate online mus
 
 This repository provides a back-end web service to power the front-end client application.
 
+[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+
 ## [Design](/design)
 
-## [Usage](/ENDPOINTS.md)
+## [Usage](/DOCS.md)
 
 ## [Contributing](/CONTRIBUTING.md)
 
 ## [Credits](/CREDITS.md)
 
-## License
+## [License](/LICENSE.md)
