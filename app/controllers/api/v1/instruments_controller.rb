@@ -3,12 +3,11 @@ class Api::V1::InstrumentsController < Api::V1::ApiController
 
   # GET /api/v1/instruments
   def index
-    render_json(Instrument.all)
+    @instruments = Instrument.all
   end
 
   # GET /api/v1/instruments/:id
   def show
-    render_json(@instrument)
   end
 
   # POST /api/v1/instruments

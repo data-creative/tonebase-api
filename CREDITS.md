@@ -23,3 +23,5 @@
   + [RSpec Formatting](https://relishapp.com/rspec/rspec-core/v/2-6/docs/command-line/format-option)
   + [RSpec Inclusion Matcher](https://relishapp.com/rspec/rspec-expectations/v/2-0/docs/matchers/include-matcher)
   + [Passing Blocks to RSpec Shared Examples](https://stackoverflow.com/questions/11354763/how-to-pass-an-instance-variable-to-an-rspec-shared-example)
+  + [Configuring RSpec to recognize JBuilder views](https://stackoverflow.com/a/12243026/670433)
+  + [JBuilder docs](https://github.com/rails/jbuilder)

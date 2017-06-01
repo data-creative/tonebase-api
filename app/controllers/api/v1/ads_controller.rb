@@ -3,12 +3,11 @@ class Api::V1::AdsController < Api::V1::ApiController
 
   # GET /api/v1/ads
   def index
-    render_json(Ad.all)
+    @ads = Ad.all
   end
 
   # GET /api/v1/ads/:id
   def show
-    render_json(@ad)
   end
 
   # POST /api/v1/ads
