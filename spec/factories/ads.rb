@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :ad do
     advertiser
-    title "Buy a Fendie"
+    sequence(:title){|n| "Buy a Fendie (#{n})" }
     content ""
     url ""
     image_url ""

@@ -7,6 +7,7 @@ private
     render json: {"id": ["not found"]}, status: :not_found
   end
 
+  # @deprecated
   # @param [ApplicationRecord] resource One or more model instances.
   def render_json(resource)
     respond_to do |format|

@@ -1,6 +1,10 @@
 module Api::V1::View
   def parsed_response
-    JSON.parse(rendered).deep_symbolize_keys
+    response = JSON.parse(rendered)
+  end
+
+  def keys_of(hash)
+    hash.symbolize_keys.keys
   end
 end
 

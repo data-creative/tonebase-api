@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :advertiser do
-    name "Fendie"
+    sequence(:name){|n| "Fendie (#{n})" }
     description ""
     url ""
 

@@ -7,11 +7,7 @@ describe "api/v1/ads/show.json.jbuilder" do
     render
   end
 
-  it "displays an ad" do
-    expect(parsed_response.keys).to match_array([:id, :advertiser, :title, :content, :url, :image_url, :created_at, :updated_at])
-  end
-
-  it "displays a nested advertiser" do
-    expect(parsed_response[:advertiser].keys).to match_array([:id, :name, :description, :url])
+  it "displays an ad with nested advertiser" do
+    expect(keys_of(parsed_response)).to match_array([:id, :advertiser, :title, :content, :url, :image_url, :created_at, :updated_at])
   end
 end
