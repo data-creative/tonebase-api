@@ -42,6 +42,24 @@ When there are Client Errors, the API also returns descriptive error messages, s
 
 Each section below describes a class of resource within the scope of this system, as well as an example JSON representation of that resource, and a list of operations available to be performed on that resource.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Instrument
 
 A musical instrument.
@@ -137,5 +155,90 @@ Example POST/PUT request body:
   content: "Fendie sitars are the best.",
   url: "https://www.fendie.com/promo",
   image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+}
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Ad Placement
+
+Describes a period of time during which an ad is visible to users.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+ad_id | Integer | References the ad.
+start_date | Date | The first day an ad should be visible to users.
+end_date | Date | The last day an ad should be visible to users.
+price | Integer (cents USD) | How much the advertiser is paying to run this ad during this period of time.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /ad_placements
+Create | POST | /ad_placements
+Show | GET | /ad_placements/:id
+Update | PUT | /ad_placements/:id
+Destroy | DELETE | /ad_placements/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  ad_id: 1,
+  start_date: "2017-07-01",
+  end_date: "2017-07-08",
+  price: 25000
+}
+````
+
+### Ads Instruments
+
+Associates ads with instruments.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+ad_id | Integer | References the ad.
+instrument_id | Integer | References the instrument.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Create | POST | /ads_instruments
+Destroy | DELETE | /ads_instruments/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  ad_id: 1,
+  instrument_id: 1,
 }
 ````
