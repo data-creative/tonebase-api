@@ -76,4 +76,8 @@ heroku git:remote -a tonebase-api
 
 ```` sh
 rails g model instrument name:string:uniq description:text
+
+rails g model advertiser name:string:uniq description:text url:string
+
+rails g model ad advertiser:references title:string content:text url:string image_url:string
 ````

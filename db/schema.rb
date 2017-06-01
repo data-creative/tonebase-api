@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526185216) do
+ActiveRecord::Schema.define(version: 20170531221454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ads", force: :cascade do |t|
+    t.integer  "advertiser_id"
+    t.string   "title",         null: false
+    t.text     "content"
+    t.string   "url"
+    t.string   "image_url"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["advertiser_id"], name: "index_ads_on_advertiser_id", using: :btree
+  end
+
+  create_table "advertisers", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.string   "url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["name"], name: "index_advertisers_on_name", unique: true, using: :btree
+  end
 
   create_table "instruments", force: :cascade do |t|
     t.string   "name",        null: false
@@ -23,4 +43,5 @@ ActiveRecord::Schema.define(version: 20170526185216) do
     t.index ["name"], name: "index_instruments_on_name", unique: true, using: :btree
   end
 
+  add_foreign_key "ads", "advertisers"
 end
