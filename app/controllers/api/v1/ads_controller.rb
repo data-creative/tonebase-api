@@ -8,7 +8,7 @@ class Api::V1::AdsController < Api::V1::ApiController
 
   # GET /api/v1/ads/:id
   def show
-    render_json(@ad)
+    render :show
   end
 
   # POST /api/v1/ads

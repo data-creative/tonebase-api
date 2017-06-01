@@ -64,4 +64,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  # Enable RSpec to access JBuilder views in controller specs 
+  config.render_views = true
 end
