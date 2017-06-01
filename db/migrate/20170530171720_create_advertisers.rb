@@ -4,7 +4,6 @@ class CreateAdvertisers < ActiveRecord::Migration[5.0]
       t.string :name, null: false
       t.text :description
       t.string :url
-      t.text :metadata
 
       t.timestamps
     end

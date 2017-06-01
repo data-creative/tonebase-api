@@ -19,9 +19,7 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
       let(:resource_params){
         {
           name: "Strattle",
-          description: "A sitar distribution company.",
-          metadata: {contact: {name:"Jay", phone: "123456789", emailed_on:["2017-05-01", "2017-05-02", "2017-05-03"]} }
-
+          description: "A sitar distribution company."
         }
       }
     end

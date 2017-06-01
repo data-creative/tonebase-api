@@ -82,7 +82,6 @@ name | type | description
 name | String | The organization's name.
 description | Text | A description of the organization.
 url | String | The organization's website.
-metadata | Object | An unstructured place to store other information about the organization.
 
 Endpoints:
 
@@ -100,14 +99,7 @@ Example POST/PUT request body:
 {
   name: "Fendie",
   description: "The leader in Sitar manufacturing and distribution.",
-  url: "https://www.fendie.com/",
-  metadata: {
-    contacts:[{
-      name: "Brian",
-      email:"someone@fendie.com",
-      contacted_on:["2017-05-01", "2017-05-15"]
-    }]
-  }
+  url: "https://www.fendie.com/"
 }
 ````
 

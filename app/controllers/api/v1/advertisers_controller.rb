@@ -35,8 +35,5 @@ private
 
   def advertiser_params
     my_params = params.require(:advertiser).permit(:name, :description, :url)
-    # workaround to allow unstructured object passed via params ...
-    my_params[:metadata] = params[:advertiser][:metadata]
-    my_params.permit!
   end
 end
