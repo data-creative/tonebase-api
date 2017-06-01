@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :instrument do
-    name "Sitar"
+    sequence(:name){|n| "Sitar (#{n})" }
     description ""
 
     trait :described do
