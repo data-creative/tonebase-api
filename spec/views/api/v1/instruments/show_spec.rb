@@ -7,7 +7,7 @@ describe "api/v1/instruments/show.json.jbuilder" do
     render
   end
 
-  it "displays an advertiser" do
+  it "displays an instrument" do
     expect(keys_of(parsed_view)).to match_array([:id, :name, :description, :created_at, :updated_at])
   end
 end
