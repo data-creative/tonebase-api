@@ -3,12 +3,11 @@ class Api::V1::AdvertisersController < Api::V1::ApiController
 
   # GET /api/v1/advertisers
   def index
-    render_json(Advertiser.all)
+    @advertisers = Advertiser.all
   end
 
   # GET /api/v1/advertisers/:id
   def show
-    render_json(@advertiser)
   end
 
   # POST /api/v1/advertisers
