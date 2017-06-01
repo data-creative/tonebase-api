@@ -36,6 +36,7 @@ When there are Client Errors, the API also returns descriptive error messages, s
   + `{"id": ["not found"]}`
   + `{"name": ["can't be blank"]}`
   + `{"name": ["has already been taken"]}`
+  + `{"advertiser"=>["can't be blank", "must exist"]}`
 
 ## Resources
 

@@ -6,8 +6,7 @@ require_relative "../response"
 # @example
 #
 #   it_behaves_like "a create endpoint which validates presence", Ad, [:title]  do
-#     let(:advertiser){ create(:advertiser)}
-#     let(:resource_params){ {advertiser_id: advertiser.id, title: ""} }
+#     let(:resource_params){ {advertiser_id: "", title: ""} }
 #   end
 #
 shared_examples_for "a create endpoint which validates presence" do |model_class, attribute_names|

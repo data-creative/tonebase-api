@@ -28,9 +28,8 @@ RSpec.describe Api::V1::AdsController, type: :controller do
       }
     end
 
-    it_behaves_like "a create endpoint which validates presence", Ad, [:title] do
-      let(:advertiser){ create(:advertiser)}
-      let(:resource_params){ {advertiser_id: advertiser.id, title: ""} }
+    it_behaves_like "a create endpoint which validates presence", Ad, [:advertiser, :title] do
+      let(:resource_params){ {advertiser_id: "", title: ""} }
     end
   end
 
