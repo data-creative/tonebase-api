@@ -17,7 +17,7 @@ shared_examples_for "an index endpoint" do |model_class, attribute_name|
 
       it "should include all resources" do
         expect(parsed_response.count).to eql(model_class.count)
-        expect(parsed_response.count).to eql(1)
+        expect(parsed_response.any?).to be true
       end
 
       it "should include the example resource" do
