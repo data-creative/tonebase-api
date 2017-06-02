@@ -1,7 +1,7 @@
 require_relative "./response"
 
 shared_examples_for "a destroy endpoint" do |model_class|
-  let!(:resource) { create(model_class.name.downcase.to_sym) }
+  let!(:resource) { create(model_class.name.underscore.to_sym) }
 
   describe "response" do
     context "with valid params" do

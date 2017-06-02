@@ -31,12 +31,15 @@ code | major status | minor status | description
 404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct.
 422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
 
+### Error Messages
+
 When there are Client Errors, the API also returns descriptive error messages, such as:
 
   + `{"id": ["not found"]}`
   + `{"name": ["can't be blank"]}`
   + `{"name": ["has already been taken"]}`
   + `{"advertiser"=>["can't be blank", "must exist"]}`
+  + `{"price"=>["can't be blank", "is not a number"]}`
 
 ## Resources
 
@@ -215,6 +218,18 @@ Example POST/PUT request body:
   price: 25000
 }
 ````
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Ads Instruments
 

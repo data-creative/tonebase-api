@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531221454) do
+ActiveRecord::Schema.define(version: 20170601222609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ad_placements", force: :cascade do |t|
+    t.integer  "ad_id"
+    t.date     "start_date", null: false
+    t.date     "end_date",   null: false
+    t.integer  "price",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_id"], name: "index_ad_placements_on_ad_id", using: :btree
+  end
 
   create_table "ads", force: :cascade do |t|
     t.integer  "advertiser_id"
@@ -43,5 +53,6 @@ ActiveRecord::Schema.define(version: 20170531221454) do
     t.index ["name"], name: "index_instruments_on_name", unique: true, using: :btree
   end
 
+  add_foreign_key "ad_placements", "ads"
   add_foreign_key "ads", "advertisers"
 end
