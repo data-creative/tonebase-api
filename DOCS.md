@@ -24,7 +24,7 @@ When issuing POST requests to a particular endpoint, pass parameters for the giv
 The API uses the following HTTP response codes:
 
 code | major status | minor status | description
---- | --- | ---
+--- | --- | --- | ---
 200 | Success | OK | The resource(s) were returned successfully. Or the resource was updated successfully.
 201 | Success | Created | The resource was created successfully.
 204 | Success | No Content | The resource was destroyed successfully.
