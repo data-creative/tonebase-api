@@ -1,9 +1,9 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  before_action :set_advertiser, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /api/v1/users
   def index
-    @user = User.all
+    @user = User.all # User.user
   end
 
   # GET /api/v1/users/:id
