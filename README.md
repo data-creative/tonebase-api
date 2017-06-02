@@ -6,6 +6,10 @@ This repository provides a back-end web service (REST API) to power the front-en
 
 [![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
 
+[![Code Climate](https://codeclimate.com/github/data-creative/tonebase-api/badges/gpa.svg)](https://codeclimate.com/github/data-creative/tonebase-api)
+
+[![Test Coverage](https://codeclimate.com/github/data-creative/tonebase-api/badges/coverage.svg)](https://codeclimate.com/github/data-creative/tonebase-api/coverage)
+
 ## [Design](/design)
 
 ![a system domain model depicting entities as boxes and their relationships as connecting lines](/erd.png)
