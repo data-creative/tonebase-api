@@ -63,7 +63,7 @@ Each section below describes a class of resource within the scope of this system
 
 
 
-### Instrument
+### `Instrument`
 
 A musical instrument.
 
@@ -93,7 +93,7 @@ Example POST/PUT request body:
 }
 ````
 
-### Advertiser
+### `Advertiser`
 
 An organization seeking a targeted audience for their product advertisement(s).
 
@@ -125,7 +125,7 @@ Example POST/PUT request body:
 }
 ````
 
-### Ad
+### `Ad`
 
 A message promoting an advertiser's product or service.
 
@@ -161,31 +161,7 @@ Example POST/PUT request body:
 }
 ````
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Ad Placement
+### `AdPlacement`
 
 Describes a period of time during which an ad is visible to users.
 
@@ -219,19 +195,7 @@ Example POST/PUT request body:
 }
 ````
 
-
-
-
-
-
-
-
-
-
-
-
-
-### Ads Instruments
+### `AdInstrument`
 
 Associates ads with instruments.
 
@@ -255,5 +219,87 @@ Example POST/PUT request body:
 {
   ad_id: 1,
   instrument_id: 1,
+}
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### `User`
+
+Depending on the user's `role`, he/she can be either
+  a music student seeking further instruction,
+  an artist providing musical instruction, or
+  an admin overseeing the site.
+A user's role can be changed, but a user can not have more than one role at any given time.
+
+A user can have varying levels of access to site content and features depending on his/her `access_level`. By default, artists and admins have full access.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+email | String | The user's email address, to be used for authentication and communication.
+password | String | An encrypted version of the user's password used for authentication.
+confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
+visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
+role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
+access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
+first_name | String | The user's first name or nickname.
+last_name | String | The user's last name or surname.
+bio | Text | A description of user interests, skills, and goals.
+image_url | String | The user's profile image source.
+hero_url | String | The user's hero/background image source.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /users
+Create | POST | /users
+Show | GET | /users/:id
+Update | PUT | /users/:id
+Destroy | DELETE | /users/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  email: "avg.joe@gmail.com",
+  password: "abc123",
+  confirmed: true,
+  visible: true,
+  role: "User",
+  access_level: "Full",
+  first_name: "Joe",
+  last_name: "Averaggi",
+  bio: "I love guitar and I'm hoping to get better!",
+  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+  hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
 }
 ````

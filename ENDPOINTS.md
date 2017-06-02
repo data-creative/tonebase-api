@@ -8,11 +8,6 @@ Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 1-Core	|	Artist (User)	|	3-Show	|	GET	|	/api/artists/:id
 1-Core	|	Artist (User)	|	4-Update	|	PUT	|	/api/artists/:id
 1-Core	|	Artist (User)	|	5-Destroy	|	DELETE	|	/api/artists/:id
-1-Core	|	User	|	1-List	|	GET	|	/api/users
-1-Core	|	User	|	2-Create	|	POST	|	/api/users
-1-Core	|	User	|	3-Show	|	GET	|	/api/users/:id
-1-Core	|	User	|	4-Update	|	PUT	|	/api/users/:id
-1-Core	|	User	|	5-Destroy	|	DELETE	|	/api/users/:id
 2-Comms	|	Alert	|	1-List	|	GET	|	/api/alerts
 2-Comms	|	Alert	|	2-Create	|	POST	|	/api/alerts
 2-Comms	|	Alert	|	3-Show	|	GET	|	/api/alerts/:id
