@@ -25,5 +25,12 @@ FactoryGirl.define do
         create(:ad_placement, ad: ad, start_date: "2017-09-01", end_date: "2017-09-15", price: 25000)
       end
     end
+
+    factory :ad_with_instrument do
+      after(:create) do |ad, evaluator|
+        instrument = create(:instrument)
+        create(:ad_instrument, ad: ad, instrument: instrument)
+      end
+    end
   end
 end
