@@ -33,6 +33,6 @@ private
   end
 
   def advertiser_params
-    my_params = params.require(:advertiser).permit(:name, :description, :url)
+    params.require(:advertiser).permit(:name, :description, :url)
   end
 end
