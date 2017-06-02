@@ -40,6 +40,7 @@ When there are Client Errors, the API also returns descriptive error messages, s
   + `{"name": ["has already been taken"]}`
   + `{"advertiser"=>["can't be blank", "must exist"]}`
   + `{"price"=>["can't be blank", "is not a number"]}`
+  + `{"role"=>["can't be blank", "is not included in the list"]}`
 
 ## Resources
 
