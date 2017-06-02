@@ -21,4 +21,42 @@ RSpec.describe User, type: :model do
       it { should validate_uniqueness_of(:email) }
     end
   end
+
+  describe "constants" do
+    describe "ROLES" do
+      it "returns a list of valid user roles" do
+        expect(User::ROLES).to match_array(["User", "Artist", "Admin"])
+      end
+    end
+  end
+
+  describe "class methods" do
+    describe "role-filtering methods" do
+      let!(:users){ [create(:user), create(:user), create(:user), create(:artist), create(:artist), create(:admin)] }
+
+      describe ".all" do
+        it "does not filter users by role" do
+          expect(User.all.count).to eql(users.count)
+        end
+      end
+
+      describe ".users" do
+        it "filters users by role" do
+          expect(User.user.count).to eql(3)
+        end
+      end
+
+      describe ".artist" do
+        it "filters users by role" do
+          expect(User.artist.count).to eql(2)
+        end
+      end
+
+      describe ".admin" do
+        it "filters users by role" do
+          expect(User.admin.count).to eql(1)
+        end
+      end
+    end
+  end
 end

@@ -3,7 +3,15 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
-    @users = User.all # User.user
+    if !params[:role]
+      @users = User.all
+    else
+      if User::ROLES.include?(params[:role])
+        @users = User.send(params[:role].underscore.to_sym)
+      else
+        render json: {"role": ["not found"]}, status: :not_found
+      end
+    end
   end
 
   # GET /api/v1/users/:id

@@ -4,10 +4,6 @@ For now, this document contains a table of endpoints planned but not yet impleme
 
 Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 ---	|	---	|	---	|	---	|	---
-1-Core	|	Artist (User)	|	1-List | GET | /api/artists
-1-Core	|	Artist (User)	|	3-Show	|	GET	|	/api/artists/:id
-1-Core	|	Artist (User)	|	4-Update	|	PUT	|	/api/artists/:id
-1-Core	|	Artist (User)	|	5-Destroy	|	DELETE	|	/api/artists/:id
 2-Comms	|	Alert	|	1-List	|	GET	|	/api/alerts
 2-Comms	|	Alert	|	2-Create	|	POST	|	/api/alerts
 2-Comms	|	Alert	|	3-Show	|	GET	|	/api/alerts/:id

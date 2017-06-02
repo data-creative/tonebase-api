@@ -28,7 +28,7 @@ code | major status | minor status | description
 200 | Success | OK | The resource(s) were returned successfully. Or the resource was updated successfully.
 201 | Success | Created | The resource was created successfully.
 204 | Success | No Content | The resource was destroyed successfully.
-404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct.
+404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct and other parameter values are valid.
 422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
 
 ### Error Messages
@@ -254,9 +254,9 @@ Example POST/PUT request body:
 ### `User`
 
 Depending on the user's `role`, he/she can be either
-  a music student seeking further instruction,
-  an artist providing musical instruction, or
-  an admin overseeing the site.
+  a music student seeking further instruction (`User`),
+  an artist providing musical instruction (`Artist`), or
+  an admin overseeing the site (`Admin`).
 A user's role can be changed, but a user can not have more than one role at any given time.
 
 A user can have varying levels of access to site content and features depending on his/her `access_level`. By default, artists and admins have full access.
@@ -279,13 +279,13 @@ hero_url | String | The user's hero/background image source.
 
 Endpoints:
 
-Action | Request Method | Endpoint URL
----	|	---	|	---
-List | GET | /users
-Create | POST | /users
-Show | GET | /users/:id
-Update | PUT | /users/:id
-Destroy | DELETE | /users/:id
+Action | Request Method | Endpoint URL | Comments
+---	|	---	| --- | ---
+List | GET | /users | Returns all users by default, regardless of role. Optionally supply a `role` parameter (e.g. `/users?role=User`) to get a subset of users assigned to the specified role.
+Create | POST | /users | N/A
+Show | GET | /users/:id | N/A
+Update | PUT | /users/:id | N/A
+Destroy | DELETE | /users/:id | N/A
 
 Example POST/PUT request body:
 
@@ -304,3 +304,11 @@ Example POST/PUT request body:
   hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
 }
 ````
+
+### `Artist`
+
+Reference [`User`](#user) documentation.
+
+### `Admin`
+
+Reference [`User`](#user) documentation.
