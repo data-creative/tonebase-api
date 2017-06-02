@@ -1,0 +1,25 @@
+attributes:
+  - primary_key
+  - foreign_key
+  - content
+  - inheritance
+disconnected: true
+filename: erd
+filetype: png
+indirect: true
+inheritance: true
+markup: true
+notation: simple
+orientation: vertical
+polymorphism: false
+sort: false
+warn: true
+title: ToneBase 1.0 Entity Relationship Diagram
+exclude:
+  - ActiveRecord::InternalMetadata
+  - ActiveRecord::SchemaMigration
+only: null
+only_recursion_depth: null
+prepend_primary: true
+cluster: false
+splines: spline

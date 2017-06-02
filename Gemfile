@@ -29,4 +29,5 @@ end
 
 group :development do
   gem 'listen', '~> 3.0.5' # dev webserver needs this
+  gem "rails-erd" # Run `rails generate erd:install`, then database migrations will trigger a new diagram.
 end
