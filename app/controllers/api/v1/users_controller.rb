@@ -3,7 +3,7 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
-    @user = User.all # User.user
+    @users = User.all # User.user
   end
 
   # GET /api/v1/users/:id
