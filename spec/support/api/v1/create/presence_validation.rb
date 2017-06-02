@@ -5,14 +5,14 @@ require_relative "../response"
 # @param [Hash] resource_params For initializing the resource. Pass this from inside a block so you can use other variables in its contstruction.
 # @example
 #
-#   it_behaves_like "a create endpoint which validates presence", Ad, [:title]  do
+#   it_behaves_like "a create endpoint which validates presence", Ad, [:advertiser, :title]  do
 #     let(:resource_params){ {advertiser_id: "", title: ""} }
 #   end
 #
 shared_examples_for "a create endpoint which validates presence" do |model_class, attribute_names|
   describe "response" do
     context "with invalid params (blank attribute value)" do
-      let(:response){ post(:create, params: {format: 'json', model_class.name.downcase.to_sym => resource_params}) }
+      let(:response){ post(:create, params: {format: 'json', model_class.name.underscore.to_sym => resource_params}) }
 
       it "should be unsuccessful (unprocessable_entity)" do
         expect(response.status).to eql(422)

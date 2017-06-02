@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :instruments, only: [:index, :show, :create, :update, :destroy]
       resources :advertisers, only: [:index, :show, :create, :update, :destroy]
       resources :ads, only: [:index, :show, :create, :update, :destroy]
+      resources :ad_placements, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end

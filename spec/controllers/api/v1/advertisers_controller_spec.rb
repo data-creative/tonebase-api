@@ -7,11 +7,11 @@ require_relative '../../../support/api/v1/destroy'
 
 RSpec.describe Api::V1::AdvertisersController, type: :controller do
   describe "GET #index" do
-    it_behaves_like "an index endpoint", Advertiser, :name
+    it_behaves_like "an index endpoint", Advertiser
   end
 
   describe "GET #show" do
-    it_behaves_like "a show endpoint", Advertiser, :name
+    it_behaves_like "a show endpoint", Advertiser
   end
 
   describe "POST #create" do
@@ -36,7 +36,7 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
 
   describe "PUT #update" do
     it_behaves_like "an update endpoint", Advertiser, {description: "A sitar distribution company."}
-    it_behaves_like "an update endpoint which validates presence", Advertiser, :name
+    it_behaves_like "an update endpoint which validates presence", Advertiser, [:name]
     it_behaves_like "an update endpoint which validates uniqueness", Advertiser, :name
   end
 

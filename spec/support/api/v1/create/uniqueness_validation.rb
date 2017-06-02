@@ -14,7 +14,7 @@ require_relative "../response"
 shared_examples_for "a create endpoint which validates uniqueness" do |model_class, attribute_names|
   describe "response" do
     context "with invalid params (duplicate attribute value)" do
-      let(:response){ post(:create, params: {format: 'json', model_class.name.downcase.to_sym => resource_params}) }
+      let(:response){ post(:create, params: {format: 'json', model_class.name.underscore.to_sym => resource_params}) }
 
       it "should be unsuccessful (unprocessable_entity)" do
         expect(response.status).to eql(422)

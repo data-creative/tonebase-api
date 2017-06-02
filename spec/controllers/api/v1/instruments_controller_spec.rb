@@ -7,11 +7,11 @@ require_relative '../../../support/api/v1/destroy'
 
 RSpec.describe Api::V1::InstrumentsController, type: :controller do
   describe "GET #index" do
-    it_behaves_like "an index endpoint", Instrument, :name
+    it_behaves_like "an index endpoint", Instrument
   end
 
   describe "GET #show" do
-    it_behaves_like "a show endpoint", Instrument, :name
+    it_behaves_like "a show endpoint", Instrument
   end
 
   describe "POST #create" do
@@ -36,7 +36,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
 
   describe "PUT #update" do
     it_behaves_like "an update endpoint", Instrument, {description: "Shake it some more."}
-    it_behaves_like "an update endpoint which validates presence", Instrument, :name
+    it_behaves_like "an update endpoint which validates presence", Instrument, [:name]
     it_behaves_like "an update endpoint which validates uniqueness", Instrument, :name
   end
 

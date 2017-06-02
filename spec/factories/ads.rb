@@ -17,5 +17,13 @@ FactoryGirl.define do
     trait :with_image do
       image_url "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
     end
+
+    factory :ad_with_placements do
+      after(:create) do |ad, evaluator|
+        create(:ad_placement, ad: ad, start_date: "2017-07-01", end_date: "2017-07-15", price: 25000)
+        create(:ad_placement, ad: ad, start_date: "2017-08-01", end_date: "2017-08-15", price: 25000)
+        create(:ad_placement, ad: ad, start_date: "2017-09-01", end_date: "2017-09-15", price: 25000)
+      end
+    end
   end
 end

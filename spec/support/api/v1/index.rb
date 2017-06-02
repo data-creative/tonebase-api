@@ -1,7 +1,7 @@
 require_relative "./response"
 
-shared_examples_for "an index endpoint" do |model_class, attribute_name|
-  let!(:resource) { create(model_class.name.downcase.to_sym) }
+shared_examples_for "an index endpoint" do |model_class|
+  let!(:resource) { create(model_class.name.underscore.to_sym) }
 
   describe "response" do
     context "when successful" do
@@ -18,10 +18,6 @@ shared_examples_for "an index endpoint" do |model_class, attribute_name|
       it "should include all resources" do
         expect(parsed_response.count).to eql(model_class.count)
         expect(parsed_response.any?).to be true
-      end
-
-      it "should include the example resource" do
-        expect(parsed_response.map{|i| i[attribute_name.to_s]}).to include(resource.send(attribute_name.to_sym))
       end
     end
   end

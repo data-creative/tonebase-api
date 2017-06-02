@@ -1,7 +1,7 @@
 require_relative "./response"
 
-shared_examples_for "a show endpoint" do |model_class, attribute_name|
-  let!(:resource) { create(model_class.name.downcase.to_sym) }
+shared_examples_for "a show endpoint" do |model_class|
+  let!(:resource) { create(model_class.name.underscore.to_sym) }
 
   describe "response" do
     context "with valid params" do
@@ -13,10 +13,6 @@ shared_examples_for "a show endpoint" do |model_class, attribute_name|
 
       it "should return an object" do
         expect(parsed_response).to be_kind_of(Hash)
-      end
-
-      it "should include the requested resource" do
-        expect(parsed_response[attribute_name.to_s]).to eql(resource.send(attribute_name.to_sym))
       end
     end
 

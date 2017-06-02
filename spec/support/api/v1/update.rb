@@ -3,11 +3,11 @@ require_relative './update/presence_validation' # allows controller spec to avoi
 require_relative './update/uniqueness_validation' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 
 shared_examples_for "an update endpoint" do |model_class, resource_params|
-  let!(:resource) { create(model_class.name.downcase.to_sym) }
+  let!(:resource) { create(model_class.name.underscore.to_sym) }
 
   describe "response" do
     context "with valid params" do
-      let!(:response){ post(:update, params: {format: 'json', id: resource.id, model_class.name.downcase.to_sym => resource_params}) }
+      let!(:response){ post(:update, params: {format: 'json', id: resource.id, model_class.name.underscore.to_sym => resource_params}) }
 
       it "should be successful (updated)" do
         expect(response.status).to eql(200)
