@@ -12,8 +12,8 @@ class Api::V1::AdPlacementsController < Api::V1::ApiController
 
   # POST /api/v1/ad_placements
   def create
-    ad = AdPlacement.new(resource_params)
-    save_and_render_json(ad)
+    ad_placement = AdPlacement.new(resource_params)
+    save_and_render_json(ad_placement)
   end
 
   # PUT /api/v1/ad_placements/:id
