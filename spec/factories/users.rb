@@ -1,5 +1,6 @@
 FactoryGirl.define do
-  factory :user, aliases: [:follower] do
+  #factory :user, aliases: [:follower] do
+  factory :user do
     sequence(:email){|n| "avg.joe.#{n}@gmail.com)" }
     password "abc123"
     confirmed false
@@ -40,7 +41,7 @@ FactoryGirl.define do
       access_level "Full"
     end
 
-    factory :artist do
+    factory :artist, aliases: [:followed_user] do
       sequence(:email){|n| "music.pro.#{n}@gmail.com)" } # optional to put this attribute here, but it provides further clarity and differentiation
       first_name "Talenti" # optional to put this attribute here, but it provides further clarity and differentiation
       last_name "Pro" # optional to put this attribute here, but it provides further clarity and differentiation

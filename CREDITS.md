@@ -29,3 +29,5 @@
   + [Customizing model associations](https://stackoverflow.com/a/6097626/670433)
   + [Factory association double-references](https://stackoverflow.com/a/38600085/670433)
   + [Factory Girl Aliases](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#aliases)
+  + [Bi-directional self-referential association example](https://stackoverflow.com/a/35642584/670433)
+  + [Self-referential relationships](https://github.com/super-secret/self-referential-associations)

@@ -1,6 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe "associations" do
+    it { should have_many(:user_followships) }
+    it { should have_many(:follows).through(:user_followships) }
+
+    it { should have_many(:inverse_user_followships) }
+    it { should have_many(:followers).through(:inverse_user_followships) }
+
+    describe "self-referential user followships" do
+      let(:user){ create(:user) }
+      let(:artist){ create(:artist) }
+      let!(:user_followhip) { create(:user_followship, user: user, followed_user: artist) }
+
+      it "should associate user with follows" do
+        expect(user.follows.first).to eql(artist)
+        expect(artist.follows.any?).to eql(false)
+      end
+
+      it "should associate followed user with followers" do
+        expect(artist.followers.first).to eql(user)
+        expect(user.followers.any?).to eql(false)
+      end
+    end
+  end
+
   describe "validations" do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password) }
@@ -16,7 +40,7 @@ RSpec.describe User, type: :model do
     it { should validate_inclusion_of(:role).in_array(["User", "Artist", "Admin"]) }
     it { should validate_inclusion_of(:access_level).in_array(["Full", "Limited"]) }
 
-    context "when requiring another model instance" do
+    describe "for uniqueness" do
       subject { build(:user) }
       it { should validate_uniqueness_of(:email) }
     end

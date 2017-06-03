@@ -82,6 +82,5 @@ rails g model ad_placement ad:references start_date:date end_date:date price:int
 rails g model ad_instrument ad:references instrument:references
 
 rails g model user email:string:uniq password:string confirmed:boolean visible:boolean role:string access_level:string first_name:string last_name:string bio:text image_url:string hero_url:string
-rails g model user_follow user:references user:references # this self-referential association required further manual configuration
-
+rails g model user_followship follower_id:integer followed_id:integer
 ````
