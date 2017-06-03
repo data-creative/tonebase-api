@@ -41,6 +41,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
         it "returns an error" do
           expect(response.code).to eql("404")
+          expect(parsed_response["role"]).to include("not found")
         end
       end
     end
