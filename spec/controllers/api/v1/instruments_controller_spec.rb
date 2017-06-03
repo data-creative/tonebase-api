@@ -24,9 +24,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
       }
     end
 
-    it_behaves_like "a create endpoint which validates presence", Instrument, [:name] do
-      let(:resource_params){ {name:""} }
-    end
+    it_behaves_like "a create endpoint which validates presence", Instrument, [:name]
 
     it_behaves_like "a create endpoint which validates uniqueness", Instrument, [:name] do
       let!(:other_instrument){ create(:instrument) }

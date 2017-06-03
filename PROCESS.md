@@ -80,4 +80,7 @@ rails g model advertiser name:string:uniq description:text url:string
 rails g model ad advertiser:references title:string content:text url:string image_url:string
 rails g model ad_placement ad:references start_date:date end_date:date price:integer
 rails g model ad_instrument ad:references instrument:references
+
+rails g model user email:string:uniq password:string confirmed:boolean visible:boolean role:string access_level:string first_name:string last_name:string bio:text image_url:string hero_url:string
+
 ````

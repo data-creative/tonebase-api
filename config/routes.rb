@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       resources :ads, only: [:index, :show, :create, :update, :destroy]
       resources :ad_placements, only: [:index, :show, :create, :update, :destroy]
       resources :ad_instruments, only: [:create, :destroy]
+
+      resources :users, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end

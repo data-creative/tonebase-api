@@ -28,7 +28,7 @@ code | major status | minor status | description
 200 | Success | OK | The resource(s) were returned successfully. Or the resource was updated successfully.
 201 | Success | Created | The resource was created successfully.
 204 | Success | No Content | The resource was destroyed successfully.
-404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct.
+404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct and other parameter values are valid.
 422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
 
 ### Error Messages
@@ -40,6 +40,7 @@ When there are Client Errors, the API also returns descriptive error messages, s
   + `{"name": ["has already been taken"]}`
   + `{"advertiser"=>["can't be blank", "must exist"]}`
   + `{"price"=>["can't be blank", "is not a number"]}`
+  + `{"role"=>["can't be blank", "is not included in the list"]}`
 
 ## Resources
 
@@ -63,7 +64,7 @@ Each section below describes a class of resource within the scope of this system
 
 
 
-### Instrument
+### `Instrument`
 
 A musical instrument.
 
@@ -93,7 +94,7 @@ Example POST/PUT request body:
 }
 ````
 
-### Advertiser
+### `Advertiser`
 
 An organization seeking a targeted audience for their product advertisement(s).
 
@@ -125,7 +126,7 @@ Example POST/PUT request body:
 }
 ````
 
-### Ad
+### `Ad`
 
 A message promoting an advertiser's product or service.
 
@@ -161,31 +162,7 @@ Example POST/PUT request body:
 }
 ````
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Ad Placement
+### `AdPlacement`
 
 Describes a period of time during which an ad is visible to users.
 
@@ -219,19 +196,7 @@ Example POST/PUT request body:
 }
 ````
 
-
-
-
-
-
-
-
-
-
-
-
-
-### Ads Instruments
+### `AdInstrument`
 
 Associates ads with instruments.
 
@@ -257,3 +222,93 @@ Example POST/PUT request body:
   instrument_id: 1,
 }
 ````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### `User`
+
+Depending on the user's `role`, he/she can be either
+  a music student seeking further instruction (`User`),
+  an artist providing musical instruction (`Artist`), or
+  an admin overseeing the site (`Admin`).
+A user's role can be changed, but a user can not have more than one role at any given time.
+
+A user can have varying levels of access to site content and features depending on his/her `access_level`. By default, artists and admins have full access.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+email | String | The user's email address, to be used for authentication and communication.
+password | String | An encrypted version of the user's password used for authentication.
+confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
+visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
+role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
+access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
+first_name | String | The user's first name or nickname.
+last_name | String | The user's last name or surname.
+bio | Text | A description of user interests, skills, and goals.
+image_url | String | The user's profile image source.
+hero_url | String | The user's hero/background image source.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL | Comments
+---	|	---	| --- | ---
+List | GET | /users | Returns all users by default, regardless of role. Optionally supply a `role` parameter (e.g. `/users?role=User`) to get a subset of users assigned to the specified role.
+Create | POST | /users | N/A
+Show | GET | /users/:id | N/A
+Update | PUT | /users/:id | N/A
+Destroy | DELETE | /users/:id | N/A
+
+Example POST/PUT request body:
+
+```` js
+{
+  email: "avg.joe@gmail.com",
+  password: "abc123",
+  confirmed: true,
+  visible: true,
+  role: "User",
+  access_level: "Full",
+  first_name: "Joe",
+  last_name: "Averaggi",
+  bio: "I love guitar and I'm hoping to get better!",
+  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+  hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
+}
+````
+
+### `Artist`
+
+Reference [`User`](#user) documentation.
+
+### `Admin`
+
+Reference [`User`](#user) documentation.

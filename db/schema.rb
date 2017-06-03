@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602043634) do
+ActiveRecord::Schema.define(version: 20170602171719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,27 @@ ActiveRecord::Schema.define(version: 20170602043634) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["name"], name: "index_instruments_on_name", unique: true, using: :btree
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",        null: false
+    t.string   "password",     null: false
+    t.boolean  "confirmed",    null: false
+    t.boolean  "visible",      null: false
+    t.string   "role",         null: false
+    t.string   "access_level", null: false
+    t.string   "first_name",   null: false
+    t.string   "last_name",    null: false
+    t.text     "bio"
+    t.string   "image_url"
+    t.string   "hero_url"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["access_level"], name: "index_users_on_access_level", using: :btree
+    t.index ["confirmed"], name: "index_users_on_confirmed", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["role"], name: "index_users_on_role", using: :btree
+    t.index ["visible"], name: "index_users_on_visible", using: :btree
   end
 
   add_foreign_key "ad_instruments", "ads"
