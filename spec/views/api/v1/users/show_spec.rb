@@ -11,7 +11,7 @@ describe "api/v1/users/show.json.jbuilder" do
     expect(keys_of(parsed_view)).to match_array([
       :id, :email, :password, :confirmed, :visible, :role, :access_level,
       :first_name, :last_name, :bio, :image_url, :hero_url,
-      :followers,
+      :follows, :followers,
       :created_at, :updated_at
     ])
   end
