@@ -25,3 +25,7 @@
   + [Passing Blocks to RSpec Shared Examples](https://stackoverflow.com/questions/11354763/how-to-pass-an-instance-variable-to-an-rspec-shared-example)
   + [Configuring RSpec to recognize JBuilder views](https://stackoverflow.com/a/12243026/670433)
   + [JBuilder docs](https://github.com/rails/jbuilder)
+  + [Migration for Self-referential Association](https://stackoverflow.com/a/31924342/670433)
+  + [Customizing model associations](https://stackoverflow.com/a/6097626/670433)
+  + [Factory association double-references](https://stackoverflow.com/a/38600085/670433)
+  + [Factory Girl Aliases](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#aliases)

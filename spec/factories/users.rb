@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:follower] do
     sequence(:email){|n| "avg.joe.#{n}@gmail.com)" }
     password "abc123"
     confirmed false

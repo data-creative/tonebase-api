@@ -312,3 +312,32 @@ Reference [`User`](#user) documentation.
 ### `Admin`
 
 Reference [`User`](#user) documentation.
+
+### `UserFollow`
+
+Allows a user to "subscribe" to content updates from another user (most commonly an artist).
+
+Describes a period of time during which an ad is visible to users.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who is followed by another.
+follower_id | Integer | References the user who is following another.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Create | POST | /user_follow
+Destroy | DELETE | /user_follow/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  user_id: 1,
+  follower_id: 1,
+}
+````
