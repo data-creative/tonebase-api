@@ -29,13 +29,6 @@ class User < ApplicationRecord
   end
 
   def username
-    "#TODO"
+    "#{first_name} #{last_name}" # consider implementing a real, persisted username attribute
   end
-
-  #def follows
-  #  joins("")
-  #end
-
-  #def followers
-  #end
 end
