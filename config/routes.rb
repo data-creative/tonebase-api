@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :ad_instruments, only: [:create, :destroy]
 
       resources :users, only: [:index, :show, :create, :update, :destroy]
-      resources :user_follows, only: [:create, :destroy]
+      resources :user_followships, only: [:create, :destroy]
     end
   end
 end

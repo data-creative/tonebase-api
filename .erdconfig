@@ -11,13 +11,14 @@ inheritance: true
 markup: true
 notation: simple
 orientation: vertical
-polymorphism: false
+polymorphism: true
 sort: false
 warn: true
 title: ToneBase 1.0 Entity Relationship Diagram
 exclude:
   - ActiveRecord::InternalMetadata
   - ActiveRecord::SchemaMigration
+  - ApplicationRecord
 only: null
 only_recursion_depth: null
 prepend_primary: true

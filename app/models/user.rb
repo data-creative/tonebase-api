@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  has_many :user_followships
+  has_many :follows, :through => :user_followships, :source => :followed_user
+
+  has_many :inverse_user_followships, :class_name => UserFollowship, :foreign_key => "followed_user_id"
+  has_many :followers, :through => :inverse_user_followships, :source => :user
+
   ROLES = ["User", "Artist", "Admin"]
 
   validates :email, {presence: true, uniqueness: true}
@@ -20,5 +26,9 @@ class User < ApplicationRecord
 
   def self.admin
     where(:role => "Admin")
+  end
+
+  def username
+    "#{first_name} #{last_name}" # consider implementing a real, persisted username attribute
   end
 end

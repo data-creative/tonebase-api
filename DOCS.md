@@ -313,31 +313,29 @@ Reference [`User`](#user) documentation.
 
 Reference [`User`](#user) documentation.
 
-### `UserFollow`
+### `UserFollowship`
 
-Allows a user to "subscribe" to content updates from another user (most commonly an artist).
-
-Describes a period of time during which an ad is visible to users.
+Allows one user to follow another.
 
 Attributes:
 
 name | type | description
 --- | --- | ---
-user_id | Integer | References the user who is followed by another.
-follower_id | Integer | References the user who is following another.
+user_id | Integer | References the user who is following another.
+followed_user_id | Integer | References the user who is followed by another. The followed is most likey an artist.
 
 Endpoints:
 
 Action | Request Method | Endpoint URL
 ---	|	---	|	---
-Create | POST | /user_follow
-Destroy | DELETE | /user_follow/:id
+Create | POST | /user_followships
+Destroy | DELETE | /user_followships/:id
 
 Example POST/PUT request body:
 
 ```` js
 {
-  user_id: 1,
-  follower_id: 1,
+  user_id: 2,
+  followed_user_id: 1,
 }
 ````

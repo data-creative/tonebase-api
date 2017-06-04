@@ -11,7 +11,12 @@ describe "api/v1/users/index.json.jbuilder" do
   it "displays users" do
     expect(parsed_view.count).to eql(2)
     parsed_view.each do |user|
-      expect(keys_of(user)).to match_array([:id, :email, :password, :confirmed, :visible, :role, :access_level, :first_name, :last_name, :bio, :image_url, :hero_url, :created_at, :updated_at])
+      expect(keys_of(user)).to match_array([
+        :id, :email, :password, :confirmed, :visible, :role, :access_level,
+        :first_name, :last_name, :bio, :image_url, :hero_url,
+        :follows, :followers,
+        :created_at, :updated_at
+      ])
     end
   end
 end
