@@ -223,34 +223,6 @@ Example POST/PUT request body:
 }
 ````
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### `User`
 
 Depending on the user's `role`, he/she can be either
@@ -337,5 +309,61 @@ Example POST/PUT request body:
 {
   user_id: 2,
   followed_user_id: 1,
+}
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### `UserPayment`
+
+Allows the system to keep track of user payments being transacted through the payment service.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References a user who has agreed to pay for system access.
+transaction_uuid | Date | The payment service's unique identifier for the transaction. Used to look up additional information about the payment.
+price | Integer (cents USD) | The amount the payment service has charged this user. Can be negative, in the case of refunds.
+paid_at | DateTime | The date and time when the payment service transacted this payment.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL | Comments
+---	|	---	|	--- | ---
+List | GET | /user_payments | Returns all users' payments by default. Optionally supply a `user_id` parameter (e.g. `/user_payments?user_id=123`) to get a subset of payments associated with a given user.
+Create | POST | /user_payments | N/A
+Show | GET | /user_payments/:id | N/A
+
+Example POST/PUT request body:
+
+```` js
+{
+  user_id: 1,
+  transaction_uuid: "abc123-def456-ghi789-jkl000",
+  price: null
+  paid_at: null
 }
 ````
