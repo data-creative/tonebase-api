@@ -13,6 +13,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :image_url
       t.string :hero_url
       t.string :customer_uuid
+      t.boolean :oauth
+      t.string :oauth_provider
 
       t.timestamps
     end
@@ -22,5 +24,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     add_index :users, :visible
     add_index :users, :role
     add_index :users, :access_level
+    add_index :users, :oauth
   end
 end

@@ -12,6 +12,8 @@ FactoryGirl.define do
     image_url nil
     hero_url nil
     customer_uuid nil
+    oauth nil
+    oauth_provider nil
 
     trait :confirmed do
       confirmed true
@@ -25,6 +27,11 @@ FactoryGirl.define do
       bio "I love guitar and I'm hoping to get better!"
       image_url "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
       hero_url "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
+    end
+
+    trait :with_oauth do
+      oauth true
+      oauth_provider "Google"
     end
 
     #

@@ -277,6 +277,8 @@ bio | Text | A description of user interests, skills, and goals.
 image_url | String | The user's profile image source.
 hero_url | String | The user's hero/background image source.
 customer_uuid | String | References the payment service's customer resource.
+oauth | Boolean | Indicates if another service authenticates this user.
+oauth_provider | String | The other service which authenticates this user (i.e. `"Google"`, `"Facebook"`, etc.).
 
 Endpoints:
 
@@ -303,7 +305,9 @@ Example POST/PUT request body:
   bio: "I love guitar and I'm hoping to get better!",
   image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
   hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
-  customer_uuid: "cus_abc123def45678"
+  customer_uuid: "cus_abc123def45678",
+  oauth: true,
+  oauth_provider: "Google",
 }
 ````
 

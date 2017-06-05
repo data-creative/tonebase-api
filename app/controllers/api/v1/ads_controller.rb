@@ -33,6 +33,6 @@ private
   end
 
   def ad_params
-    params.require(:ad).permit(:advertiser_id, :title, :message, :url, :image_url)
+    params.require(:ad).permit(:advertiser_id, :title, :content, :url, :image_url)
   end
 end
