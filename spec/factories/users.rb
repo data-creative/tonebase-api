@@ -55,5 +55,9 @@ FactoryGirl.define do
       role "Admin"
       access_level "Full"
     end
+
+    trait :customer do
+      customer_uuid "cus_Amha9ZegI8nNfa"
+    end
   end
 end
