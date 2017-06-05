@@ -276,6 +276,7 @@ last_name | String | The user's last name or surname.
 bio | Text | A description of user interests, skills, and goals.
 image_url | String | The user's profile image source.
 hero_url | String | The user's hero/background image source.
+customer_uuid | String | References the payment service's customer resource.
 
 Endpoints:
 
@@ -301,7 +302,8 @@ Example POST/PUT request body:
   last_name: "Averaggi",
   bio: "I love guitar and I'm hoping to get better!",
   image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
-  hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
+  hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
+  customer_uuid: "cus_abc123def45678"
 }
 ````
 

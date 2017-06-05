@@ -11,6 +11,7 @@ FactoryGirl.define do
     bio nil
     image_url nil
     hero_url nil
+    customer_uuid nil
 
     trait :confirmed do
       confirmed true
@@ -54,6 +55,10 @@ FactoryGirl.define do
       last_name "Administrato" # optional to put this attribute here, but it provides further clarity and differentiation
       role "Admin"
       access_level "Full"
+    end
+
+    trait :customer do
+      customer_uuid "cus_abc123def45678"
     end
   end
 end

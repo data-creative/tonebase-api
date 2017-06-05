@@ -72,19 +72,20 @@ ActiveRecord::Schema.define(version: 20170603192120) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",        null: false
-    t.string   "password",     null: false
-    t.boolean  "confirmed",    null: false
-    t.boolean  "visible",      null: false
-    t.string   "role",         null: false
-    t.string   "access_level", null: false
-    t.string   "first_name",   null: false
-    t.string   "last_name",    null: false
+    t.string   "email",         null: false
+    t.string   "password",      null: false
+    t.boolean  "confirmed",     null: false
+    t.boolean  "visible",       null: false
+    t.string   "role",          null: false
+    t.string   "access_level",  null: false
+    t.string   "first_name",    null: false
+    t.string   "last_name",     null: false
     t.text     "bio"
     t.string   "image_url"
     t.string   "hero_url"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "customer_uuid"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["access_level"], name: "index_users_on_access_level", using: :btree
     t.index ["confirmed"], name: "index_users_on_confirmed", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

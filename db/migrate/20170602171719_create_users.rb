@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.text :bio
       t.string :image_url
       t.string :hero_url
+      t.string :customer_uuid
 
       t.timestamps
     end

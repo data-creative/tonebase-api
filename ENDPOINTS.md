@@ -24,5 +24,3 @@ Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 3-Interactivity	|	View	|	1-List	|	GET	|	/api/views/
 3-Interactivity	|	View	|	2-Create	|	POST	|	/api/views/
 3-Interactivity	|	View	|	3-Show	|	GET	|	/api/views/:id
-4-Payments	|	Payment	|	1-List	|	GET	|	/api/payments
-4-Payments	|	Payment	|	3-Show	|	GET	|	/api/payments/:id
