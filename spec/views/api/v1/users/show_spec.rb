@@ -13,6 +13,7 @@ describe "api/v1/users/show.json.jbuilder" do
       :first_name, :last_name, :bio, :image_url, :hero_url,
       :customer_uuid,
       :follows, :followers,
+      :oauth, :oauth_provider,
       :created_at, :updated_at
     ])
   end

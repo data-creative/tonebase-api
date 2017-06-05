@@ -15,6 +15,7 @@ describe "api/v1/users/index.json.jbuilder" do
         :first_name, :last_name, :bio, :image_url, :hero_url,
         :follows, :followers,
         :customer_uuid,
+        :oauth, :oauth_provider,
         :created_at, :updated_at
       ])
     end
