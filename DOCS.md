@@ -425,7 +425,7 @@ Example POST/PUT request body:
 }
 ````
 
-### `Favorite`
+### `UserFavoriteVideo`
 
 Allows a user to mark a video as being one of their favorites.
 
@@ -440,8 +440,8 @@ Endpoints:
 
 Action | Request Method | Endpoint URL
 ---	|	---	|	---
-Create | POST | /favorites
-Destroy | DELETE | /favorites/:id
+Create | POST | /user_favorite_videos
+Destroy | DELETE | /user_favorite_videos/:id
 
 Example POST/PUT request body:
 
