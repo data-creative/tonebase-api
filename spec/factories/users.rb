@@ -11,6 +11,7 @@ FactoryGirl.define do
     bio nil
     image_url nil
     hero_url nil
+    customer_uuid nil
 
     trait :confirmed do
       confirmed true
@@ -57,7 +58,7 @@ FactoryGirl.define do
     end
 
     trait :customer do
-      customer_uuid "cus_Amha9ZegI8nNfa"
+      customer_uuid "cus_abc123def45678"
     end
   end
 end

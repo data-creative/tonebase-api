@@ -65,7 +65,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           last_name: "Averaggi",
           bio: "I love guitar and I'm hoping to get better!",
           image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
-          hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
+          hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
+          customer_uuid: "cus_abc123def45678"
         }
       }
     end

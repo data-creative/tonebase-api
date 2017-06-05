@@ -303,7 +303,7 @@ Example POST/PUT request body:
   bio: "I love guitar and I'm hoping to get better!",
   image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
   hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
-  customer_uuid: "cus_Amha9ZegI8nNfa"
+  customer_uuid: "cus_abc123def45678"
 }
 ````
 
