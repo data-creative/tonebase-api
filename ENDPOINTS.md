@@ -16,11 +16,6 @@ Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 2-Comms	|	UserAlert	|	5-Destroy	|	DELETE	|	/api/users/:id/alerts/:id
 3-Interactivity	|	Favorite	|	2-Create	|	POST	|	/api/favorites
 3-Interactivity	|	Favorite	|	5-Destroy	|	DELETE	|	/api/favorites
-3-Interactivity	|	Video	|	1-List	|	GET	|	/api/videos
-3-Interactivity	|	Video	|	2-Create	|	POST	|	/api/videos
-3-Interactivity	|	Video	|	3-Show	|	GET	|	/api/videos/:id
-3-Interactivity	|	Video	|	4-Update	|	PUT	|	/api/videos/:id
-3-Interactivity	|	Video	|	5-Destroy	|	DELETE	|	/api/videos/:id
 3-Interactivity	|	View	|	1-List	|	GET	|	/api/views/
 3-Interactivity	|	View	|	2-Create	|	POST	|	/api/views/
 3-Interactivity	|	View	|	3-Show	|	GET	|	/api/views/:id
