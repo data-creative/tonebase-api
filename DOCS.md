@@ -401,7 +401,6 @@ user_id | Integer | References the user (artist) who posted this video.
 instrument_id | Integer | References the instrument of instruction.
 title | String | A display title.
 description | String | A display title.
-image_url | String | A display image source.
 tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
 
 Endpoints:
