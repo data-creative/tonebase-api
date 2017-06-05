@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_girl'
+require 'support/shoulda_matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -56,15 +57,39 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  # Configure shoulda matchers https://github.com/thoughtbot/shoulda-matchers
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
-      with.test_framework :rspec
+  # Enable RSpec to access JBuilder views in controller specs
+  config.render_views = true
+end
 
-      with.library :rails
+
+
+
+
+
+
+
+
+
+
+
+
+
+module Shoulda
+  module Matchers
+    RailsShim.class_eval do
+      def self.serialized_attributes_for(model)
+        if defined?(::ActiveRecord::Type::Serialized)
+          # Rails 5+
+          model.columns.select do |column|
+            model.type_for_attribute(column.name).is_a?(::ActiveRecord::Type::Serialized)
+          end.inject({}) do |hash, column|
+            hash[column.name.to_s] = model.type_for_attribute(column.name).coder
+            hash
+          end
+        else
+          model.serialized_attributes
+        end
+      end
     end
   end
-
-  # Enable RSpec to access JBuilder views in controller specs 
-  config.render_views = true
 end

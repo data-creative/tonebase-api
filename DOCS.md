@@ -422,7 +422,6 @@ Example POST/PUT request body:
   instrument_id:1,
   title: "Finale from Sonata #99",
   description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
-  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/video-image.jpg",
   tags: ["borouque", "maestrelli", "g-major"]
 }
 ````

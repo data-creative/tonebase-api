@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603192120) do
+ActiveRecord::Schema.define(version: 20170605173648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,10 +96,25 @@ ActiveRecord::Schema.define(version: 20170603192120) do
     t.index ["visible"], name: "index_users_on_visible", using: :btree
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "instrument_id"
+    t.string   "title",         null: false
+    t.text     "description",   null: false
+    t.text     "tags"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["instrument_id"], name: "index_videos_on_instrument_id", using: :btree
+    t.index ["user_id", "title"], name: "index_videos_on_user_id_and_title", unique: true, using: :btree
+    t.index ["user_id"], name: "index_videos_on_user_id", using: :btree
+  end
+
   add_foreign_key "ad_instruments", "ads"
   add_foreign_key "ad_instruments", "instruments"
   add_foreign_key "ad_placements", "ads"
   add_foreign_key "ads", "advertisers"
   add_foreign_key "user_followships", "users"
   add_foreign_key "user_followships", "users", column: "followed_user_id"
+  add_foreign_key "videos", "instruments"
+  add_foreign_key "videos", "users"
 end
