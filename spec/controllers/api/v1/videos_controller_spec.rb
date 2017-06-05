@@ -35,7 +35,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   end
 
   describe "PUT #update" do
-    it_behaves_like "an update endpoint", Video, {image_url: "https://www.my-site.com/updated.jpg"}
+    it_behaves_like "an update endpoint", Video, {description: "My Revised Description."}
     it_behaves_like "an update endpoint which validates presence", Video, [:user, :instrument, :title, :description] do
       let(:resource_params){ {user_id: "", instrument_id: "", title:"", description:""} }
     end

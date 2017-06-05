@@ -33,6 +33,6 @@ private
   end
 
   def video_params
-    params.require(:video).permit(:user_id, :instrument_id, :title, :description, :image_url, :tags)
+    params.require(:video).permit(:user_id, :instrument_id, :title, :description, tags: [])
   end
 end
