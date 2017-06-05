@@ -31,6 +31,16 @@ shared_examples_for "a create endpoint" do |model_class|
       it "should create a new resource" do
         expect{response}.to change{model_class.count}.by(1)
       end
+
+      it "should create a resource and persist all the relevant attributes" do
+        response
+        persisted_attributes = model_class.last.serializable_hash.deep_symbolize_keys
+        persisted_attributes.reject!{|k,_| [:id, :created_at, :updated_at].include?(k)}
+        persisted_attributes.each do |k,v|
+          persisted_attributes[k] = persisted_attributes[k].to_s if v.class == Date # convert Sat, 01 Jul 2017 to "2017-07-01"
+        end
+        expect(persisted_attributes).to include(resource_params)
+      end
     end
   end
 end
