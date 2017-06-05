@@ -345,3 +345,82 @@ Example POST/PUT request body:
   followed_user_id: 1,
 }
 ````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### `Video`
+
+An audio-visual recording of an artist's music instructions.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user (artist) who posted this video.
+instrument_id | Integer | References the instrument of instruction.
+title | String | A display title.
+description | String | A display title.
+tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /videos
+Create | POST | /videos
+Show | GET | /videos/:id
+Update | PUT | /videos/:id
+Destroy | DELETE | /videos/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  user_id: 1,
+  instrument_id:1,
+  title: "Finale from Sonata #99",
+  description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
+  tags: ["borouque", "maestrelli", "g-major"]
+}
+````

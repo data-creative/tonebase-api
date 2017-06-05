@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
       resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :user_followships, only: [:create, :destroy]
+
+      resources :videos, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end

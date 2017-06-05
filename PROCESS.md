@@ -83,4 +83,6 @@ rails g model ad_instrument ad:references instrument:references
 
 rails g model user email:string:uniq password:string confirmed:boolean visible:boolean role:string access_level:string first_name:string last_name:string bio:text image_url:string hero_url:string
 rails g model user_followship user:references followed_user_id:integer
+
+rails g model video user:references instrument:references title:string description:text tags:text
 ````
