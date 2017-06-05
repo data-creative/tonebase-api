@@ -6,6 +6,9 @@ RSpec.describe Video, type: :model do
   describe "associations" do
     it { should belong_to(:user) }
     it { should belong_to(:instrument) }
+
+    it { should have_many(:user_favorite_videos) }
+    it { should have_many(:favorited_by_users).through(:user_favorite_videos) }
   end
 
   describe "validations" do

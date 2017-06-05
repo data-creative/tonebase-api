@@ -5,5 +5,5 @@ class AdInstrument < ApplicationRecord
   validates_associated :ad
   validates_associated :instrument
   validates :ad, {presence:true}
-  validates :instrument, {presence:true}
+  validates :instrument, {presence:true, uniqueness: {scope: :ad_id}}
 end

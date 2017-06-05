@@ -1,9 +1,11 @@
 class User < ApplicationRecord
   has_many :user_followships
   has_many :follows, :through => :user_followships, :source => :followed_user
-
   has_many :inverse_user_followships, :class_name => UserFollowship, :foreign_key => "followed_user_id"
   has_many :followers, :through => :inverse_user_followships, :source => :user
+
+  has_many :user_favorite_videos
+  has_many :favorite_videos, :through => :user_favorite_videos, :source => :video
 
   ROLES = ["User", "Artist", "Admin"]
 

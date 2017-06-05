@@ -6,5 +6,7 @@ class CreateAdInstruments < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    add_index :ad_instruments, [:ad_id, :instrument_id], unique: true
   end
 end

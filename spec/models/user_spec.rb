@@ -4,9 +4,11 @@ RSpec.describe User, type: :model do
   describe "associations" do
     it { should have_many(:user_followships) }
     it { should have_many(:follows).through(:user_followships) }
-
     it { should have_many(:inverse_user_followships) }
     it { should have_many(:followers).through(:inverse_user_followships) }
+
+    it { should have_many(:user_favorite_videos) }
+    it { should have_many(:favorite_videos).through(:user_favorite_videos) }
 
     describe "self-referential user followships" do
       let(:user){ create(:user) }

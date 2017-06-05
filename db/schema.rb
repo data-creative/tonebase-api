@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605173648) do
+ActiveRecord::Schema.define(version: 20170605202049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 20170605173648) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["name"], name: "index_instruments_on_name", unique: true, using: :btree
+  end
+
+  create_table "user_favorite_videos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "video_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "video_id"], name: "index_user_favorite_videos_on_user_id_and_video_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_user_favorite_videos_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_user_favorite_videos_on_video_id", using: :btree
   end
 
   create_table "user_followships", force: :cascade do |t|
@@ -113,6 +123,8 @@ ActiveRecord::Schema.define(version: 20170605173648) do
   add_foreign_key "ad_instruments", "instruments"
   add_foreign_key "ad_placements", "ads"
   add_foreign_key "ads", "advertisers"
+  add_foreign_key "user_favorite_videos", "users"
+  add_foreign_key "user_favorite_videos", "videos"
   add_foreign_key "user_followships", "users"
   add_foreign_key "user_followships", "users", column: "followed_user_id"
   add_foreign_key "videos", "instruments"

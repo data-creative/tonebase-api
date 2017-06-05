@@ -1,6 +1,8 @@
 class Video < ApplicationRecord
   belongs_to :user
   belongs_to :instrument
+  has_many :user_favorite_videos
+  has_many :favorited_by_users, :through => :user_favorite_videos, :source => :user
 
   validates_associated :user
   validates_associated :instrument
