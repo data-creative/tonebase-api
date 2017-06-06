@@ -6,7 +6,7 @@ attributes:
 disconnected: true
 filename: erd
 filetype: png
-indirect: true
+indirect: false
 inheritance: true
 markup: true
 notation: simple
