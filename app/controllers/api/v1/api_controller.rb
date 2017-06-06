@@ -59,7 +59,7 @@ private
   # source: http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Token.html
   # usage: curl SOME_URL -H 'Authorization: Token token="abc123"'
   def authenticate_client_token
-    authenticate_or_request_with_http_token do |token, options|
+    authenticate_or_request_with_http_token do |token, _|
       ActiveSupport::SecurityUtils.secure_compare(
         ::Digest::SHA256.hexdigest(token),
         ::Digest::SHA256.hexdigest(CLIENT_TOKEN)
