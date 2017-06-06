@@ -14,15 +14,24 @@ RSpec.describe Api::V1::ApiController, type: :controller do
       end
     end
 
-    #context "request with invalid client token" do
-    #  it "should return an 'invalid token' error message" do
-    #    binding.pry
-    #  end
-    #end
+    context "request with invalid client token" do
+      before :each do
+        token = 'OOPS'
+        auth = ActionController::HttpAuthentication::Token.encode_credentials(token) #> Token token="abc123"
+        request.headers.merge!({'HTTP_AUTHORIZATION': auth})
+      end
+
+      let(:response){ get(:hello, params: {format: 'json'}) }
+
+      it "should be unsuccessful (unauthorized)" do
+        expect(response.status).to eql(401)
+        expect(response.message).to eql("Unauthorized")
+      end
+    end
 
     context "request with valid client token" do
       before :each do
-        token = 'abc123'
+        token = ENV.fetch("TONEBASE_CLIENT_TOKEN")
         auth = ActionController::HttpAuthentication::Token.encode_credentials(token) #> Token token="abc123"
         request.headers.merge!({'HTTP_AUTHORIZATION': auth})
       end

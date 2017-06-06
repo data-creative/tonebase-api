@@ -33,6 +33,10 @@ gem install bundler
 gem install rails
 ````
 
+Setup environment variable(s) in your profile:
+
+    export TONEBASE_CLIENT_TOKEN="abc123" # shared with client application and excluded from version control
+
 ## Installation
 
 Download the source code:
@@ -42,10 +46,6 @@ git clone git@github.com:data-creative/tonebase-api.git
 cd tonebase-api/
 bundle install
 ````
-
-Setup environment variable(s):
-
-    TONEBASE_CLIENT_TOKEN="abc123" # shared with client application and excluded from version control
 
 ## Setup Database
 
@@ -72,13 +72,13 @@ bin/rake db:migrate
 Run a local web server:
 
 ```` sh
-rails s
+bin/rails s
 ````
 
 Run a local rails console:
 
 ```` sh
-rails c
+bin/rails c
 ````
 
 ## Testing

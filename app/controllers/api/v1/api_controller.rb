@@ -2,7 +2,7 @@ class Api::V1::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   before_action :authenticate_client_token
 
-  CLIENT_TOKEN = "abc123" # ENV.fetch("TONEBASE_CLIENT_TOKEN")
+  CLIENT_TOKEN = ENV.fetch("TONEBASE_CLIENT_TOKEN")
 
   # GET /api/v1/hello ... use this endpoint to test client authentication.
   def hello
