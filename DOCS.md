@@ -1,23 +1,15 @@
 # Web Service Documentation
 
-This document provides a reference for how the Client Application should expect to interface with the API Server.
+This document provides a reference for how the Client Application should expect to interface with the API Server. See also:
 
-NOTE: The API's current operating version is `v1`, so all endpoint URLs in this document assume a prefix of `/api/v1`.
+  + [Actual Entity Relationship Diagram](/erd.png)
+  + [Example Client Application](https://github.com/s2t2/tonebase-api-client-example), in Express
 
 ## Requests
 
-### POST Request Parameters
+The API's current operating version is `v1`, so all endpoint URLs in this document assume a prefix of `/api/v1`, for example:
 
-When issuing POST requests to a particular endpoint, pass parameters for the given resource nested inside an object named after that resource. For example, the request `POST api/v1/things` should pass a request body which resembles the following:
-
-```` js
-{
-  thing: { // <-- name this object after the resource you are trying to create!
-    name: "My Thing",
-    description: "A thing."
-  }
-}
-````
+    https://tonebase-api.herokuapp.com/api/v1/instruments
 
 ## Responses
 
