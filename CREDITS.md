@@ -33,3 +33,6 @@
   + [Self-referential relationships](https://github.com/super-secret/self-referential-associations)
   + [Accepting array attributes via strong params](https://stackoverflow.com/a/16555975/670433)
   + [Allow cross-origin requests](http://api.rubyonrails.org/classes/ActionController/RequestForgeryProtection/ClassMethods.html)
+  + [Token Authentication](http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Token.html)
+  + [Setting Request Headers in Controller Specs](https://gist.github.com/quadrolls/9203f924f934398f6992162bbbcb1a0c)
+  + [RSpec Shared Context](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-context)

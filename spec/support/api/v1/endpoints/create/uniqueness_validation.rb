@@ -1,4 +1,4 @@
-require_relative "../response"
+require_relative "../../response"
 
 # @param [ApplicationRecord] model_class
 # @param [Array] attribute_names Contains symbols of all attribute names which should be validated for their uniqueness.
