@@ -1,8 +1,11 @@
 require 'rails_helper'
 require_relative '../../../support/api/v1/create'
 require_relative '../../../support/api/v1/destroy'
+require_relative '../../../support/api/v1/request'
 
 RSpec.describe Api::V1::UserFavoriteVideosController, type: :controller do
+  include_context "authenticate requests using valid token"
+
   describe "POST #create" do
     it_behaves_like "a create endpoint", UserFavoriteVideo  do
       let(:user){ create(:user)}

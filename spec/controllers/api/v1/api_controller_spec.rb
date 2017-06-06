@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../../../support/api/v1/request'
 require_relative '../../../support/api/v1/response'
 
 RSpec.describe Api::V1::ApiController, type: :controller do
@@ -17,7 +18,7 @@ RSpec.describe Api::V1::ApiController, type: :controller do
     context "request with invalid client token" do
       before :each do
         token = 'OOPS'
-        auth = ActionController::HttpAuthentication::Token.encode_credentials(token) #> Token token="abc123"
+        auth = ActionController::HttpAuthentication::Token.encode_credentials(token) #> Token token="OOPS"
         request.headers.merge!({'HTTP_AUTHORIZATION': auth})
       end
 
@@ -30,11 +31,7 @@ RSpec.describe Api::V1::ApiController, type: :controller do
     end
 
     context "request with valid client token" do
-      before :each do
-        token = ENV.fetch("TONEBASE_CLIENT_TOKEN")
-        auth = ActionController::HttpAuthentication::Token.encode_credentials(token) #> Token token="abc123"
-        request.headers.merge!({'HTTP_AUTHORIZATION': auth})
-      end
+      include_context "authenticate requests using valid token"
 
       let(:response){ get(:hello, params: {format: 'json'}) }
 

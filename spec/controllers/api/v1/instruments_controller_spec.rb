@@ -4,8 +4,11 @@ require_relative '../../../support/api/v1/show'
 require_relative '../../../support/api/v1/create'
 require_relative '../../../support/api/v1/update'
 require_relative '../../../support/api/v1/destroy'
+require_relative '../../../support/api/v1/request'
 
 RSpec.describe Api::V1::InstrumentsController, type: :controller do
+  include_context "authenticate requests using valid token"
+
   describe "GET #index" do
     it_behaves_like "an index endpoint", Instrument
   end
