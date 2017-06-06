@@ -43,6 +43,10 @@ cd tonebase-api/
 bundle install
 ````
 
+Setup environment variable(s):
+
+    TONEBASE_CLIENT_TOKEN="abc123" # shared with client application and excluded from version control
+
 ## Setup Database
 
 Setup the database:

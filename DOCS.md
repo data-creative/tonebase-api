@@ -7,9 +7,13 @@ This document provides a reference for how the Client Application should expect 
 
 ## Requests
 
-The API's current operating version is `v1`, so all endpoint URLs in this document assume a prefix of `/api/v1`, for example:
+The API's current operating version is `v1`, so all endpoint URLs in this document assume a prefix of `/api/v1`.
 
-    https://tonebase-api.herokuapp.com/api/v1/instruments
+### Authorization
+
+The API only fulfills authorized requests. To send an authorized request, pass a valid client token in the request headers, for example:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/hello -H 'Authorization: Token token="abc123"'
 
 ## Responses
 
@@ -20,6 +24,7 @@ code | major status | minor status | description
 200 | Success | OK | The resource(s) were returned successfully. Or the resource was updated successfully.
 201 | Success | Created | The resource was created successfully.
 204 | Success | No Content | The resource was destroyed successfully.
+401 | Client Error | Unauthorized | The API requires you to pass an access token in the headers. Ensure you are passing a valid token.
 404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct and other parameter values are valid.
 422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
 
