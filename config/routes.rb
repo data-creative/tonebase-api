@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       resources :ad_placements, only: [:index, :show, :create, :update, :destroy]
       resources :ad_instruments, only: [:create, :destroy]
 
-      resources :users, only: [:index, :show, :create, :update, :destroy]
+      resources :users, only: [:index, :show, :create, :update, :destroy] do
+        get "search", on: :collection
+      end
       resources :user_followships, only: [:create, :destroy]
 
       resources :videos, only: [:index, :show, :create, :update, :destroy]

@@ -2,8 +2,8 @@
 
 This document provides a reference for how the Client Application should expect to interface with the API Server. See also:
 
-  + [Actual Entity Relationship Diagram](/erd.png)
-  + [Example Client Application](https://github.com/s2t2/tonebase-api-client-example), in Express
+  + [Entity Relationship Diagram](/erd.png)
+  + [Example Client Application (Express)](https://github.com/s2t2/tonebase-api-client-example)
 
 ## Requests
 
@@ -19,6 +19,8 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
     curl https://tonebase-api.herokuapp.com/api/v1/instruments -H 'Authorization: Token token="abc123"' -H 'Content-Type: application/json' -X POST -d '{"name":"My instrument","description":"Produces musical sounds."}'
 
+    curl https://tonebase-api.herokuapp.com//api/v1/users/search?query[email]=search4me@gmail.com -H 'Authorization: Token token="abc123"' --globoff
+
 ## Responses
 
 The API uses the following HTTP response codes:
@@ -28,6 +30,7 @@ code | major status | minor status | description
 200 | Success | OK | The resource(s) were returned successfully. Or the resource was updated successfully.
 201 | Success | Created | The resource was created successfully.
 204 | Success | No Content | The resource was destroyed successfully.
+400 | Client Error | Bad Request | Make sure you are passing the correct URL parameters. If you are using a "search" endpoint, make sure you are passing a `query` URL parameter.
 401 | Client Error | Unauthorized | The API requires you to pass an access token in the headers. Ensure you are passing a valid token.
 404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct and other parameter values are valid.
 422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
@@ -290,6 +293,7 @@ Create | POST | /users | N/A
 Show | GET | /users/:id | N/A
 Update | PUT | /users/:id | N/A
 Destroy | DELETE | /users/:id | N/A
+Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?email=hello@gmail.com`) to get a subset of matching users.
 
 Example POST/PUT request body:
 

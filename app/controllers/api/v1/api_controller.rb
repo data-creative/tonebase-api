@@ -16,6 +16,10 @@ private
     render json: {"id": ["not found"]}, status: :not_found
   end
 
+  def render_query_400
+    render json: {"query": ["should be a named URL parameter included in the request"]}, status: :bad_request
+  end
+
   # @deprecated Because using jbuilder instead.
   # @param [ApplicationRecord] resource One or more model instances.
   def render_json(resource)
