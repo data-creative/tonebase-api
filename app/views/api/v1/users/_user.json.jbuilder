@@ -5,4 +5,6 @@ json.follows user.follows, :id, :username, :image_url
 
 json.followers user.followers, :id, :username, :image_url
 
+json.favorite_videos user.favorite_videos, :id, :title
+
 json.extract! user, :created_at, :updated_at

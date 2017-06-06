@@ -8,5 +8,6 @@ class CreateUserFollowships < ActiveRecord::Migration[5.0]
     end
 
     add_foreign_key :user_followships, :users, column: :followed_user_id
+    add_index :user_followships, [:user_id, :followed_user_id], unique: true
   end
 end

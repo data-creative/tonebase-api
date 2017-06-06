@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :user_followships, only: [:create, :destroy]
 
       resources :videos, only: [:index, :show, :create, :update, :destroy]
+      resources :user_favorite_videos, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end

@@ -85,4 +85,5 @@ rails g model user email:string:uniq password:string confirmed:boolean visible:b
 rails g model user_followship user:references followed_user_id:integer
 
 rails g model video user:references instrument:references title:string description:text tags:text
+rails g model user_favorite_video user:references video:references
 ````

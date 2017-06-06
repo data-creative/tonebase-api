@@ -424,3 +424,30 @@ Example POST/PUT request body:
   tags: ["borouque", "maestrelli", "g-major"]
 }
 ````
+
+### `UserFavoriteVideo`
+
+Allows a user to mark a video as being one of their favorites.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who likes this video.
+video_id | Integer | References the video being liked.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Create | POST | /user_favorite_videos
+Destroy | DELETE | /user_favorite_videos/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  user_id: 40,
+  video_id: 13
+}
+````
