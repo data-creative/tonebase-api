@@ -93,4 +93,35 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "DELETE #destroy" do
     it_behaves_like "a destroy endpoint", User
   end
+
+  describe "GET #search" do
+    let(:email){ "search4me@gmail.com" }
+    let(:users){ [create(:user), create(:user, email: email), create(:user)] }
+
+    context "without any search params" do
+      let(:response){  get(:search, params: {format: 'json'})  }
+
+      it "should return an error message" do
+        expect(response.code).to eql(999)
+      end
+    end
+
+    context "with valid search params" do
+      context "when there are no matching resources" do
+        let(:response){  get(:search, params: {format: 'json', email: "OOPS"})  }
+
+        it "should return an empty array" do
+          expect(parsed_response.empty?).to eql(true)
+        end
+      end
+
+      context "when there are matching resources" do
+        let(:response){  get(:search, params: {format: 'json', email: email})  }
+
+        it "should return an array of matching resources" do
+          expect(parsed_response.first["email"]).to eql(email)
+        end
+      end
+    end
+  end
 end
