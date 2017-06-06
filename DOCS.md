@@ -15,6 +15,10 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
     curl https://tonebase-api.herokuapp.com/api/v1/hello -H 'Authorization: Token token="abc123"'
 
+    curl https://tonebase-api.herokuapp.com/api/v1/instruments -H 'Authorization: Token token="abc123"'
+
+    curl https://tonebase-api.herokuapp.com/api/v1/instruments -H 'Authorization: Token token="abc123"' -H 'Content-Type: application/json' -X POST -d '{"name":"My instrument","description":"Produces musical sounds."}'
+
 ## Responses
 
 The API uses the following HTTP response codes:
