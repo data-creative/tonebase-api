@@ -2,8 +2,8 @@
 
 This document provides a reference for how the Client Application should expect to interface with the API Server. See also:
 
-  + [Actual Entity Relationship Diagram](/erd.png)
-  + [Example Client Application](https://github.com/s2t2/tonebase-api-client-example), in Express
+  + [Entity Relationship Diagram](/erd.png)
+  + [Example Client Application (Express)](https://github.com/s2t2/tonebase-api-client-example)
 
 ## Requests
 
@@ -290,6 +290,7 @@ Create | POST | /users | N/A
 Show | GET | /users/:id | N/A
 Update | PUT | /users/:id | N/A
 Destroy | DELETE | /users/:id | N/A
+Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?email=hello@gmail.com`) to get a subset of matching users.
 
 Example POST/PUT request body:
 
