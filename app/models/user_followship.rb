@@ -5,18 +5,5 @@ class UserFollowship < ApplicationRecord
   validates_associated :user
   validates_associated :followed_user
   validates :user, {presence:true}
-  validates :followed_user, {presence:true}
-  validate :directional_uniqueness
-
-private
-
-  def duplicates
-    UserFollowship.where(:user_id => user_id, :followed_user_id => followed_user_id)
-  end
-
-  def directional_uniqueness
-    if duplicates.any?
-      errors.add(:user_id, "is already following user #{followed_user_id}")
-    end
-  end
+  validates :followed_user, {presence:true, uniqueness: {scope: :user_id}}
 end

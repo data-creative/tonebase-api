@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170605202049) do
     t.integer  "instrument_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["ad_id", "instrument_id"], name: "index_ad_instruments_on_ad_id_and_instrument_id", unique: true, using: :btree
     t.index ["ad_id"], name: "index_ad_instruments_on_ad_id", using: :btree
     t.index ["instrument_id"], name: "index_ad_instruments_on_instrument_id", using: :btree
   end
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170605202049) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["followed_user_id"], name: "index_user_followships_on_followed_user_id", using: :btree
+    t.index ["user_id", "followed_user_id"], name: "index_user_followships_on_user_id_and_followed_user_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_user_followships_on_user_id", using: :btree
   end
 
