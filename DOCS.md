@@ -443,3 +443,31 @@ Example POST/PUT request body:
   video_id: 13
 }
 ````
+
+### `UserViewVideo`
+
+An event logged by the client application when a user views a video. The most ideal time to log one of these events is when the user starts viewing the video, else perhaps when the user visits the video show page, but be consistent. Really this resource just provides a benchmark for comparing against in-depth analytics provided by the video service.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who viewed this video.
+video_id | Integer | References the video being viewed.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /user_view_videos
+Create | POST | /user_view_videos
+Show | GET | /user_view_videos/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  user_id: 40,
+  video_id: 13
+}
+````
