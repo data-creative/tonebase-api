@@ -1,4 +1,4 @@
-require_relative './response'
+require_relative '../response'
 require_relative './update/presence_validation' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 require_relative './update/uniqueness_validation' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 

@@ -1,4 +1,4 @@
-require_relative "./response"
+require_relative "../response"
 
 shared_examples_for "a show endpoint" do |model_class|
   let!(:resource) { create(model_class.name.underscore.to_sym) }

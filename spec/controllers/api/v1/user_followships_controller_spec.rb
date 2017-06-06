@@ -1,7 +1,7 @@
 require 'rails_helper'
-require_relative '../../../support/api/v1/create'
-require_relative '../../../support/api/v1/destroy'
 require_relative '../../../support/api/v1/request'
+require_relative '../../../support/api/v1/endpoints/create'
+require_relative '../../../support/api/v1/endpoints/destroy'
 
 RSpec.describe Api::V1::UserFollowshipsController, type: :controller do
   include_context "authenticate requests using valid token"

@@ -1,4 +1,4 @@
-require_relative "../response"
+require_relative "../../response"
 
 shared_examples_for "an update endpoint which validates uniqueness" do |model_class, attribute_name|
   let!(:resource) { create(model_class.name.underscore.to_sym) }
