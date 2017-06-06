@@ -1,5 +1,6 @@
 class Api::V1::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+  skip_before_action :verify_authenticity_token # creates security vulnerabilities which are addressed by #authenticate_client_token
   before_action :authenticate_client_token
 
   CLIENT_TOKEN = ENV.fetch("TONEBASE_CLIENT_TOKEN")
