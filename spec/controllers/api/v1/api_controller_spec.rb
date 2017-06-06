@@ -3,8 +3,6 @@ require_relative '../../../support/api/v1/request'
 require_relative '../../../support/api/v1/response'
 
 RSpec.describe Api::V1::ApiController, type: :controller do
-
-  # Requires request to have header... "HTTP_AUTHORIZATION"=>"Token token=\"abc123\"",
   describe "Authentication", "GET #hello" do
     context "request without a client token" do
       let(:response){ get(:hello, params: {format: 'json'}) }
@@ -16,12 +14,7 @@ RSpec.describe Api::V1::ApiController, type: :controller do
     end
 
     context "request with invalid client token" do
-      before :each do
-        token = 'OOPS'
-        auth = ActionController::HttpAuthentication::Token.encode_credentials(token) #> Token token="OOPS"
-        request.headers.merge!({'HTTP_AUTHORIZATION': auth})
-      end
-
+      include_context "authenticate requests using invalid token"
       let(:response){ get(:hello, params: {format: 'json'}) }
 
       it "should be unsuccessful (unauthorized)" do
@@ -32,7 +25,6 @@ RSpec.describe Api::V1::ApiController, type: :controller do
 
     context "request with valid client token" do
       include_context "authenticate requests using valid token"
-
       let(:response){ get(:hello, params: {format: 'json'}) }
 
       it "should be successful (ok)" do
