@@ -18,5 +18,13 @@ module ToneBase
       g.assets = false
       g.helper = false
     end
+
+    # configure rack-cors to enable cross-origin requests
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
+      end
+    end
   end
 end

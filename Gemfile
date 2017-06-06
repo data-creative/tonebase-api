@@ -19,6 +19,8 @@ gem 'turbolinks', '~> 5' # heroku needs this # dev webserver needs this # Build 
 
 gem 'yard', group: :doc # run `bundle exec yard doc` to parse comments and/or `bundle exec yard server` to view documentation at *localhost:8808*
 
+gem 'rack-cors', :require => 'rack/cors' # enable cross-origin requests
+
 group :development, :test do
   gem 'pry'
 
