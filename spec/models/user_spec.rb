@@ -10,6 +10,9 @@ RSpec.describe User, type: :model do
     it { should have_many(:user_favorite_videos) }
     it { should have_many(:favorite_videos).through(:user_favorite_videos) }
 
+    it { should have_one(:user_profile) }
+    it { should have_one(:user_music_profile) }
+
     describe "self-referential user followships" do
       let(:user){ create(:user) }
       let(:artist){ create(:artist) }

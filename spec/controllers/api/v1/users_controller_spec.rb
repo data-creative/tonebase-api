@@ -60,18 +60,30 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         {
           email: "avg.joe@gmail.com",
           password: "abc123",
+          # nickname: "joe123",
           confirmed: true,
           visible: true,
           role: "User",
           access_level: "Full",
-          first_name: "Joe",
-          last_name: "Averaggi",
-          bio: "I love guitar and I'm hoping to get better!",
-          image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
-          hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
+          first_name: "Joe", # move to profile
+          last_name: "Averaggi", # move to profile
+          bio: "I love guitar and I'm hoping to get better!", # move to profile
+          image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg", # move to profile
+          hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg", # move to profile
           customer_uuid: "cus_abc123def45678",
           oauth: true,
           oauth_provider: "Google",
+          profile:{
+            birth_year: 1975,
+            professions: ["Student", "Performer", "Instructor"]
+          }#,
+          #music_profile: {
+          #  guitar_owned: true,
+          #  guitar_models_owned:["Gibson ABC", "Fender XYZ"],
+          #  fav_composers: ["Bach"],
+          #  fav_performers: ["Talenti"],
+          #  fav_periods: ["Classical", "Contemporary", "Baroque"]
+          #}
         }
       }
     end

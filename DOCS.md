@@ -19,7 +19,7 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
     curl https://tonebase-api.herokuapp.com/api/v1/instruments -H 'Authorization: Token token="abc123"' -H 'Content-Type: application/json' -X POST -d '{"name":"My instrument","description":"Produces musical sounds."}'
 
-    curl https://tonebase-api.herokuapp.com//api/v1/users/search?query[email]=search4me@gmail.com -H 'Authorization: Token token="abc123"' --globoff
+    curl https://tonebase-api.herokuapp.com/api/v1/users/search?query[email]=search4me@gmail.com -H 'Authorization: Token token="abc123"' --globoff
 
 ## Responses
 
@@ -265,24 +265,7 @@ A user's role can be changed, but a user can not have more than one role at any 
 
 A user can have varying levels of access to site content and features depending on his/her `access_level`. By default, artists and admins have full access.
 
-Attributes:
-
-name | type | description
---- | --- | ---
-email | String | The user's email address, to be used for authentication and communication.
-password | String | An encrypted version of the user's password used for authentication.
-confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
-visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
-role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
-access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
-first_name | String | The user's first name or nickname.
-last_name | String | The user's last name or surname.
-bio | Text | A description of user interests, skills, and goals.
-image_url | String | The user's profile image source.
-hero_url | String | The user's hero/background image source.
-customer_uuid | String | References the payment service's customer resource.
-oauth | Boolean | Indicates if another service authenticates this user.
-oauth_provider | String | The other service which authenticates this user (i.e. `"Google"`, `"Facebook"`, etc.).
+During the registration process, a user may provide self-identified demographic information and musical preferences.
 
 Endpoints:
 
@@ -313,8 +296,55 @@ Example POST/PUT request body:
   customer_uuid: "cus_abc123def45678",
   oauth: true,
   oauth_provider: "Google",
+  profile:{
+    birth_year: 1975,
+    professions: ["Student", "Performer", "Instructor"]
+  },
+  music_profile: {
+    guitar_owned: true,
+    guitar_models_owned:["Gibson ABC", "Fender XYZ"],
+    composers: ["Bach"],
+    performers: ["Talenti"],
+    periods: ["Classical", "Contemporary", "Baroque"]
+  }
 }
 ````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+email | String | The user's email address, to be used for authentication and communication.
+password | String | An encrypted version of the user's password used for authentication.
+confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
+visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
+role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
+access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
+first_name | String | The user's first name or nickname.
+last_name | String | The user's last name or surname.
+bio | Text | A description of user interests, skills, and goals.
+image_url | String | The user's profile image source.
+hero_url | String | The user's hero/background image source.
+customer_uuid | String | References the payment service's customer resource.
+oauth | Boolean | Indicates if another service authenticates this user.
+oauth_provider | String | The other service which authenticates this user (i.e. `"Google"`, `"Facebook"`, etc.).
+
+Profile Attributes:
+
+name | type | description
+--- | --- | ---
+birth_year | Integer | The user's year of birth.
+professions | Array | A list of the user's professions.
+
+Music Profile Attributes:
+
+name | type | description
+--- | --- | ---
+guitar_owned | Boolean | Whether or not the user owns a guitar.
+guitar_models_owned | Array | A list of guitars the user owns.
+fav_composers | Array | A list of the user's favorite music composers.
+fav_performers | Array | A list of the user's favorite music performers.
+fav_periods | Array | A list of the user's favorite music periods.
 
 ### `Artist`
 

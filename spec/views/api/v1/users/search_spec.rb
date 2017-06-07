@@ -15,6 +15,7 @@ describe "api/v1/users/search.json.jbuilder" do
         :first_name, :last_name, :bio, :image_url, :hero_url,
         :customer_uuid,
         :oauth, :oauth_provider,
+        :profile, :music_profile,
         :follows, :followers,
         :favorite_videos,
         :created_at, :updated_at
