@@ -55,38 +55,90 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe "POST #create" do
-    it_behaves_like "a create endpoint", User do
-      let(:also_serialize){ [:user_profile_attributes, :user_music_profile_attributes] }
-      let(:resource_params){
-        {
-          email: "avg.joe@gmail.com",
-          password: "abc123",
-          username: "joe123",
-          confirmed: true,
-          visible: true,
-          role: "User",
-          access_level: "Full",
-          customer_uuid: "cus_abc123def45678",
-          oauth: true,
-          oauth_provider: "Google",
-          user_profile_attributes:{
-            first_name: "Joe",
-            last_name: "Averaggi",
-            bio: "I love guitar and I'm hoping to get better!",
-            image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
-            hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
-            birth_year: 1975,
-            professions: ["Student", "Performer", "Instructor"]
-          },
-          user_music_profile_attributes: {
-            guitar_owned: true,
-            guitar_models_owned: ["Gibson ABC", "Fender XYZ"],
-            fav_composers: ["Bach"],
-            fav_performers: ["Talenti"],
-            fav_periods: ["Classical", "Contemporary", "Baroque"]
+    context "with valid params" do
+      context "with both profiles" do
+        it_behaves_like "a create endpoint", User do
+          let(:also_serialize){ [:user_profile_attributes, :user_music_profile_attributes] }
+          let(:resource_params){
+            {
+              email: "avg.joe@gmail.com",
+              password: "abc123",
+              username: "joe123",
+              confirmed: true,
+              visible: true,
+              role: "User",
+              access_level: "Full",
+              customer_uuid: "cus_abc123def45678",
+              oauth: true,
+              oauth_provider: "Google",
+              user_profile_attributes:{
+                first_name: "Joe",
+                last_name: "Averaggi",
+                bio: "I love guitar and I'm hoping to get better!",
+                image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+                hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
+                birth_year: 1975,
+                professions: ["Student", "Performer", "Instructor"]
+              },
+              user_music_profile_attributes: {
+                guitar_owned: true,
+                guitar_models_owned: ["Gibson ABC", "Fender XYZ"],
+                fav_composers: ["Bach"],
+                fav_performers: ["Talenti"],
+                fav_periods: ["Classical", "Contemporary", "Baroque"]
+              }
+            }
           }
-        }
-      }
+        end
+      end
+
+      context "with only a user profile" do
+        it_behaves_like "a create endpoint", User do
+          let(:also_serialize){ [:user_profile_attributes] }
+          let(:resource_params){
+            {
+              email: "avg.joe@gmail.com",
+              password: "abc123",
+              username: "joe123",
+              confirmed: true,
+              visible: true,
+              role: "User",
+              access_level: "Full",
+              customer_uuid: "cus_abc123def45678",
+              oauth: true,
+              oauth_provider: "Google",
+              user_profile_attributes:{
+                first_name: "Joe",
+                last_name: "Averaggi",
+                bio: "",
+                image_url: "",
+                hero_url: "",
+                birth_year: nil,
+                professions: []
+              },
+            }
+          }
+        end
+      end
+
+      context "without any profiles" do
+        it_behaves_like "a create endpoint", User do
+          let(:resource_params){
+            {
+              email: "avg.joe@gmail.com",
+              password: "abc123",
+              username: "joe123",
+              confirmed: true,
+              visible: true,
+              role: "User",
+              access_level: "Full",
+              customer_uuid: "cus_abc123def45678",
+              oauth: true,
+              oauth_provider: "Google"
+            }
+          }
+        end
+      end
     end
 
     it_behaves_like "a create endpoint which validates presence", User, [:email, :password, :role, :access_level, "user_profile.first_name", "user_profile.last_name"] do
