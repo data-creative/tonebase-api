@@ -284,31 +284,34 @@ Example POST/PUT request body:
 {
   email: "avg.joe@gmail.com",
   password: "abc123",
+  username: "joe123",
   confirmed: true,
   visible: true,
   role: "User",
   access_level: "Full",
-  first_name: "Joe",
-  last_name: "Averaggi",
-  bio: "I love guitar and I'm hoping to get better!",
-  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
-  hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
   customer_uuid: "cus_abc123def45678",
   oauth: true,
   oauth_provider: "Google",
-  profile:{
+  user_profile_attributes:{
+    first_name: "Joe",
+    last_name: "Averaggi",
+    bio: "I love guitar and I'm hoping to get better!",
+    image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+    hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
     birth_year: 1975,
     professions: ["Student", "Performer", "Instructor"]
   },
-  music_profile: {
+  user_music_profile_attributes: {
     guitar_owned: true,
-    guitar_models_owned:["Gibson ABC", "Fender XYZ"],
-    composers: ["Bach"],
-    performers: ["Talenti"],
-    periods: ["Classical", "Contemporary", "Baroque"]
+    guitar_models_owned: ["Gibson ABC", "Fender XYZ"],
+    fav_composers: ["Bach"],
+    fav_performers: ["Talenti"],
+    fav_periods: ["Classical", "Contemporary", "Baroque"]
   }
 }
 ````
+
+> NOTE: for GET requests, `user_profile_attributes` is called `profile`, and `user_music_profile_attributes` is called `music_profile`.
 
 Attributes:
 
@@ -316,15 +319,11 @@ name | type | description
 --- | --- | ---
 email | String | The user's email address, to be used for authentication and communication.
 password | String | An encrypted version of the user's password used for authentication.
+username | String | The user's unique nickname to be used for identification across the platform.
 confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
 visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
 role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
 access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
-first_name | String | The user's first name or nickname.
-last_name | String | The user's last name or surname.
-bio | Text | A description of user interests, skills, and goals.
-image_url | String | The user's profile image source.
-hero_url | String | The user's hero/background image source.
 customer_uuid | String | References the payment service's customer resource.
 oauth | Boolean | Indicates if another service authenticates this user.
 oauth_provider | String | The other service which authenticates this user (i.e. `"Google"`, `"Facebook"`, etc.).
@@ -333,6 +332,11 @@ Profile Attributes:
 
 name | type | description
 --- | --- | ---
+first_name | String | The user's first name or nickname.
+last_name | String | The user's last name or surname.
+bio | Text | A description of user interests, skills, and goals.
+image_url | String | The user's profile image source.
+hero_url | String | The user's hero/background image source.
 birth_year | Integer | The user's year of birth.
 professions | Array | A list of the user's professions.
 
