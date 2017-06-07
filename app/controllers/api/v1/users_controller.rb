@@ -2,10 +2,10 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: [:show, :update, :destroy]
 
   PERMITTED_ATTRIBUTES = [
-    :email, :password, :confirmed, :visible, :role, :access_level,
-    :first_name, :last_name, :bio, :image_url, :hero_url,
+    :email, :password, :username,
+    :confirmed, :visible, :role, :access_level,
     :customer_uuid, :oauth, :oauth_provider,
-    user_profile_attributes: [:birth_year, professions:[]],
+    user_profile_attributes: [:first_name, :last_name, :bio, :image_url, :hero_url, :birth_year, professions:[]],
     user_music_profile_attributes: [:guitar_owned, guitar_models_owned:[], fav_composers:[], fav_performers:[], fav_periods:[]]
   ]
 

@@ -1,10 +1,9 @@
-json.extract! user, :id, :email, :password, :confirmed, :visible, :role, :access_level,
-  :first_name, :last_name, :bio, :image_url, :hero_url,
+json.extract! user, :id, :email, :password, :username, :confirmed, :visible, :role, :access_level,
   :customer_uuid,
   :oauth, :oauth_provider
 
 if user.user_profile
-  json.profile user.user_profile, :birth_year, :professions
+  json.profile user.user_profile, :first_name, :last_name, :bio, :image_url, :hero_url, :birth_year, :professions
 else
   json.profile ({})
 end # or more simply ... json.profile user.user_profile_attributes

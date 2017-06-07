@@ -4,7 +4,6 @@ class UserMusicProfile < ApplicationRecord
   validates_associated :user
 
   validates :user, {presence:true, uniqueness:true}
-  validates :guitar_owned, {inclusion: {in: [true, false] }}
 
   serialize(:guitar_models_owned, Array)
   serialize(:fav_composers, Array)

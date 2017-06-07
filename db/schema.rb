@@ -97,6 +97,11 @@ ActiveRecord::Schema.define(version: 20170607032648) do
 
   create_table "user_profiles", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "first_name",  null: false
+    t.string   "last_name",   null: false
+    t.text     "bio"
+    t.string   "image_url"
+    t.string   "hero_url"
     t.integer  "birth_year"
     t.text     "professions"
     t.datetime "created_at",  null: false
@@ -107,15 +112,11 @@ ActiveRecord::Schema.define(version: 20170607032648) do
   create_table "users", force: :cascade do |t|
     t.string   "email",          null: false
     t.string   "password",       null: false
+    t.string   "username",       null: false
     t.boolean  "confirmed",      null: false
     t.boolean  "visible",        null: false
     t.string   "role",           null: false
     t.string   "access_level",   null: false
-    t.string   "first_name",     null: false
-    t.string   "last_name",      null: false
-    t.text     "bio"
-    t.string   "image_url"
-    t.string   "hero_url"
     t.string   "customer_uuid"
     t.boolean  "oauth"
     t.string   "oauth_provider"
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(version: 20170607032648) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["oauth"], name: "index_users_on_oauth", using: :btree
     t.index ["role"], name: "index_users_on_role", using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
     t.index ["visible"], name: "index_users_on_visible", using: :btree
   end
 

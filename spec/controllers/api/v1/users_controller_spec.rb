@@ -61,20 +61,20 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         {
           email: "avg.joe@gmail.com",
           password: "abc123",
-          # nickname: "joe123",
+          username: "joe123",
           confirmed: true,
           visible: true,
           role: "User",
           access_level: "Full",
-          first_name: "Joe", # move to profile
-          last_name: "Averaggi", # move to profile
-          bio: "I love guitar and I'm hoping to get better!", # move to profile
-          image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg", # move to profile
-          hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg", # move to profile
           customer_uuid: "cus_abc123def45678",
           oauth: true,
           oauth_provider: "Google",
           user_profile_attributes:{
+            first_name: "Joe",
+            last_name: "Averaggi",
+            bio: "I love guitar and I'm hoping to get better!",
+            image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+            hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
             birth_year: 1975,
             professions: ["Student", "Performer", "Instructor"]
           },
@@ -89,7 +89,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       }
     end
 
-    it_behaves_like "a create endpoint which validates presence", User, [:email, :password, :role, :access_level, :first_name, :last_name]
+    #it_behaves_like "a create endpoint which validates presence", User, [:email, :password, :role, :access_level, :first_name, :last_name]
+    it_behaves_like "a create endpoint which validates presence", User, [:email, :password, :role, :access_level]
 
     it_behaves_like "a create endpoint which validates uniqueness", User, [:email] do
       let!(:other_user){ create(:user) }
@@ -98,8 +99,9 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe "PUT #update" do
-    it_behaves_like "an update endpoint", User, {bio: "My updated info."}
-    it_behaves_like "an update endpoint which validates presence", User, [:email, :password, :role, :access_level, :first_name, :last_name]
+    it_behaves_like "an update endpoint", User, {email: "new.email@example.com"}
+    #it_behaves_like "an update endpoint which validates presence", User, [:email, :password, :role, :access_level, :first_name, :last_name]
+    it_behaves_like "an update endpoint which validates presence", User, [:email, :password, :role, :access_level]
     it_behaves_like "an update endpoint which validates uniqueness", User, :email
   end
 
