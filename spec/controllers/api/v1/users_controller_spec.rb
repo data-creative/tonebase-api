@@ -73,7 +73,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           customer_uuid: "cus_abc123def45678",
           oauth: true,
           oauth_provider: "Google",
-          profile:{
+          user_profile_attributes:{
             birth_year: 1975,
             professions: ["Student", "Performer", "Instructor"]
           }#,

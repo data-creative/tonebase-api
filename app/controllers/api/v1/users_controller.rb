@@ -1,7 +1,12 @@
 class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: [:show, :update, :destroy]
 
-  PERMITTED_ATTRIBUTES = [:email, :password, :confirmed, :visible, :role, :access_level, :first_name, :last_name, :bio, :image_url, :hero_url, :customer_uuid, :oauth, :oauth_provider]
+  PERMITTED_ATTRIBUTES = [
+    :email, :password, :confirmed, :visible, :role, :access_level,
+    :first_name, :last_name, :bio, :image_url, :hero_url,
+    :customer_uuid, :oauth, :oauth_provider,
+    user_profile_attributes: [:birth_year, professions:[]]
+  ]
 
   # GET /api/v1/users
   def index

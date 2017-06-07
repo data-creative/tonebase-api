@@ -38,3 +38,4 @@
   + [RSpec Shared Context](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-context)
   + [HTTP Status Codes](https://httpstatuses.com/)
   + [Should Validate Numericality](https://github.com/thoughtbot/shoulda-matchers/blob/master/lib/shoulda/matchers/active_model/validate_numericality_of_matcher.rb)
+  + [Association inverses](https://stackoverflow.com/a/4783112/670433)

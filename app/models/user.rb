@@ -7,8 +7,9 @@ class User < ApplicationRecord
   has_many :user_favorite_videos
   has_many :favorite_videos, :through => :user_favorite_videos, :source => :video
 
-  has_one :user_profile
+  has_one :user_profile, :inverse_of => :user
   alias :profile :user_profile
+  accepts_nested_attributes_for :user_profile
 
   ROLES = ["User", "Artist", "Admin"]
 
@@ -35,5 +36,9 @@ class User < ApplicationRecord
 
   def username
     "#{first_name} #{last_name}" # consider implementing a real, persisted username attribute
+  end
+
+  def music_profile
+    {to:"DO"}
   end
 end

@@ -1,5 +1,5 @@
 class UserProfile < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, :inverse_of => :user_profile
 
   validates_associated :user
 
