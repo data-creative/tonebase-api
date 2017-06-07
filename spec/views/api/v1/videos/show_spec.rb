@@ -13,6 +13,8 @@ describe "api/v1/videos/show.json.jbuilder" do
       :artist,
       :instrument,
       :title, :description, :tags,
+      :parts,
+      :scores,
       :favorited_by,
       :created_at, :updated_at
     ])

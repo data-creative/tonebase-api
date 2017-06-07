@@ -21,13 +21,23 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     it_behaves_like "a create endpoint", Video  do
       let(:artist){ create(:artist) }
       let(:instrument){ create(:instrument) }
+      let(:also_serialize){ [:parts, :scores] }
       let(:resource_params){
         {
           user_id: artist.id,
           instrument_id: instrument.id,
           title: "Finale from Sonata #99",
           description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
-          tags: ["borouque", "maestrelli", "g-major"]
+          tags: ["borouque", "maestrelli", "g-major"],
+          parts:[
+            {source_url: "https://www.youtube.com/watch?v=abc123", duration: 333},
+            {source_url: "https://www.youtube.com/watch?v=def456", duration: 333},
+            {source_url: "https://www.youtube.com/watch?v=ghi789", duration: 333}
+          ],
+          scores:[
+            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-1-image.jpg", start: 25, end: 500},
+            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-2-image.jpg", start: 750, end: 999}
+          ]
         }
       }
     end
