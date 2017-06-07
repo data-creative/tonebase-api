@@ -89,7 +89,18 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       }
     end
 
-    it_behaves_like "a create endpoint which validates presence", User, [:email, :password, :role, :access_level] # , :first_name, :last_name
+    it_behaves_like "a create endpoint which validates presence", User, [:email, :password, :role, :access_level, "user_profile.first_name", "user_profile.last_name"] do
+      let(:resource_params){
+        {
+          email: "",
+          password: "",
+          username: "",
+          role: "",
+          access_level: "",
+          user_profile_attributes:{first_name: nil, last_name: nil}
+        }
+      }
+     end
 
     it_behaves_like "a create endpoint which validates uniqueness", User, [:email, :username] do
       let!(:other_user){ create(:user) }
@@ -100,7 +111,18 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "PUT #update" do
     it_behaves_like "an update endpoint", User, {email: "new.email@example.com"}
 
-    it_behaves_like "an update endpoint which validates presence", User, [:email, :password, :role, :access_level] # , :first_name, :last_name
+    it_behaves_like "an update endpoint which validates presence", User, [:email, :password, :role, :access_level, "user_profile.first_name", "user_profile.last_name"] do
+    let(:resource_params){
+      {
+        email: "",
+        password: "",
+        username: "",
+        role: "",
+        access_level: "",
+        user_profile_attributes:{first_name: nil, last_name: nil}
+      }
+    }
+   end
 
     it_behaves_like "an update endpoint which validates uniqueness", User, [:email, :username]  do
       let!(:other_user){ create(:user)}

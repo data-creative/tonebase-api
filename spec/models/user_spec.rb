@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "associations" do
-    it { should have_many(:user_followships) }
+    it { should have_many(:user_followships).dependent(:destroy) }
     it { should have_many(:follows).through(:user_followships) }
-    it { should have_many(:inverse_user_followships) }
+    it { should have_many(:inverse_user_followships).dependent(:destroy) }
     it { should have_many(:followers).through(:inverse_user_followships) }
 
-    it { should have_many(:user_favorite_videos) }
+    it { should have_many(:user_favorite_videos).dependent(:destroy) }
     it { should have_many(:favorite_videos).through(:user_favorite_videos) }
 
-    it { should have_one(:user_profile) }
-    it { should have_one(:user_music_profile) }
+    it { should have_one(:user_profile).dependent(:destroy) }
+    it { should have_one(:user_music_profile).dependent(:destroy) }
 
     it { should accept_nested_attributes_for(:user_profile) }
     it { should accept_nested_attributes_for(:user_music_profile) }
