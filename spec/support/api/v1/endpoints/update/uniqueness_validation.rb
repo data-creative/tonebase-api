@@ -1,12 +1,20 @@
 require_relative "../../response"
 
-shared_examples_for "an update endpoint which validates uniqueness" do |model_class, attribute_name|
+# @param [ApplicationRecord] model_class
+# @param [Array] attribute_names Contains symbols of all attribute names which should be validated for their uniqueness.
+# @param [Hash] resource_params For initializing the resource. Pass this from inside a block so you can use other variables in its contstruction.
+# @example
+#
+#   it_behaves_like "an update endpoint which validates uniqueness", User, [:email, :username]  do
+#     let!(:other_user){ create(:user)}
+#     let(:resource_params){ {email: other_user.email, username: other_user.username} }
+#   end
+#
+shared_examples_for "an update endpoint which validates uniqueness" do |model_class, attribute_names|
   let!(:resource) { create(model_class.name.underscore.to_sym) }
-  let!(:other_resource) { create(model_class.name.underscore.to_sym, attribute_name.to_sym => "#{resource.send(attribute_name.to_sym)}-EDITED") }
 
   describe "response" do
     context "with invalid params (duplicate attribute value)" do
-      let(:resource_params){ {attribute_name.to_sym => other_resource.send(attribute_name.to_sym)} }
       let(:response){ post(:update, params: {format: 'json', id: resource.id, model_class.name.underscore.to_sym => resource_params}) }
 
       it "should be unsuccessful (unprocessable_entity)" do
@@ -15,7 +23,9 @@ shared_examples_for "an update endpoint which validates uniqueness" do |model_cl
       end
 
       it "should return a uniqueness validation error message" do
-        expect(parsed_response[attribute_name.to_s]).to include("has already been taken")
+        attribute_names.each do |attribute_name|
+          expect(parsed_response[attribute_name.to_s]).to include("has already been taken")
+        end
       end
     end
   end

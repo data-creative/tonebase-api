@@ -37,8 +37,13 @@ RSpec.describe Api::V1::AdvertisersController, type: :controller do
 
   describe "PUT #update" do
     it_behaves_like "an update endpoint", Advertiser, {description: "A sitar distribution company."}
+
     it_behaves_like "an update endpoint which validates presence", Advertiser, [:name]
-    it_behaves_like "an update endpoint which validates uniqueness", Advertiser, :name
+
+    it_behaves_like "an update endpoint which validates uniqueness", Advertiser, [:name] do
+      let!(:other_advertiser){ create(:advertiser)}
+      let(:resource_params){ {name: other_advertiser.name} }
+    end
   end
 
   describe "DELETE #destroy" do

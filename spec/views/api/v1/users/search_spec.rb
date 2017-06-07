@@ -11,10 +11,10 @@ describe "api/v1/users/search.json.jbuilder" do
     expect(parsed_view.count).to eql(2)
     parsed_view.each do |user|
       expect(keys_of(user)).to match_array([
-        :id, :email, :password, :confirmed, :visible, :role, :access_level,
-        :first_name, :last_name, :bio, :image_url, :hero_url,
+        :id, :email, :password, :username, :confirmed, :visible, :role, :access_level,
         :customer_uuid,
         :oauth, :oauth_provider,
+        :profile, :music_profile,
         :follows, :followers,
         :favorite_videos,
         :created_at, :updated_at

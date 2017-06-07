@@ -86,4 +86,7 @@ rails g model user_followship user:references followed_user_id:integer
 
 rails g model video user:references instrument:references title:string description:text tags:text
 rails g model user_favorite_video user:references video:references
+
+rails g model user_profile user:references birth_year:integer professions:text
+rails g model user_music_profile user:references guitar_owned:boolean guitar_models_owned:text fav_composers:text fav_performers:text fav_periods:text
 ````
