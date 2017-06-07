@@ -14,7 +14,7 @@ FactoryGirl.define do
       image_url "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
       hero_url "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
       birth_year 1993
-      professions ["Student", "Performer", "Instructor"]
+      professions ["Student"]
     end
   end
 end

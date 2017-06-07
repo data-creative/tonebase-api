@@ -24,6 +24,12 @@ FactoryGirl.define do
       oauth_provider "Google"
     end
 
+    trait :with_profile do
+      after(:create) do |user, evaluator|
+        create(:user_profile, user: user)
+      end
+    end
+
     #
     # FACTORIES
     #
@@ -39,19 +45,29 @@ FactoryGirl.define do
     end
 
     factory :artist, aliases: [:followed_user] do
-      sequence(:email){|n| "music.pro.#{n}@gmail.com)" } # optional to put this attribute here, but it provides further clarity and differentiation
-      #first_name "Talenti" # optional to put this attribute here, but it provides further clarity and differentiation
-      #last_name "Pro" # optional to put this attribute here, but it provides further clarity and differentiation
+      sequence(:email){|n| "music.pro.#{n}@gmail.com)" }
+      sequence(:username){|n| "pro#{n}" }
       role "Artist"
       access_level "Full"
+
+      trait :with_profile do
+        after(:create) do |user, evaluator|
+          create(:user_profile, user: user, first_name: "Talenti", last_name: "Pro", birth_year: 1975, professions: ["Performer", "Instructor"])
+        end
+      end
     end
 
     factory :admin do
-      sequence(:email){|n| "tonebase.admin.#{n}@gmail.com)" } # optional to put this attribute here, but it provides further clarity and differentiation
-      #first_name "Tony" # optional to put this attribute here, but it provides further clarity and differentiation
-      #last_name "Administrato" # optional to put this attribute here, but it provides further clarity and differentiation
+      sequence(:email){|n| "tonebase.admin.#{n}@gmail.com)" }
+      sequence(:username){|n| "admin#{n}" }
       role "Admin"
       access_level "Full"
+
+      trait :with_profile do
+        after(:create) do |user, evaluator|
+          create(:user_profile, user: user, first_name: "Tony", last_name: "Administrato")
+        end
+      end
     end
 
     trait :customer do
