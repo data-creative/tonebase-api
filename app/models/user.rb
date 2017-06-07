@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :inverse_user_followships, class_name: UserFollowship, foreign_key: "followed_user_id", dependent: :destroy
   has_many :followers, through: :inverse_user_followships, source: :user
 
+  has_many :videos
+
   has_many :user_favorite_videos, dependent: :destroy
   has_many :favorite_videos, through: :user_favorite_videos, source: :video
 
