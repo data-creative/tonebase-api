@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :user_favorite_videos
   has_many :favorite_videos, :through => :user_favorite_videos, :source => :video
 
+  has_one :user_profile
+  alias :profile :user_profile
+
   ROLES = ["User", "Artist", "Admin"]
 
   validates :email, {presence: true, uniqueness: true}

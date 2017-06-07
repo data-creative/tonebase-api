@@ -37,3 +37,4 @@
   + [Setting Request Headers in Controller Specs](https://gist.github.com/quadrolls/9203f924f934398f6992162bbbcb1a0c)
   + [RSpec Shared Context](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-context)
   + [HTTP Status Codes](https://httpstatuses.com/)
+  + [Should Validate Numericality](https://github.com/thoughtbot/shoulda-matchers/blob/master/lib/shoulda/matchers/active_model/validate_numericality_of_matcher.rb)
