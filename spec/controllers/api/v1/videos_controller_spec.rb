@@ -35,8 +35,8 @@ RSpec.describe Api::V1::VideosController, type: :controller do
             {source_url: "https://www.youtube.com/watch?v=ghi789", duration: 333}
           ],
           scores:[
-            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-1-image.jpg", start: 25, end: 500},
-            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-2-image.jpg", start: 750, end: 999}
+            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-1-image.jpg", starts_at: 25, ends_at: 500},
+            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-2-image.jpg", starts_at: 750, ends_at: 999}
           ]
         }
       }

@@ -89,4 +89,7 @@ rails g model user_favorite_video user:references video:references
 
 rails g model user_profile user:references birth_year:integer professions:text
 rails g model user_music_profile user:references guitar_owned:boolean guitar_models_owned:text fav_composers:text fav_performers:text fav_periods:text
+
+rails g model video_part video:references source_url:string number:integer duration:integer
+rails g model video_score video:references image_url:string starts_at:integer ends_at:integer
 ````

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607032648) do
+ActiveRecord::Schema.define(version: 20170607222542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,27 @@ ActiveRecord::Schema.define(version: 20170607032648) do
     t.index ["visible"], name: "index_users_on_visible", using: :btree
   end
 
+  create_table "video_parts", force: :cascade do |t|
+    t.integer  "video_id"
+    t.string   "source_url", null: false
+    t.integer  "number",     null: false
+    t.integer  "duration",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_video_parts_on_number", using: :btree
+    t.index ["video_id"], name: "index_video_parts_on_video_id", using: :btree
+  end
+
+  create_table "video_scores", force: :cascade do |t|
+    t.integer  "video_id"
+    t.string   "image_url",  null: false
+    t.integer  "starts_at",  null: false
+    t.integer  "ends_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_video_scores_on_video_id", using: :btree
+  end
+
   create_table "videos", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "instrument_id"
@@ -154,6 +175,8 @@ ActiveRecord::Schema.define(version: 20170607032648) do
   add_foreign_key "user_followships", "users", column: "followed_user_id"
   add_foreign_key "user_music_profiles", "users"
   add_foreign_key "user_profiles", "users"
+  add_foreign_key "video_parts", "videos"
+  add_foreign_key "video_scores", "videos"
   add_foreign_key "videos", "instruments"
   add_foreign_key "videos", "users"
 end
