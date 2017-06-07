@@ -11,10 +11,16 @@ instrument.update_attributes(description: "A musical instrument classified as a 
 
 puts instrument.as_json
 
-if Rails.env.development?
+# LEAVE THIS IN PRODUCTION FOR NOW TO HELP CLIENT APPLICATION ONBOARDING
+#if Rails.env.development?
+
+  #
+  # SEED USERS
+  #
 
   User.destroy_all
 
+  # USER
   user = User.create({
     email: "avg.joe@gmail.com",
     password: "abc123",
@@ -46,6 +52,12 @@ if Rails.env.development?
 
   puts user.as_json
 
+  # MORE USERS
+  (1..100).to_a.each do |i|
+    User.create({email: "another#{i}@tonebase.com", username: "another#{i}", password: "abc123", confirmed: [true, false].sample, visible: true, role: "User", access_level: ["Full", "Limited"].sample})
+  end
+
+  # ARTIST
   artist = User.create({
     email: "talenti.pro@gmail.com",
     password: "abc123",
@@ -69,4 +81,75 @@ if Rails.env.development?
   })
 
   puts artist.as_json
-end
+
+  # MORE ARTISTS
+  (1..35).to_a.each do |i|
+    User.create({
+      email: "another.pro#{i}@gmail.com",
+      username: "anotherPro#{i}",
+      password: "abc123",
+      confirmed: [true, false].sample,
+      visible: true,
+      role: "Artist",
+      access_level: "Full",
+      user_profile_attributes:{first_name: "Another", last_name: "Pro"}
+    })
+  end
+
+  # ADMIN
+  admin = User.create({
+    email: "admin@tonebase.com",
+    username: "admin123",
+    password: "abc123",
+    confirmed: true,
+    visible: true,
+    role: "Admin",
+    access_level: "Full",
+    user_profile_attributes:{first_name: "Tony", last_name: "Administrato"}
+  })
+
+  puts artist.as_json
+
+  user_ids = User.user.pluck(:id)
+  artist_ids = User.artist.pluck(:id)
+  puts "#{user_ids.count} USERS, #{artist_ids.count} ARTISTS"
+
+  #
+  # FOLLOWS
+  #
+
+  150.times do
+    UserFollowship.create(user_id: user_ids.sample, followed_user_id: artist_ids.sample)
+  end
+
+  puts "#{UserFollowship.count} FOLLOWS"
+
+  #
+  # VIDEOS
+  #
+
+  9.times do |i|
+    Video.create({
+      user_id: artist_ids.sample,
+      instrument_id: instrument.id,
+      title: "Finale from Sonata ##{i}",
+      description: "The final moments of master composer Maestrelli's most famous piece. Composed in #{1817 + i}.",
+      tags: ["borouque", "maestrelli", "g-major"]
+    })
+  end
+
+  video_ids = Video.pluck(:id)
+
+  puts "#{video_ids.count} VIDEOS"
+
+  #
+  # FAVORITE VIDEOS
+  #
+
+  225.times do
+    UserFavoriteVideo.create({user_id: user_ids.sample, video_id: video_ids.sample})
+  end
+
+  puts "#{UserFavoriteVideo.count} FAVORITE VIDEOS"
+
+#end

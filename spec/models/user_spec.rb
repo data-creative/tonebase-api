@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:inverse_user_followships).dependent(:destroy) }
     it { should have_many(:followers).through(:inverse_user_followships) }
 
-    it { should have_many(:videos) }
+    it { should have_many(:videos).dependent(:destroy) }
 
     it { should have_many(:user_favorite_videos).dependent(:destroy) }
     it { should have_many(:favorite_videos).through(:user_favorite_videos) }

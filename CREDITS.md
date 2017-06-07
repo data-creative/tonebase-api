@@ -41,3 +41,4 @@
   + [Association inverses](https://stackoverflow.com/a/4783112/670433)
   + [Nested Attributes](http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html)
   + [Serializable Hash](http://api.rubyonrails.org/classes/ActiveModel/Serialization.html)
+  + [Preloading associations](http://tomdallimore.com/blog/includes-vs-joins-in-rails-when-and-where/)

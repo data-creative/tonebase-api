@@ -9,13 +9,15 @@ class Api::V1::UsersController < Api::V1::ApiController
     user_music_profile_attributes: [:guitar_owned, guitar_models_owned:[], fav_composers:[], fav_performers:[], fav_periods:[]]
   ]
 
+  ASSOCIATIONS = [:user_profile, :user_music_profile, :follows, :followers, :favorite_videos]
+
   # GET /api/v1/users
   def index
     if !params[:role]
-      @users = User.all
+      @users = User.eager_load(ASSOCIATIONS).all
     else
       if User::ROLES.include?(params[:role])
-        @users = User.send(params[:role].underscore.to_sym)
+        @users = User.eager_load(ASSOCIATIONS).send(params[:role].underscore.to_sym)
       else
         render json: {"role": ["not found"]}, status: :not_found
       end
@@ -56,7 +58,7 @@ class Api::V1::UsersController < Api::V1::ApiController
 private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.eager_load(ASSOCIATIONS).find(params[:id])
   end
 
   def user_params
