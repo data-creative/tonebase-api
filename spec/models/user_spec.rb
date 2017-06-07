@@ -50,10 +50,10 @@ RSpec.describe User, type: :model do
       it { should validate_uniqueness_of(:email) }
     end
 
-    #describe "username uniqueness" do
-    #  subject { build(:user) }
-    #  it { should validate_uniqueness_of(:username) }
-    #end
+    describe "username uniqueness" do
+      subject { build(:user) }
+      it { should validate_uniqueness_of(:username) }
+    end
   end
 
   describe "constants" do
@@ -93,8 +93,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-  #describe "delegations" do
-  #  it { should delegate_method(:image_url).to(:user_profile) }
-  #end
 end

@@ -10,7 +10,6 @@ describe "api/v1/users/show.json.jbuilder" do
   it "displays a user" do
     expect(keys_of(parsed_view)).to match_array([
       :id, :email, :password, :username, :confirmed, :visible, :role, :access_level,
-      #:first_name, :last_name, :bio, :image_url, :hero_url,
       :customer_uuid,
       :oauth, :oauth_provider,
       :profile, :music_profile,

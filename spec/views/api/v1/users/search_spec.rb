@@ -12,7 +12,6 @@ describe "api/v1/users/search.json.jbuilder" do
     parsed_view.each do |user|
       expect(keys_of(user)).to match_array([
         :id, :email, :password, :username, :confirmed, :visible, :role, :access_level,
-        #:first_name, :last_name, :bio, :image_url, :hero_url,
         :customer_uuid,
         :oauth, :oauth_provider,
         :profile, :music_profile,
