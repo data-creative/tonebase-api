@@ -432,16 +432,6 @@ Example POST/PUT request body:
 
 An audio-visual recording of an artist's music instructions.
 
-Attributes:
-
-name | type | description
---- | --- | ---
-user_id | Integer | References the user (artist) who posted this video.
-instrument_id | Integer | References the instrument of instruction.
-title | String | A display title.
-description | String | A display title.
-tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
-
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -460,9 +450,46 @@ Example POST/PUT request body:
   instrument_id:1,
   title: "Finale from Sonata #99",
   description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
-  tags: ["borouque", "maestrelli", "g-major"]
+  tags: ["borouque", "maestrelli", "g-major"],
+  parts:[ // <-- ensure parts are in the proper order!
+    {source_url: "https://www.youtube.com/watch?v=abc123", duration: 333},
+    {source_url: "https://www.youtube.com/watch?v=def456", duration: 333},
+    {source_url: "https://www.youtube.com/watch?v=ghi789", duration: 333}
+  ],
+  scores:[
+    {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-1-image.jpg", start: 25, end: 500},
+    {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-2-image.jpg", start: 750, end: 999}
+  ]
 }
 ````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user (artist) who posted this video.
+instrument_id | Integer | References the instrument of instruction.
+title | String | A display title.
+description | String | A display title.
+tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
+
+Video Part Attributes:
+
+name | type | description
+--- | --- | ---
+video_id | Integer | References the global video of which it is a part.
+source_url | String | References a video resource on the video service.
+number | Integer | The sort order of this video part (e.g. 1, 2, 3). The "X" in "Part number X of Y".
+duration | Integer (milliseconds) | The length of the video part in milliseconds.
+
+Video Score Attributes:
+
+name | type | description
+--- | --- | ---
+video_id | Integer | References the global video of which it is a part.
+image_url | String | References the score's image source.
+start | Integer (milliseconds) | Begin displaying the score when the global video duration reaches this duration.
+end | Integer (milliseconds) | Stop displaying the score after the global video duration reaches this duration.
 
 ### `UserFavoriteVideo`
 
