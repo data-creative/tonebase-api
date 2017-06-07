@@ -1,5 +1,5 @@
 class VideoScore < ApplicationRecord
-  belongs_to :video
+  belongs_to :video, inverse_of: :video_scores
 
   validates_associated :video
   validates :video, {presence: true}
