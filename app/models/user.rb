@@ -11,6 +11,10 @@ class User < ApplicationRecord
   alias :profile :user_profile
   accepts_nested_attributes_for :user_profile
 
+  has_one :user_music_profile, :inverse_of => :user
+  alias :music_profile :user_music_profile
+  accepts_nested_attributes_for :user_music_profile
+
   ROLES = ["User", "Artist", "Admin"]
 
   validates :email, {presence: true, uniqueness: true}
@@ -38,13 +42,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}" # consider implementing a real, persisted username attribute
   end
 
-  def music_profile
-    {to:"DO"}
-  end
-
   # Work-around to enable "create" endpoint spec to validate persistance of nested resources!
   def user_profile_attributes
     #user_profile.serializable_hash(only: [:birth_year, :professions])
-    user_profile.try(:serializable_hash, only: [:birth_year, :professions]) # try because not all users will have a profile.
+    user_profile.try(:serializable_hash, only: [:birth_year, :professions]) # try because not all users will have a profile (or should they?).
+  end
+
+  # Work-around to enable "create" endpoint spec to validate persistance of nested resources!
+  def user_music_profile_attributes
+    user_music_profile.try(:serializable_hash, only: [:guitar_owned, :guitar_models_owned, :fav_composers, :fav_performers, :fav_periods]) # try because not all users will have a music profile (or should they?).
   end
 end

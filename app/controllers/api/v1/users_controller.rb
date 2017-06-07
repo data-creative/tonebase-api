@@ -5,7 +5,8 @@ class Api::V1::UsersController < Api::V1::ApiController
     :email, :password, :confirmed, :visible, :role, :access_level,
     :first_name, :last_name, :bio, :image_url, :hero_url,
     :customer_uuid, :oauth, :oauth_provider,
-    user_profile_attributes: [:birth_year, professions:[]]
+    user_profile_attributes: [:birth_year, professions:[]],
+    user_music_profile_attributes: [:guitar_owned, guitar_models_owned:[], fav_composers:[], fav_performers:[], fav_periods:[]]
   ]
 
   # GET /api/v1/users

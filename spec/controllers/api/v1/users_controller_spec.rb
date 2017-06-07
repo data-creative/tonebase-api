@@ -56,7 +56,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "POST #create" do
     it_behaves_like "a create endpoint", User do
-      let(:also_serialize){ [:user_profile_attributes] }
+      let(:also_serialize){ [:user_profile_attributes, :user_music_profile_attributes] }
       let(:resource_params){
         {
           email: "avg.joe@gmail.com",
@@ -77,14 +77,14 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           user_profile_attributes:{
             birth_year: 1975,
             professions: ["Student", "Performer", "Instructor"]
-          }#,
-          #music_profile: {
-          #  guitar_owned: true,
-          #  guitar_models_owned:["Gibson ABC", "Fender XYZ"],
-          #  fav_composers: ["Bach"],
-          #  fav_performers: ["Talenti"],
-          #  fav_periods: ["Classical", "Contemporary", "Baroque"]
-          #}
+          },
+          user_music_profile_attributes: {
+            guitar_owned: true,
+            guitar_models_owned: ["Gibson ABC", "Fender XYZ"],
+            fav_composers: ["Bach"],
+            fav_performers: ["Talenti"],
+            fav_periods: ["Classical", "Contemporary", "Baroque"]
+          }
         }
       }
     end

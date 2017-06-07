@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607000439) do
+ActiveRecord::Schema.define(version: 20170607032648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,13 +83,25 @@ ActiveRecord::Schema.define(version: 20170607000439) do
     t.index ["user_id"], name: "index_user_followships_on_user_id", using: :btree
   end
 
+  create_table "user_music_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "guitar_owned"
+    t.text     "guitar_models_owned"
+    t.text     "fav_composers"
+    t.text     "fav_performers"
+    t.text     "fav_periods"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["user_id"], name: "index_user_music_profiles_on_user_id", unique: true, using: :btree
+  end
+
   create_table "user_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "birth_year"
     t.text     "professions"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
+    t.index ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -138,6 +150,7 @@ ActiveRecord::Schema.define(version: 20170607000439) do
   add_foreign_key "user_favorite_videos", "videos"
   add_foreign_key "user_followships", "users"
   add_foreign_key "user_followships", "users", column: "followed_user_id"
+  add_foreign_key "user_music_profiles", "users"
   add_foreign_key "user_profiles", "users"
   add_foreign_key "videos", "instruments"
   add_foreign_key "videos", "users"
