@@ -2,7 +2,16 @@ json.extract! user, :id, :email, :password, :confirmed, :visible, :role, :access
   :first_name, :last_name, :bio, :image_url, :hero_url,
   :customer_uuid,
   :oauth, :oauth_provider,
-  :profile, :music_profile
+  :profile,
+  :music_profile
+
+#if user.user_profile
+#  json.profile user.user_profile, :birth_year, :professions
+#else
+#  json.profile {}
+#end
+
+#json.profile user.user_profile_attributes
 
 json.follows user.follows, :id, :username, :image_url
 

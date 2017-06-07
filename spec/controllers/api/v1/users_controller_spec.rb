@@ -56,6 +56,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "POST #create" do
     it_behaves_like "a create endpoint", User do
+      let(:also_serialize){ [:user_profile_attributes] }
       let(:resource_params){
         {
           email: "avg.joe@gmail.com",

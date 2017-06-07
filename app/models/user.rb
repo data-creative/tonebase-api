@@ -41,4 +41,9 @@ class User < ApplicationRecord
   def music_profile
     {to:"DO"}
   end
+
+  # Work-around to enable "create" endpoint spec to validate persistance of nested resources!
+  def user_profile_attributes
+    user_profile.serializable_hash(only: [:birth_year, :professions])
+  end
 end

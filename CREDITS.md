@@ -39,3 +39,5 @@
   + [HTTP Status Codes](https://httpstatuses.com/)
   + [Should Validate Numericality](https://github.com/thoughtbot/shoulda-matchers/blob/master/lib/shoulda/matchers/active_model/validate_numericality_of_matcher.rb)
   + [Association inverses](https://stackoverflow.com/a/4783112/670433)
+  + [Nested Attributes](http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html)
+  + [Serializable Hash](http://api.rubyonrails.org/classes/ActiveModel/Serialization.html)
