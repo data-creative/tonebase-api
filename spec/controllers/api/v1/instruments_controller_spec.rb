@@ -37,8 +37,13 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
 
   describe "PUT #update" do
     it_behaves_like "an update endpoint", Instrument, {description: "Shake it some more."}
+
     it_behaves_like "an update endpoint which validates presence", Instrument, [:name]
-    it_behaves_like "an update endpoint which validates uniqueness", Instrument, :name
+
+    it_behaves_like "an update endpoint which validates uniqueness", Instrument, [:name]  do
+      let!(:other_instrument){ create(:instrument)}
+      let(:resource_params){ {name: other_instrument.name} }
+    end
   end
 
   describe "DELETE #destroy" do
