@@ -21,7 +21,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     it_behaves_like "a create endpoint", Video  do
       let(:artist){ create(:artist) }
       let(:instrument){ create(:instrument) }
-      let(:also_serialize){ [:parts, :scores] }
+      let(:also_serialize){ [:video_parts_attributes, :video_scores_attributes] }
       let(:resource_params){
         {
           user_id: artist.id,

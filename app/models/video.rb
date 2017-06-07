@@ -21,4 +21,16 @@ class Video < ApplicationRecord
   validates :description, {presence: true}
 
   serialize(:tags, Array)
+
+  # Corresponds with the name used by accepts_nested_attributes_for.
+  # Work-around to enable generic "create" endpoint spec to validate persistance of nested resources.
+  def video_parts_attributes
+    video_parts.map{|video_part| video_part.serializable_hash(only: [:source_url, :number, :duration]) }
+  end
+
+  # Corresponds with the name used by accepts_nested_attributes_for.
+  # Work-around to enable generic "create" endpoint spec to validate persistance of nested resources.
+  def video_scores_attributes
+    video_scores.map{|video_score| video_score.serializable_hash(only: [:image_url, :starts_at, :ends_at]) }
+  end
 end
