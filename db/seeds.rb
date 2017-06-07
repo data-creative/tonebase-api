@@ -12,7 +12,7 @@ instrument.update_attributes(description: "A musical instrument classified as a 
 puts instrument.as_json
 
 # LEAVE THIS IN PRODUCTION FOR NOW TO HELP CLIENT APPLICATION ONBOARDING
-#if Rails.env.development?
+unless Rails.env.test? #if Rails.env.development?
 
   #
   # SEED USERS
@@ -164,4 +164,4 @@ puts instrument.as_json
 
   puts "#{UserFavoriteVideo.count} FAVORITE VIDEOS"
 
-#end
+end
