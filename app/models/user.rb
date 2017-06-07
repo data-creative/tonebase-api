@@ -44,6 +44,7 @@ class User < ApplicationRecord
 
   # Work-around to enable "create" endpoint spec to validate persistance of nested resources!
   def user_profile_attributes
-    user_profile.serializable_hash(only: [:birth_year, :professions])
+    #user_profile.serializable_hash(only: [:birth_year, :professions])
+    user_profile.try(:serializable_hash, only: [:birth_year, :professions]) # try because not all users will have a profile.
   end
 end
