@@ -10,5 +10,6 @@ class CreateVideoParts < ActiveRecord::Migration[5.0]
     end
 
     add_index :video_parts, :number
+    add_index :video_parts, [:video_id, :number], unique: true
   end
 end

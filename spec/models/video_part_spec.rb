@@ -13,5 +13,10 @@ RSpec.describe VideoPart, type: :model do
 
     it { should validate_numericality_of(:number).only_integer }
     it { should validate_numericality_of(:duration).only_integer }
+
+    context "uniqueness" do
+      subject { build(:video_part) }
+      it { should validate_uniqueness_of(:number).scoped_to(:video_id) }
+    end
   end
 end

@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20170607222542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["number"], name: "index_video_parts_on_number", using: :btree
+    t.index ["video_id", "number"], name: "index_video_parts_on_video_id_and_number", unique: true, using: :btree
     t.index ["video_id"], name: "index_video_parts_on_video_id", using: :btree
   end
 

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :video_part do
-    video nil
-    source_url "MyString"
+    video
+    source_url "https://www.youtube.com/watch?v=abc123"
     number 1
-    duration 1
+    duration 333
   end
 end

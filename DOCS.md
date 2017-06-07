@@ -480,7 +480,7 @@ name | type | description
 video_id | Integer | References the global video of which it is a part.
 source_url | String | References a video resource on the video service.
 number | Integer | The sort order of this video part (e.g. 1, 2, 3). The "X" in "Part number X of Y".
-duration | Integer (milliseconds) | The length of the video part in milliseconds.
+duration | Integer (seconds) | The length of the video part in seconds.
 
 Video Score Attributes:
 
@@ -488,8 +488,8 @@ name | type | description
 --- | --- | ---
 video_id | Integer | References the global video of which it is a part.
 image_url | String | References the score's image source.
-starts_at | Integer (milliseconds) | Begin displaying the score when the global video duration reaches this duration.
-ends_at | Integer (milliseconds) | Stop displaying the score after the global video duration reaches this duration.
+starts_at | Integer (seconds) | Begin displaying the score when the global video duration reaches this duration. The minimum should be `1`.
+ends_at | Integer (seconds) | Stop displaying the score after the global video duration reaches this duration. The maximum should be equal to the global video's duration.
 
 ### `UserFavoriteVideo`
 
