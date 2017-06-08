@@ -36,6 +36,42 @@ RSpec.describe User, type: :model do
         expect(user.followers.any?).to eql(false)
       end
     end
+
+    describe ".recent_video_views" do
+      let(:user){ create(:user) }
+      let(:video){ create(:video, title: "First") }
+      let(:other_video){ create(:video, title: "Second") }
+      let(:third_video){ create(:video, title: "Third") }
+
+      let(:video_ids){ user.recent_video_views.limit(3).map{|view| view.video_id} }
+
+      describe "limits results" do
+        let(:fourth_video){ create(:video, title: "Fourth") }
+        let(:fifth_video){ create(:video, title: "Fifth") }
+
+        let!(:first_view){ create(:user_view_video, user: user, video: video)}
+        let!(:second_view){ create(:user_view_video, user: user, video: other_video)}
+        let!(:third_view){ create(:user_view_video, user: user, video: third_video)}
+        let!(:fourth_view){ create(:user_view_video, user: user, video: fourth_video)}
+        let!(:fifth_view){ create(:user_view_video, user: user, video: fifth_video)}
+
+        it "should return a list of recent video views" do
+          expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, third_view.video_id])
+        end
+      end
+
+      describe "groups results by unique video" do
+        let!(:first_view){ create(:user_view_video, user: user, video: video)}
+        let!(:second_view){ create(:user_view_video, user: user, video: other_video)}
+        let!(:third_view){ create(:user_view_video, user: user, video: third_video)}
+        let!(:fourth_view){ create(:user_view_video, user: user, video: other_video)}
+        let!(:fifth_view){ create(:user_view_video, user: user, video: third_video)}
+
+        it "should include only the user's most recent view for any given video" do
+          expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, first_view.video_id])
+        end
+      end
+    end
   end
 
   describe "validations" do
@@ -92,44 +128,6 @@ RSpec.describe User, type: :model do
       describe ".admin" do
         it "filters users by role" do
           expect(User.admin.count).to eql(1)
-        end
-      end
-    end
-  end
-
-  describe "instance methods" do
-    describe "#recent_video_views" do
-      let(:user){ create(:user) }
-      let(:video){ create(:video, title: "First") }
-      let(:other_video){ create(:video, title: "Second") }
-      let(:third_video){ create(:video, title: "Third") }
-
-      let(:video_ids){ user.recent_video_views.limit(3).map{|view| view.video_id} }
-
-      describe "limits results" do
-        let(:fourth_video){ create(:video, title: "Fourth") }
-        let(:fifth_video){ create(:video, title: "Fifth") }
-
-        let!(:first_view){ create(:user_view_video, user: user, video: video)}
-        let!(:second_view){ create(:user_view_video, user: user, video: other_video)}
-        let!(:third_view){ create(:user_view_video, user: user, video: third_video)}
-        let!(:fourth_view){ create(:user_view_video, user: user, video: fourth_video)}
-        let!(:fifth_view){ create(:user_view_video, user: user, video: fifth_video)}
-
-        it "should return a list of recent video views" do
-          expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, third_view.video_id])
-        end
-      end
-
-      describe "groups results by unique video" do
-        let!(:first_view){ create(:user_view_video, user: user, video: video)}
-        let!(:second_view){ create(:user_view_video, user: user, video: other_video)}
-        let!(:third_view){ create(:user_view_video, user: user, video: third_video)}
-        let!(:fourth_view){ create(:user_view_video, user: user, video: other_video)}
-        let!(:fifth_view){ create(:user_view_video, user: user, video: third_video)}
-
-        it "should include only the user's most recent view for any given video" do
-          expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, first_view.video_id])
         end
       end
     end
