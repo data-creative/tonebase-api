@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  has_one :user_profile, inverse_of: :user, dependent: :destroy
+  has_one :user_music_profile, inverse_of: :user, dependent: :destroy
+  alias :profile :user_profile
+  alias :music_profile :user_music_profile
+  accepts_nested_attributes_for :user_profile
+  accepts_nested_attributes_for :user_music_profile
+
   has_many :user_followships, dependent: :destroy
   has_many :follows, through: :user_followships, source: :followed_user
   has_many :inverse_user_followships, class_name: UserFollowship, foreign_key: "followed_user_id", dependent: :destroy
@@ -9,12 +16,8 @@ class User < ApplicationRecord
   has_many :user_favorite_videos, dependent: :destroy
   has_many :favorite_videos, through: :user_favorite_videos, source: :video
 
-  has_one :user_profile, inverse_of: :user, dependent: :destroy
-  has_one :user_music_profile, inverse_of: :user, dependent: :destroy
-  alias :profile :user_profile
-  alias :music_profile :user_music_profile
-  accepts_nested_attributes_for :user_profile
-  accepts_nested_attributes_for :user_music_profile
+  has_many :user_view_videos, dependent: :destroy
+  has_many :viewed_videos, through: :user_view_videos, source: :video
 
   ROLES = ["User", "Artist", "Admin"]
 
