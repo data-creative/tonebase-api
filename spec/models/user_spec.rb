@@ -104,6 +104,8 @@ RSpec.describe User, type: :model do
       let(:other_video){ create(:video, title: "Second") }
       let(:third_video){ create(:video, title: "Third") }
 
+      let(:video_ids){ user.recent_video_views.limit(3).map{|view| view.video_id} }
+
       describe "limits results" do
         let(:fourth_video){ create(:video, title: "Fourth") }
         let(:fifth_video){ create(:video, title: "Fifth") }
@@ -115,7 +117,6 @@ RSpec.describe User, type: :model do
         let!(:fifth_view){ create(:user_view_video, user: user, video: fifth_video)}
 
         it "should return a list of recent video views" do
-          video_ids = user.recent_video_views(3).to_a.map{|view| view.video_id}
           expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, third_view.video_id])
         end
       end
@@ -128,7 +129,6 @@ RSpec.describe User, type: :model do
         let!(:fifth_view){ create(:user_view_video, user: user, video: third_video)}
 
         it "should include only the user's most recent view for any given video" do
-          video_ids = user.recent_video_views(3).to_a.map{|view| view.video_id}
           expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, first_view.video_id])
         end
       end

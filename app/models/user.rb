@@ -65,17 +65,14 @@ class User < ApplicationRecord
   #      video_id
   #      ,max(created_at) as most_recently_viewed_at
   #    FROM user_view_videos
-  #    where user_id = 620
+  #    where user_id = 123
   #    GROUP BY video_id
   #    ORDER BY most_recently_viewed_at DESC
-  #    LIMIT 3
   #
-  # @param [Integer] n The desired number of unique videos watched most recently.
-  def recent_video_views(n = 3)
+  def recent_video_views
     video_views
       .group(:video_id)
       .select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at")
       .order("max(user_view_videos.created_at) DESC")
-      .limit(n)
   end
 end

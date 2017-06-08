@@ -22,6 +22,6 @@ json.followers user.followers, :id, :username, :image_url
 
 json.favorite_videos user.favorite_videos, :id, :title
 
-json.recently_viewed_videos user.recent_video_views, :video_id, :most_recently_viewed_at
+json.recently_viewed_videos user.recent_video_views.limit(3), :video_id, :most_recently_viewed_at
 
 json.extract! user, :created_at, :updated_at
