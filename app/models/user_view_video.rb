@@ -8,5 +8,5 @@ class UserViewVideo < ApplicationRecord
   validates :user, {presence:true}
   validates :video, {presence:true}
 
-  #scope :recent, lambda { |count| {:limit => count }}
+  #alias :viewed_at :created_at
 end

@@ -14,7 +14,8 @@ class Video < ApplicationRecord
   has_many :favorited_by_users, through: :user_favorite_videos, source: :user
 
   has_many :user_view_videos, dependent: :destroy
-  has_many :viewed_by_users, through: :user_view_videos, source: :user
+  alias :views :user_view_videos
+  has_many :viewed_by_users, -> { distinct }, through: :user_view_videos, source: :user
 
   validates_associated :user
   validates_associated :instrument

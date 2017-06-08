@@ -17,7 +17,9 @@ class User < ApplicationRecord
   has_many :favorite_videos, through: :user_favorite_videos, source: :video
 
   has_many :user_view_videos, dependent: :destroy
-  has_many :viewed_videos, through: :user_view_videos, source: :video
+  alias :video_views :user_view_videos
+  alias :views :user_view_videos
+  has_many :viewed_videos, -> { distinct }, through: :user_view_videos, source: :video
 
   ROLES = ["User", "Artist", "Admin"]
 
@@ -55,5 +57,25 @@ class User < ApplicationRecord
 
   def image_url
     profile.try(:image_url) || "https://my-bucket.s3.amazonaws.com/my-dir/some-default-twitter-egg-image.png"
+  end
+
+  # Should correspond with the following query:
+  #
+  #    SELECT
+  #      video_id
+  #      ,max(created_at) as most_recently_viewed_at
+  #    FROM user_view_videos
+  #    where user_id = 620
+  #    GROUP BY video_id
+  #    ORDER BY most_recently_viewed_at DESC
+  #    LIMIT 3
+  #
+  # @param [Integer] n The desired number of unique videos watched most recently.
+  def recent_video_views(n = 3)
+    video_views
+      .group(:video_id)
+      .select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at")
+      .order("max(user_view_videos.created_at) DESC")
+      .limit(n)
   end
 end
