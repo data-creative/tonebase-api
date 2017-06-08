@@ -7,11 +7,14 @@ RSpec.describe Video, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:instrument) }
 
+    it { should have_many(:video_parts).dependent(:destroy) }
+    it { should have_many(:video_scores).dependent(:destroy) }
+
     it { should have_many(:user_favorite_videos).dependent(:destroy) }
     it { should have_many(:favorited_by_users).through(:user_favorite_videos) }
 
-    it { should have_many(:video_parts).dependent(:destroy) }
-    it { should have_many(:video_scores).dependent(:destroy) }
+    it { should have_many(:user_view_videos).dependent(:destroy) }
+    it { should have_many(:viewed_by_users).through(:user_view_videos) }
   end
 
   describe "validations" do

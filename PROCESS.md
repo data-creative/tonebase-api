@@ -92,4 +92,6 @@ rails g model user_music_profile user:references guitar_owned:boolean guitar_mod
 
 rails g model video_part video:references source_url:string number:integer duration:integer
 rails g model video_score video:references image_url:string starts_at:integer ends_at:integer
+
+rails g model user_view_video user:references video:references
 ````

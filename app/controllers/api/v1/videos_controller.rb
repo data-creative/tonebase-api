@@ -1,9 +1,17 @@
 class Api::V1::VideosController < Api::V1::ApiController
   before_action :set_video, only: [:show, :update, :destroy]
 
+  ASSOCIATIONS = [
+    :video_parts, :video_scores,
+    [user: :user_profile],
+    :instrument,
+    [favorited_by_users: :user_profile],
+    [viewed_by_users: :user_profile]
+  ]
+
   # GET /api/v1/videos
   def index
-    @videos = Video.all
+    @videos = Video.eager_load(ASSOCIATIONS).all
   end
 
   # GET /api/v1/videos/:id
@@ -29,7 +37,7 @@ class Api::V1::VideosController < Api::V1::ApiController
 private
 
   def set_video
-    @video = Video.find(params[:id])
+    @video = Video.eager_load(ASSOCIATIONS).find(params[:id])
   end
 
   def video_params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607222542) do
+ActiveRecord::Schema.define(version: 20170608153544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 20170607222542) do
     t.index ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
   end
 
+  create_table "user_view_videos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "video_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_view_videos_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_user_view_videos_on_video_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",          null: false
     t.string   "password",       null: false
@@ -176,6 +185,8 @@ ActiveRecord::Schema.define(version: 20170607222542) do
   add_foreign_key "user_followships", "users", column: "followed_user_id"
   add_foreign_key "user_music_profiles", "users"
   add_foreign_key "user_profiles", "users"
+  add_foreign_key "user_view_videos", "users"
+  add_foreign_key "user_view_videos", "videos"
   add_foreign_key "video_parts", "videos"
   add_foreign_key "video_scores", "videos"
   add_foreign_key "videos", "instruments"

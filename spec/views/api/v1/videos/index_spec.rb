@@ -18,6 +18,7 @@ describe "api/v1/videos/index.json.jbuilder" do
         :parts,
         :scores,
         :favorited_by,
+        :viewed_by,
         :created_at, :updated_at
       ])
     end

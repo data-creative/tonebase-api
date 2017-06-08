@@ -42,14 +42,15 @@ When there are Client Errors, the API also returns descriptive error messages, s
   + `{"id": ["not found"]}`
   + `{"name": ["can't be blank"]}`
   + `{"name": ["has already been taken"]}`
-  + `{"advertiser"=>["can't be blank", "must exist"]}`
-  + `{"price"=>["can't be blank", "is not a number"]}`
-  + `{"role"=>["can't be blank", "is not included in the list"]}`
+  + `{"advertiser": ["can't be blank", "must exist"]}`
+  + `{"price": ["can't be blank", "is not a number"]}`
+  + `{"role": ["can't be blank", "is not included in the list"]}`
 
 ## Resources
 
-Each section below describes a class of resource within the scope of this system, as well as an example JSON representation of that resource, and a list of operations available to be performed on that resource.
+Each section below describes a class of resource within the scope of this system, as an example JSON representation of that resource, and a list of operations available to be performed on that resource.
 
+Each resource contains the attributes `id`, `created_at`, and `updated_at`, in addition to the other attributes listed below.
 
 
 
@@ -72,13 +73,6 @@ Each section below describes a class of resource within the scope of this system
 
 A musical instrument.
 
-Attributes:
-
-name | type | description
---- | --- | ---
-name | String | The instrument name.
-description | Text | A description of the instrument.
-
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -98,17 +92,16 @@ Example POST/PUT request body:
 }
 ````
 
-### `Advertiser`
-
-An organization seeking a targeted audience for their product advertisement(s).
-
 Attributes:
 
 name | type | description
 --- | --- | ---
-name | String | The organization's name.
-description | Text | A description of the organization.
-url | String | The organization's website.
+name | String | The instrument name.
+description | Text | A description of the instrument.
+
+### `Advertiser`
+
+An organization seeking a targeted audience for their product advertisement(s).
 
 Endpoints:
 
@@ -130,19 +123,17 @@ Example POST/PUT request body:
 }
 ````
 
-### `Ad`
-
-A message promoting an advertiser's product or service.
-
 Attributes:
 
 name | type | description
 --- | --- | ---
-advertiser_id | Integer | References the advertiser who placed this ad.
-title | String | A display title.
-content | Text | The ad's content.
-url | String | Where the ad redirects the user.
-image_url | String | The ad's image source.
+name | String | The organization's name.
+description | Text | A description of the organization.
+url | String | The organization's website.
+
+### `Ad`
+
+A message promoting an advertiser's product or service.
 
 Endpoints:
 
@@ -166,18 +157,19 @@ Example POST/PUT request body:
 }
 ````
 
-### `AdPlacement`
-
-Describes a period of time during which an ad is visible to users.
-
 Attributes:
 
 name | type | description
 --- | --- | ---
-ad_id | Integer | References the ad.
-start_date | Date | The first day an ad should be visible to users.
-end_date | Date | The last day an ad should be visible to users.
-price | Integer (cents USD) | How much the advertiser is paying to run this ad during this period of time.
+advertiser_id | Integer | References the advertiser who placed this ad.
+title | String | A display title.
+content | Text | The ad's content.
+url | String | Where the ad redirects the user.
+image_url | String | The ad's image source.
+
+### `AdPlacement`
+
+Describes a period of time during which an ad is visible to users.
 
 Endpoints:
 
@@ -200,16 +192,18 @@ Example POST/PUT request body:
 }
 ````
 
-### `AdInstrument`
-
-Associates ads with instruments.
-
 Attributes:
 
 name | type | description
 --- | --- | ---
 ad_id | Integer | References the ad.
-instrument_id | Integer | References the instrument.
+start_date | Date | The first day an ad should be visible to users.
+end_date | Date | The last day an ad should be visible to users.
+price | Integer (cents USD) | How much the advertiser is paying to run this ad during this period of time.
+
+### `AdInstrument`
+
+Associates ads with instruments.
 
 Endpoints:
 
@@ -227,6 +221,12 @@ Example POST/PUT request body:
 }
 ````
 
+Attributes:
+
+name | type | description
+--- | --- | ---
+ad_id | Integer | References the ad.
+instrument_id | Integer | References the instrument.
 
 
 
@@ -276,7 +276,7 @@ Create | POST | /users | N/A
 Show | GET | /users/:id | N/A
 Update | PUT | /users/:id | N/A
 Destroy | DELETE | /users/:id | N/A
-Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?email=hello@gmail.com`) to get a subset of matching users.
+Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?query[email]=search4me@gmail.com`) to get a subset of matching users. This will always return an array of objects, even if there is only one match.
 
 Example POST/PUT request body:
 
@@ -362,13 +362,6 @@ Reference [`User`](#user) documentation.
 
 Allows one user to follow another.
 
-Attributes:
-
-name | type | description
---- | --- | ---
-user_id | Integer | References the user who is following another.
-followed_user_id | Integer | References the user who is followed by another. The followed is most likey an artist.
-
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -385,7 +378,12 @@ Example POST/PUT request body:
 }
 ````
 
+Attributes:
 
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who is following another.
+followed_user_id | Integer | References the user who is followed by another. The followed is most likey an artist.
 
 
 
@@ -451,7 +449,7 @@ Example POST/PUT request body:
   title: "Finale from Sonata #99",
   description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
   tags: ["borouque", "maestrelli", "g-major"],
-  video_parts_attributes:[ // <-- ensure parts are in the proper order!
+  video_parts_attributes:[
     {source_url: "https://www.youtube.com/watch?v=abc123", number: 1, duration: 333},
     {source_url: "https://www.youtube.com/watch?v=def456", number: 2, duration: 333},
     {source_url: "https://www.youtube.com/watch?v=ghi789", number: 3, duration: 333}
@@ -470,7 +468,7 @@ name | type | description
 user_id | Integer | References the user (artist) who posted this video.
 instrument_id | Integer | References the instrument of instruction.
 title | String | A display title.
-description | String | A display title.
+description | Text | A description of the video.
 tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
 
 Video Part Attributes:
@@ -495,13 +493,6 @@ ends_at | Integer (seconds) | Stop displaying the score after the global video d
 
 Allows a user to mark a video as being one of their favorites.
 
-Attributes:
-
-name | type | description
---- | --- | ---
-user_id | Integer | References the user who likes this video.
-video_id | Integer | References the video being liked.
-
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -517,3 +508,37 @@ Example POST/PUT request body:
   video_id: 13
 }
 ````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who likes this video.
+video_id | Integer | References the video being liked.
+
+### `UserViewVideo`
+
+An event logged by the client application when a user views a video. The most ideal time to log one of these events is when the user starts viewing the video, else perhaps when the user visits the video show page, but be consistent. Really this resource just provides a benchmark for comparing against in-depth analytics provided by the video service.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /user_view_videos
+Create | POST | /user_view_videos
+
+Example POST/PUT request body:
+
+```` js
+{
+  user_id: 40,
+  video_id: 13
+}
+````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who viewed this video.
+video_id | Integer | References the video being viewed.

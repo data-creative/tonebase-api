@@ -162,6 +162,16 @@ unless Rails.env.test? #if Rails.env.development?
     UserFavoriteVideo.create({user_id: user_ids.sample, video_id: video_ids.sample})
   end
 
-  puts "#{UserFavoriteVideo.count} FAVORITE VIDEOS"
+  puts "#{UserFavoriteVideo.count} VIDEO FAVORITES"
+
+  #
+  # VIEWED VIDEOS
+  #
+
+  350.times do
+    UserViewVideo.create({user_id: user_ids.sample, video_id: video_ids.sample})
+  end
+
+  puts "#{UserViewVideo.count} VIDEO VIEWS"
 
 end

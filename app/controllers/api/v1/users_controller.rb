@@ -9,7 +9,12 @@ class Api::V1::UsersController < Api::V1::ApiController
     user_music_profile_attributes: [:guitar_owned, guitar_models_owned:[], fav_composers:[], fav_performers:[], fav_periods:[]]
   ]
 
-  ASSOCIATIONS = [:user_profile, :user_music_profile, :follows, :followers, :favorite_videos]
+  ASSOCIATIONS = [
+    :user_profile, :user_music_profile,
+    :follows, :followers,
+    :favorite_videos,
+    :recent_video_views
+  ]
 
   # GET /api/v1/users
   def index
@@ -49,7 +54,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   # @example GET /api/v1/users/search?query[role]=Artist&query[first_name]=Talenti
   def search
     begin
-      @users = User.where(query_params)
+      @users = User.eager_load(ASSOCIATIONS).where(query_params)
     rescue ActionController::ParameterMissing
       render_query_400
     end

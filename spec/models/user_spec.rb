@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "associations" do
+    it { should have_one(:user_profile).dependent(:destroy) }
+    it { should have_one(:user_music_profile).dependent(:destroy) }
+
+    it { should accept_nested_attributes_for(:user_profile) }
+    it { should accept_nested_attributes_for(:user_music_profile) }
+
     it { should have_many(:user_followships).dependent(:destroy) }
     it { should have_many(:follows).through(:user_followships) }
     it { should have_many(:inverse_user_followships).dependent(:destroy) }
@@ -12,11 +18,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:user_favorite_videos).dependent(:destroy) }
     it { should have_many(:favorite_videos).through(:user_favorite_videos) }
 
-    it { should have_one(:user_profile).dependent(:destroy) }
-    it { should have_one(:user_music_profile).dependent(:destroy) }
-
-    it { should accept_nested_attributes_for(:user_profile) }
-    it { should accept_nested_attributes_for(:user_music_profile) }
+    it { should have_many(:user_view_videos).dependent(:destroy) }
+    it { should have_many(:viewed_videos).through(:user_view_videos) }
 
     describe "self-referential user followships" do
       let(:user){ create(:user) }
@@ -31,6 +34,42 @@ RSpec.describe User, type: :model do
       it "should associate followed user with followers" do
         expect(artist.followers.first).to eql(user)
         expect(user.followers.any?).to eql(false)
+      end
+    end
+
+    describe ".recent_video_views" do
+      let(:user){ create(:user) }
+      let(:video){ create(:video, title: "First") }
+      let(:other_video){ create(:video, title: "Second") }
+      let(:third_video){ create(:video, title: "Third") }
+
+      let(:video_ids){ user.recent_video_views.limit(3).map{|view| view.video_id} }
+
+      describe "limits results" do
+        let(:fourth_video){ create(:video, title: "Fourth") }
+        let(:fifth_video){ create(:video, title: "Fifth") }
+
+        let!(:first_view){ create(:user_view_video, user: user, video: video)}
+        let!(:second_view){ create(:user_view_video, user: user, video: other_video)}
+        let!(:third_view){ create(:user_view_video, user: user, video: third_video)}
+        let!(:fourth_view){ create(:user_view_video, user: user, video: fourth_video)}
+        let!(:fifth_view){ create(:user_view_video, user: user, video: fifth_video)}
+
+        it "should return a list of recent video views" do
+          expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, third_view.video_id])
+        end
+      end
+
+      describe "groups results by unique video" do
+        let!(:first_view){ create(:user_view_video, user: user, video: video)}
+        let!(:second_view){ create(:user_view_video, user: user, video: other_video)}
+        let!(:third_view){ create(:user_view_video, user: user, video: third_video)}
+        let!(:fourth_view){ create(:user_view_video, user: user, video: other_video)}
+        let!(:fifth_view){ create(:user_view_video, user: user, video: third_video)}
+
+        it "should include only the user's most recent view for any given video" do
+          expect(video_ids).to eql([fifth_view.video_id, fourth_view.video_id, first_view.video_id])
+        end
       end
     end
   end
