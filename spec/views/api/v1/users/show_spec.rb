@@ -15,6 +15,7 @@ describe "api/v1/users/show.json.jbuilder" do
       :profile, :music_profile,
       :follows, :followers,
       :favorite_videos,
+      :recently_viewed_videos,
       :created_at, :updated_at
     ])
   end

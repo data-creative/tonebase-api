@@ -10,4 +10,6 @@ json.instrument video.instrument, :id, :name, :description
 
 json.favorited_by video.favorited_by_users, :id, :username, :image_url
 
+json.recently_viewed_by video.recently_viewed_by_users, :id, :username, :image_url
+
 json.extract! video, :created_at, :updated_at

@@ -276,7 +276,7 @@ Create | POST | /users | N/A
 Show | GET | /users/:id | N/A
 Update | PUT | /users/:id | N/A
 Destroy | DELETE | /users/:id | N/A
-Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?email=hello@gmail.com`) to get a subset of matching users.
+Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?query[email]=search4me@gmail.com`) to get a subset of matching users. This will always return an array of objects, even if there is only one match.
 
 Example POST/PUT request body:
 
@@ -449,7 +449,7 @@ Example POST/PUT request body:
   title: "Finale from Sonata #99",
   description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
   tags: ["borouque", "maestrelli", "g-major"],
-  video_parts_attributes:[ // <-- ensure parts are in the proper order!
+  video_parts_attributes:[
     {source_url: "https://www.youtube.com/watch?v=abc123", number: 1, duration: 333},
     {source_url: "https://www.youtube.com/watch?v=def456", number: 2, duration: 333},
     {source_url: "https://www.youtube.com/watch?v=ghi789", number: 3, duration: 333}
@@ -468,7 +468,7 @@ name | type | description
 user_id | Integer | References the user (artist) who posted this video.
 instrument_id | Integer | References the instrument of instruction.
 title | String | A display title.
-description | String | A display title.
+description | Text | A description of the video.
 tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
 
 Video Part Attributes:
@@ -526,7 +526,6 @@ Action | Request Method | Endpoint URL
 ---	|	---	|	---
 List | GET | /user_view_videos
 Create | POST | /user_view_videos
-Show | GET | /user_view_videos/:id
 
 Example POST/PUT request body:
 

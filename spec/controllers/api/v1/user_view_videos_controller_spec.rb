@@ -1,7 +1,6 @@
 require 'rails_helper'
 require_relative '../../../support/api/v1/request'
 require_relative '../../../support/api/v1/endpoints/index'
-require_relative '../../../support/api/v1/endpoints/show'
 require_relative '../../../support/api/v1/endpoints/create'
 
 RSpec.describe Api::V1::UserViewVideosController, type: :controller do
@@ -9,10 +8,6 @@ RSpec.describe Api::V1::UserViewVideosController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", UserViewVideo
-  end
-
-  describe "GET #show" do
-    it_behaves_like "a show endpoint", UserViewVideo
   end
 
   describe "POST #create" do
