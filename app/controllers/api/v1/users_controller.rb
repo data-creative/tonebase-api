@@ -1,13 +1,23 @@
 class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: [:show, :update, :destroy]
 
+  PERMITTED_ATTRIBUTES = [
+    :email, :password, :username,
+    :confirmed, :visible, :role, :access_level,
+    :customer_uuid, :oauth, :oauth_provider,
+    user_profile_attributes: [:first_name, :last_name, :bio, :image_url, :hero_url, :birth_year, professions:[]],
+    user_music_profile_attributes: [:guitar_owned, guitar_models_owned:[], fav_composers:[], fav_performers:[], fav_periods:[]]
+  ]
+
+  ASSOCIATIONS = [:user_profile, :user_music_profile, :follows, :followers, :favorite_videos]
+
   # GET /api/v1/users
   def index
     if !params[:role]
-      @users = User.all
+      @users = User.eager_load(ASSOCIATIONS).all
     else
       if User::ROLES.include?(params[:role])
-        @users = User.send(params[:role].underscore.to_sym)
+        @users = User.eager_load(ASSOCIATIONS).send(params[:role].underscore.to_sym)
       else
         render json: {"role": ["not found"]}, status: :not_found
       end
@@ -34,13 +44,28 @@ class Api::V1::UsersController < Api::V1::ApiController
     destroy_and_render_json(@user)
   end
 
+  # GET /api/v1/users/search
+  # @example GET /api/v1/users/search?query[email]=search4me@gmail.com
+  # @example GET /api/v1/users/search?query[role]=Artist&query[first_name]=Talenti
+  def search
+    begin
+      @users = User.where(query_params)
+    rescue ActionController::ParameterMissing
+      render_query_400
+    end
+  end
+
 private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.eager_load(ASSOCIATIONS).find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :confirmed, :visible, :role, :access_level, :first_name, :last_name, :bio, :image_url, :hero_url, :customer_uuid, :oauth, :oauth_provider)
+    params.require(:user).permit(PERMITTED_ATTRIBUTES)
+  end
+
+  def query_params
+    params.require(:query).permit(PERMITTED_ATTRIBUTES)
   end
 end

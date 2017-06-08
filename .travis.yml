@@ -7,4 +7,4 @@ script:
   - bin/rake db:setup RAILS_ENV=test
   - bin/rake
 env:
-  CODECLIMATE_REPO_TOKEN: 701fdd09d9a3c1731c5c7e16794105d7aba56d2d587da555822ef355fd21f4b5
+  TONEBASE_CLIENT_TOKEN: abc123
