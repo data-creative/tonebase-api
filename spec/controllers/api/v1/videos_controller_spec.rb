@@ -42,15 +42,42 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       }
     end
 
-    it_behaves_like "a create endpoint which validates presence", Video, [:user, :instrument, :title, :description] do
-      let(:resource_params){ {user_id: "", instrument_id: "", title:"", description:""} }
+    it_behaves_like "a create endpoint which validates presence", Video, [
+      :user, :instrument, :title, :description,
+      "video_parts.source_url", "video_parts.number", "video_parts.duration",
+      "video_scores.image_url", "video_scores.starts_at", "video_scores.ends_at"
+    ] do
+      let(:resource_params){
+        {
+          user_id: "",
+          instrument_id: "",
+          title:"",
+          description:"",
+          video_parts_attributes:[{source_url:""}],
+          video_scores_attributes:[{image_url:""}],
+        }
+      }
     end
   end
 
   describe "PUT #update" do
     it_behaves_like "an update endpoint", Video, {description: "My Revised Description."}
-    it_behaves_like "an update endpoint which validates presence", Video, [:user, :instrument, :title, :description] do
-      let(:resource_params){ {user_id: "", instrument_id: "", title:"", description:""} }
+
+    it_behaves_like "an update endpoint which validates presence", Video, [
+      :user, :instrument, :title, :description,
+      "video_parts.source_url", "video_parts.number", "video_parts.duration",
+      "video_scores.image_url", "video_scores.starts_at", "video_scores.ends_at"
+    ] do
+      let(:resource_params){
+        {
+          user_id: "",
+          instrument_id: "",
+          title:"",
+          description:"",
+          video_parts_attributes:[{source_url:""}],
+          video_scores_attributes:[{image_url:""}],
+        }
+      }
     end
   end
 
