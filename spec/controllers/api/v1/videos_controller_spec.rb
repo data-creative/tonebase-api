@@ -21,26 +21,63 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     it_behaves_like "a create endpoint", Video  do
       let(:artist){ create(:artist) }
       let(:instrument){ create(:instrument) }
+      let(:also_serialize){ [:video_parts_attributes, :video_scores_attributes] }
       let(:resource_params){
         {
           user_id: artist.id,
           instrument_id: instrument.id,
           title: "Finale from Sonata #99",
           description: "The final moments of master composer Maestrelli's most famous piece. Composed in 1817.",
-          tags: ["borouque", "maestrelli", "g-major"]
+          tags: ["borouque", "maestrelli", "g-major"],
+          video_parts_attributes:[
+            {source_url: "https://www.youtube.com/watch?v=abc123", number: 1, duration: 333},
+            {source_url: "https://www.youtube.com/watch?v=def456", number: 2, duration: 333},
+            {source_url: "https://www.youtube.com/watch?v=ghi789", number: 3, duration: 333}
+          ],
+          video_scores_attributes:[
+            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-1-image.jpg", starts_at: 25, ends_at: 500},
+            {image_url: "https://my-bucket.s3.amazonaws.com/my-dir/score-2-image.jpg", starts_at: 750, ends_at: 999}
+          ]
         }
       }
     end
 
-    it_behaves_like "a create endpoint which validates presence", Video, [:user, :instrument, :title, :description] do
-      let(:resource_params){ {user_id: "", instrument_id: "", title:"", description:""} }
+    it_behaves_like "a create endpoint which validates presence", Video, [
+      :user, :instrument, :title, :description,
+      "video_parts.source_url", "video_parts.number", "video_parts.duration",
+      "video_scores.image_url", "video_scores.starts_at", "video_scores.ends_at"
+    ] do
+      let(:resource_params){
+        {
+          user_id: "",
+          instrument_id: "",
+          title:"",
+          description:"",
+          video_parts_attributes:[{source_url:""}],
+          video_scores_attributes:[{image_url:""}],
+        }
+      }
     end
   end
 
   describe "PUT #update" do
     it_behaves_like "an update endpoint", Video, {description: "My Revised Description."}
-    it_behaves_like "an update endpoint which validates presence", Video, [:user, :instrument, :title, :description] do
-      let(:resource_params){ {user_id: "", instrument_id: "", title:"", description:""} }
+
+    it_behaves_like "an update endpoint which validates presence", Video, [
+      :user, :instrument, :title, :description,
+      "video_parts.source_url", "video_parts.number", "video_parts.duration",
+      "video_scores.image_url", "video_scores.starts_at", "video_scores.ends_at"
+    ] do
+      let(:resource_params){
+        {
+          user_id: "",
+          instrument_id: "",
+          title:"",
+          description:"",
+          video_parts_attributes:[{source_url:""}],
+          video_scores_attributes:[{image_url:""}],
+        }
+      }
     end
   end
 
