@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
       resources :videos, only: [:index, :show, :create, :update, :destroy]
       resources :user_favorite_videos, only: [:index, :show, :create, :update, :destroy]
-      resources :user_view_videos, only: [:index, :show, :create]
+      resources :user_view_videos, only: [:index, :create]
     end
   end
 end

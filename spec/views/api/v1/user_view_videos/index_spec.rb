@@ -10,7 +10,7 @@ describe "api/v1/user_view_videos/index.json.jbuilder" do
   it "displays advertisers" do
     expect(parsed_view.count).to eql(2)
     parsed_view.each do |resource|
-      expect(keys_of(resource)).to match_array([:user_id, :video_id, :created_at])
+      expect(keys_of(resource)).to match_array([:user_id, :video_id, :viewed_at])
     end
   end
 end

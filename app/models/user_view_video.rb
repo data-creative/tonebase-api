@@ -8,5 +8,5 @@ class UserViewVideo < ApplicationRecord
   validates :user, {presence:true}
   validates :video, {presence:true}
 
-  #alias :viewed_at :created_at
+  alias_attribute :viewed_at, :created_at
 end
