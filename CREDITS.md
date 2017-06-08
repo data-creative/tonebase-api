@@ -43,3 +43,4 @@
   + [Serializable Hash](http://api.rubyonrails.org/classes/ActiveModel/Serialization.html)
   + [Preloading associations](http://tomdallimore.com/blog/includes-vs-joins-in-rails-when-and-where/)
   + [Most recent associations via HABTM](https://stackoverflow.com/questions/2456181/how-to-find-the-most-recent-associations-created-between-two-objects-with-rails)
+  + [Preloading rails scopes](http://www.justinweiss.com/articles/how-to-preload-rails-scopes/)
