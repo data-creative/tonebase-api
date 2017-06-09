@@ -33,6 +33,6 @@ private
   end
 
   def announcement_params
-    params.require(:announcement).permit(:title, :content, :url, :image_url, :broadcast)
+    params.require(:announcement).permit(:title, :content, :url, :image_url)
   end
 end
