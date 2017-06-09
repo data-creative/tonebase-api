@@ -96,4 +96,7 @@ rails g model video_score video:references image_url:string starts_at:integer en
 rails g model user_view_video user:references video:references
 
 rails g model announcement title:string content:text url:string image_url:string
+
+rails g model notification broadcastable:references{polymorphic} event:string headline:string url:string
+rails g model user_notification user:references notification:references marked_read:boolean
 ````

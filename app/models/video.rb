@@ -43,10 +43,10 @@ class Video < ApplicationRecord
 #private
 
   def broadcast_new_video_event_to_artist_followers
-    Broadcast.create({
-      title: "#{user.name} posted a new video. Watch it now!",
+    Broadcast.new({
+      broadcastable: self,
       event: "NewVideo",
-      resource: self,
+      title: "#{user.name} posted a new video. Watch it now!",
       users: user.followers
     })
   end
@@ -54,34 +54,34 @@ end
 
 class Broadcast
   # @param [Hash] options
-  # @param [Hash] options [String] title The message a user will see in their inbox.
-  # @param [Hash] options [String] event The type of event that triggered the notification.
-  # @param [Hash] options [ApplicationRecord] resource The resource which triggered the notification. The focus of attention.
+  # @param [Hash] options [ApplicationRecord] broadcastable The resource which triggered this broadcast. The focus of attention.
+  # @param [Hash] options [String] event The type of event that triggered this broadcast.
+  # @param [Hash] options [String] headline The notification headline a user will see in their inbox.
+  # @param [Hash] options [String] url An optional url to redirect a user who clicks on the notification headline in their inbox.
   # @param [Hash] options [Array] users A list of users to be notified.
-  # @param [Hash] options [String] url An optional url to redirect a user who clicks on the message in their inbox.
   #
   # @example
   #
   #   Broadcast.create({
-  #     title: "Talenti Pro posted a new video. Watch it now!"
+  #     broadcastable: <Video>,
   #     event: "NewVideo",
-  #     resource: <Video>,
+  #     headline: "Talenti Pro posted a new video. Watch it now!"
   #     users: [<User>, <User>, <User>]
   #   })
   #
   def initialize(options = {})
-    @title = options[:title]
+    @broadcastable = options[:broadcastable]
     @event = options[:event]
-    @users = options[:users]
-    @resource = options[:resource]
+    @headline = options[:headline]
     @url = options[:url]
+    @users = options[:users]
   end
 
-  def resource_type
-    @resource.class.name
+  def broadcastable_type
+    @broadcastable.class.name
   end
 
-  def resource_id
-    @resource.id
+  def broadcastable_id
+    @broadcastable.id
   end
 end
