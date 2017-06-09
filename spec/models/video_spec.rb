@@ -15,6 +15,8 @@ RSpec.describe Video, type: :model do
 
     it { should have_many(:user_view_videos).dependent(:destroy) }
     it { should have_many(:viewed_by_users).through(:user_view_videos) }
+
+    it { should have_many(:notifications).dependent(:destroy) }
   end
 
   describe "validations" do

@@ -47,3 +47,4 @@
   + [ActiveRecord Callbacks](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
   + [Generating Polymorphic Associations](https://stackoverflow.com/a/15204525/670433)
   + [Polymorphic Associations](http://guides.rubyonrails.org/association_basics.html#polymorphic-associations)
+  + [Factory Girl Associations](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#associations)

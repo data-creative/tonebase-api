@@ -8,5 +8,7 @@ class CreateNotifications < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    add_index :notifications, [:event, :broadcastable_id, :broadcastable_type], unique: true, name: "index_notifications_on_composite_key"
   end
 end

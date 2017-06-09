@@ -1,6 +1,10 @@
 class Video < ApplicationRecord
   after_create :broadcast_new_video_event_to_artist_followers
 
+  #
+  # ASSOCIATIONS
+  #
+
   belongs_to :user
 
   belongs_to :instrument
@@ -18,6 +22,12 @@ class Video < ApplicationRecord
   has_many :user_view_videos, dependent: :destroy
   alias :views :user_view_videos
   has_many :viewed_by_users, -> { distinct }, through: :user_view_videos, source: :user
+
+  has_many :notifications, as: :broadcastable, dependent: :destroy
+
+  #
+  # VALIDATIONS
+  #
 
   validates_associated :user
   validates_associated :instrument
