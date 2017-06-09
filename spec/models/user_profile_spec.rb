@@ -21,4 +21,14 @@ RSpec.describe UserProfile, type: :model do
       it { should validate_uniqueness_of(:user) }
     end
   end
+
+  describe "instance methods" do
+    describe "#name" do
+      let(:profile){ create(:user_profile, first_name: "First", last_name: "Last") }
+
+      it "should concatenate first and last names with a space in the middle" do
+        expect(profile.name).to eql("First Last")
+      end
+    end
+  end
 end

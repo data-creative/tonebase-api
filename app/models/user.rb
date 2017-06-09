@@ -69,6 +69,10 @@ class User < ApplicationRecord
     profile.try(:image_url) || "https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"
   end
 
+  def name
+    profile.try(:name) || "Un-named User"
+  end
+
   # @deprecated converted to a scope so it can be eager-loaded.
   # Should correspond with the following query:
   #

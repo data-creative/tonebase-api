@@ -46,13 +46,15 @@ class Video < ApplicationRecord
     Broadcast.new({
       broadcastable: self,
       event: "NewVideo",
-      title: "#{user.name} posted a new video. Watch it now!",
+      headline: "#{user.name} posted a new video. Watch it now!",
       users: user.followers
     })
   end
 end
 
 class Broadcast
+  VALID_EVENTS = ["NewVideo"]
+
   # @param [Hash] options
   # @param [Hash] options [ApplicationRecord] broadcastable The resource which triggered this broadcast. The focus of attention.
   # @param [Hash] options [String] event The type of event that triggered this broadcast.
@@ -75,13 +77,35 @@ class Broadcast
     @headline = options[:headline]
     @url = options[:url]
     @users = options[:users]
+    validate
+    notify_users
   end
 
-  def broadcastable_type
-    @broadcastable.class.name
+private
+
+  def valid_event_names
+    VALID_EVENTS # VALID_EVENTS.map{|_,v| v}.flatten
   end
 
-  def broadcastable_id
-    @broadcastable.id
+  def validate
+    raise ArgumentError.new("Broadcastable must be a valid resource") unless @broadcastable.class < ApplicationRecord
+    raise ArgumentError.new("Event must be one of: #{valid_event_names}") unless valid_event_names.include?(@event)
+    raise ArgumentError.new("Headline must be present") unless @headline
+    raise ArgumentError.new("Users must be users") unless @users.class == User::ActiveRecord_Associations_CollectionProxy
+
+    case @event
+    when "NewVideo"
+      raise ArgumentError.new("Broadcastable must match event type") unless @broadcastable.class == Video
+    else
+      raise StandardError.new("OOPS. THAT EVENT IS NOT YET REGISTERED.")
+    end
+  end
+
+  def notify_users
+    notification = Notification.create(broadcastable: @broadcastable, event: @event, headline: @headline, url: @url)
+
+    #@users.each do |user|
+    #  UserNotification.create(user: user, notification: notification, marked_read:false)
+    #end
   end
 end
