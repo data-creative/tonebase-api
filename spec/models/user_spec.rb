@@ -21,6 +21,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:user_view_videos).dependent(:destroy) }
     it { should have_many(:viewed_videos).through(:user_view_videos) }
 
+    it { should have_many(:user_notifications).dependent(:destroy) }
+
     describe "self-referential user followships" do
       let(:user){ create(:user) }
       let(:artist){ create(:artist) }

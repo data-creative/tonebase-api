@@ -31,6 +31,8 @@ class User < ApplicationRecord
     group(:video_id).select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at").order("max(user_view_videos.created_at) DESC")
   }, class_name: "UserViewVideo"
 
+  has_many :user_notifications, dependent: :destroy
+
   ROLES = ["User", "Artist", "Admin"]
 
   validates :email, {presence: true, uniqueness: true}

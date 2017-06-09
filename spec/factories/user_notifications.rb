@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user_notification do
-    user nil
-    notification nil
+    user
+    notification
     marked_read false
   end
 end
