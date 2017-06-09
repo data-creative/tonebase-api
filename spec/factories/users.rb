@@ -51,8 +51,17 @@ FactoryGirl.define do
       access_level "Full"
 
       trait :with_profile do
-        after(:create) do |user, evaluator|
-          create(:user_profile, user: user, first_name: "Talenti", last_name: "Pro", birth_year: 1975, professions: ["Performer", "Instructor"])
+        after(:create) do |artist, evaluator|
+          create(:user_profile, user: artist, first_name: "Talenti", last_name: "Pro", birth_year: 1975, professions: ["Performer", "Instructor"])
+        end
+      end
+
+      trait :with_followers do
+        after(:create) do |artist, evaluator|
+          3.times do |i|
+            user = create(:user)
+            create(:user_followship, user: user, followed_user: artist)
+          end
         end
       end
     end
