@@ -4,11 +4,6 @@ For now, this document contains a table of endpoints planned but not yet impleme
 
 Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 ---	|	---	|	---	|	---	|	---
-2-Comms	|	Alert	|	1-List	|	GET	|	/api/alerts
-2-Comms	|	Alert	|	2-Create	|	POST	|	/api/alerts
-2-Comms	|	Alert	|	3-Show	|	GET	|	/api/alerts/:id
-2-Comms	|	Alert	|	4-Update	|	PUT	|	/api/alerts/:id
-2-Comms	|	Alert	|	5-Destroy	|	DELETE	|	/api/alerts/:id
 2-Comms	|	UserAlert	|	1-List	|	GET	|	/api/users/:id/alerts
 2-Comms	|	UserAlert	|	2-Create	|	POST	|	/api/users/:id/alerts
 2-Comms	|	UserAlert	|	3-Show	|	GET	|	/api/users/:id/alerts/:id
