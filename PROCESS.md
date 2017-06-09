@@ -94,4 +94,6 @@ rails g model video_part video:references source_url:string number:integer durat
 rails g model video_score video:references image_url:string starts_at:integer ends_at:integer
 
 rails g model user_view_video user:references video:references
+
+rails g model announcement title:string content:text url:string image_url:string
 ````

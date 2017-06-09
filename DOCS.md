@@ -542,3 +542,100 @@ name | type | description
 --- | --- | ---
 user_id | Integer | References the user who viewed this video.
 video_id | Integer | References the video being viewed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### `Announcement`
+
+A message promoting system features, community events, etc.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /announcements
+Create | POST | /announcements
+Show | GET | /announcements/:id
+Update | PUT | /ads/:announcements
+Destroy | DELETE | /ads/:announcements
+
+Example POST/PUT request body:
+
+```` js
+{
+  title: "New Feature ABC",
+  content: "This new feature allows you to do cool things.",
+  url: "https://blog.tonebase.com/posts/new-feature-abc",
+  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+}
+````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+title | String | A display title.
+content | Text | The announcement's message body.
+url | String | Where the announcement redirects the user.
+image_url | String | The announcement's image source.

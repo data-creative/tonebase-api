@@ -4,13 +4,15 @@ For now, this document contains a table of endpoints planned but not yet impleme
 
 Dev Group	| Primary Resource | Action | Request Method | Endpoint URL
 ---	|	---	|	---	|	---	|	---
-2-Comms	|	Alert	|	1-List	|	GET	|	/api/alerts
-2-Comms	|	Alert	|	2-Create	|	POST	|	/api/alerts
-2-Comms	|	Alert	|	3-Show	|	GET	|	/api/alerts/:id
-2-Comms	|	Alert	|	4-Update	|	PUT	|	/api/alerts/:id
-2-Comms	|	Alert	|	5-Destroy	|	DELETE	|	/api/alerts/:id
 2-Comms	|	UserAlert	|	1-List	|	GET	|	/api/users/:id/alerts
 2-Comms	|	UserAlert	|	2-Create	|	POST	|	/api/users/:id/alerts
 2-Comms	|	UserAlert	|	3-Show	|	GET	|	/api/users/:id/alerts/:id
 2-Comms	|	UserAlert	|	4-Update	|	PUT	|	/api/users/:id/alerts/:id
 2-Comms	|	UserAlert	|	5-Destroy	|	DELETE	|	/api/users/:id/alerts/:id
+
+
+Pending Announcement Attributes:
+
+name | type | description
+--- | --- | ---
+broadcast | Boolean | Whether the announcement's title and url, upon initial creation, should be sent to all users via an alert message. Announcements without both a title and url are not broadcast-able.

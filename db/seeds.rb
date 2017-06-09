@@ -174,4 +174,24 @@ unless Rails.env.test? #if Rails.env.development?
 
   puts "#{UserViewVideo.count} VIDEO VIEWS"
 
+
+  #
+  # ANNOUNCEMENTS
+  #
+
+  Announcement.create(title: "Keep Playing Bros!")
+
+  3.times do |i|
+    Announcement.create({
+      title: "New Feature #{i}",
+      content: "This new feature allows you to do cool things.",
+      url: "https://blog.tonebase.com/posts/new-feature-abc",
+      image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+    })
+  end
+
+  Announcement.create(title: "Fill out our survey please!", url: "https://surveymonkey.com/surveys/abc")
+
+  puts "#{Announcement.count} ANNOUNCEMENTS"
+
 end
