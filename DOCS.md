@@ -556,6 +556,34 @@ video_id | Integer | References the video being viewed.
 
 
 
+### `Notification`
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /notifications
+Show | GET | /notifications/:id
+Destroy | DELETE | /notifications/:id
+
+### `UserNotification`
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /user_notifications
+Create | POST | /user_notifications
+Update | PUT | /user_notifications/:id
+
+
+
+
+
+
+
+
+
 
 
 

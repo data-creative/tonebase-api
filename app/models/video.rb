@@ -52,6 +52,7 @@ class Video < ApplicationRecord
   end
 end
 
+# Move me somewhere.
 class Broadcast
   VALID_EVENTS = ["NewVideo"]
 
@@ -83,16 +84,23 @@ class Broadcast
 
 private
 
-  def valid_event_names
-    VALID_EVENTS # VALID_EVENTS.map{|_,v| v}.flatten
+  def validate
+    validate_broadcastable
+    validate_event
+    validate_event_and_broadcastable
+    validate_headline
+    validate_users
   end
 
-  def validate
+  def validate_broadcastable
     raise ArgumentError.new("Broadcastable must be a valid resource") unless @broadcastable.class < ApplicationRecord
-    raise ArgumentError.new("Event must be one of: #{valid_event_names}") unless valid_event_names.include?(@event)
-    raise ArgumentError.new("Headline must be present") unless @headline
-    raise ArgumentError.new("Users must be users") unless @users.class == User::ActiveRecord_Associations_CollectionProxy
+  end
 
+  def validate_event
+    raise ArgumentError.new("Event must be one of: #{VALID_EVENTS}") unless VALID_EVENTS.include?(@event)
+  end
+
+  def validate_event_and_broadcastable
     case @event
     when "NewVideo"
       raise ArgumentError.new("Broadcastable must match event type") unless @broadcastable.class == Video
@@ -101,11 +109,16 @@ private
     end
   end
 
+  def validate_headline
+    raise ArgumentError.new("Headline must be present") unless @headline
+  end
+
+  def validate_users
+    raise ArgumentError.new("Users must be users") unless @users.class == User::ActiveRecord_Associations_CollectionProxy
+  end
+
   def notify_users
     notification = Notification.create(broadcastable: @broadcastable, event: @event, headline: @headline, url: @url)
-
-    #@users.each do |user|
-    #  UserNotification.create(user: user, notification: notification, marked_read:false)
-    #end
+    UserNotification.create(@users.map{|user| {user: user, notification: notification, marked_read:false} })
   end
 end

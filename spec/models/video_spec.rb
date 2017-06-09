@@ -40,9 +40,9 @@ RSpec.describe Video, type: :model do
           expect{ video }.to change{ Notification.count }.by(1)
         end
 
-        #it "should notify all the artist's followers" do
-        #  expect{ video }.to change{ UserNotification.count }.by(artist.followers.count)
-        #end
+        it "should notify all the artist's followers" do
+          expect{ video }.to change{ UserNotification.count }.by(artist.followers.count)
+        end
       end
     end
   end

@@ -44,3 +44,6 @@
   + [Preloading associations](http://tomdallimore.com/blog/includes-vs-joins-in-rails-when-and-where/)
   + [Most recent associations via HABTM](https://stackoverflow.com/questions/2456181/how-to-find-the-most-recent-associations-created-between-two-objects-with-rails)
   + [Preloading rails scopes](http://www.justinweiss.com/articles/how-to-preload-rails-scopes/)
+  + [ActiveRecord Callbacks](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
+  + [Generating Polymorphic Associations](https://stackoverflow.com/a/15204525/670433)
+  + [Polymorphic Associations](http://guides.rubyonrails.org/association_basics.html#polymorphic-associations)
