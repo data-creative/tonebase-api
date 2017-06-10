@@ -19,7 +19,7 @@ RSpec.describe Notification, type: :model do
     #
     #context "uniqueness" do
     #  subject { build(:notification) }
-    #  #it { should validate_uniqueness_of(:event).scoped_to(:broadcastable_type, :broadcastable_id) }
+    #  it { should validate_uniqueness_of(:event).scoped_to(:broadcastable_type, :broadcastable_id) }
     #end
   end
 end

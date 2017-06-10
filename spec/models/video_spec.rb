@@ -36,7 +36,7 @@ RSpec.describe Video, type: :model do
       describe "#broadcast_new_video_event_to_artist_followers" do
         let!(:nonfollower){ create(:user) }
         let(:artist){ create(:artist, :with_followers)}
-        let(:video){ create(:video, user: artist)}
+        let(:video){ create(:video, :with_callbacks, user: artist)}
 
         it "should create a new notification" do
           expect{ video }.to change{ Notification.count }.by(1)

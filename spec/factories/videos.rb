@@ -6,6 +6,16 @@ FactoryGirl.define do
     description "The final moments of master composer Maestrelli's most famous piece. Composed in 1817."
     tags nil
 
+    after(:build) do |video|
+      video.class.skip_callback(:create, :after, :broadcast_new_video_event_to_artist_followers, raise: false)
+    end
+
+    trait :with_callbacks do
+      after(:build) do |video|
+        video.class.set_callback(:create, :after, :broadcast_new_video_event_to_artist_followers)
+      end
+    end
+
     trait :tagged do
       tags ["borouque", "maestrelli", "g-major"]
     end

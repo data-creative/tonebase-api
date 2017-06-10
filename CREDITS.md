@@ -48,3 +48,6 @@
   + [Generating Polymorphic Associations](https://stackoverflow.com/a/15204525/670433)
   + [Polymorphic Associations](http://guides.rubyonrails.org/association_basics.html#polymorphic-associations)
   + [Factory Girl Associations](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#associations)
+  + [Skip callbacks in specs 1](https://stackoverflow.com/questions/8751175/skip-callbacks-on-factory-girl-and-rspec)
+  + [Skipping callbacks in specs 2](https://github.com/thoughtbot/factory_girl/issues/931)
+  + [Skipping callbacks in specs 3](https://stackoverflow.com/questions/39647150/skip-before-action-and-rails-5)
