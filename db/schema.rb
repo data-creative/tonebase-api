@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 20170609184440) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["broadcastable_type", "broadcastable_id"], name: "index_notifications_on_broadcastable_type_and_broadcastable_id", using: :btree
-    t.index ["event", "broadcastable_id", "broadcastable_type"], name: "index_notifications_on_composite_key", unique: true, using: :btree
   end
 
   create_table "user_favorite_videos", force: :cascade do |t|
@@ -120,7 +119,7 @@ ActiveRecord::Schema.define(version: 20170609184440) do
   create_table "user_notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "notification_id"
-    t.boolean  "marked_read",     default: false
+    t.boolean  "marked_read",     default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.index ["marked_read"], name: "index_user_notifications_on_marked_read", using: :btree
