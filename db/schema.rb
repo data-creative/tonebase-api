@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609012852) do
+ActiveRecord::Schema.define(version: 20170609184440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 20170609012852) do
     t.index ["name"], name: "index_instruments_on_name", unique: true, using: :btree
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string   "broadcastable_type"
+    t.integer  "broadcastable_id",   null: false
+    t.string   "event",              null: false
+    t.string   "headline",           null: false
+    t.string   "url"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["broadcastable_type", "broadcastable_id"], name: "index_notifications_on_broadcastable_type_and_broadcastable_id", using: :btree
+  end
+
   create_table "user_favorite_videos", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "video_id"
@@ -103,6 +114,18 @@ ActiveRecord::Schema.define(version: 20170609012852) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["user_id"], name: "index_user_music_profiles_on_user_id", unique: true, using: :btree
+  end
+
+  create_table "user_notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "notification_id"
+    t.boolean  "marked_read",     default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["marked_read"], name: "index_user_notifications_on_marked_read", using: :btree
+    t.index ["notification_id"], name: "index_user_notifications_on_notification_id", using: :btree
+    t.index ["user_id", "notification_id"], name: "index_user_notifications_on_user_id_and_notification_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_user_notifications_on_user_id", using: :btree
   end
 
   create_table "user_profiles", force: :cascade do |t|
@@ -194,6 +217,8 @@ ActiveRecord::Schema.define(version: 20170609012852) do
   add_foreign_key "user_followships", "users"
   add_foreign_key "user_followships", "users", column: "followed_user_id"
   add_foreign_key "user_music_profiles", "users"
+  add_foreign_key "user_notifications", "notifications"
+  add_foreign_key "user_notifications", "users"
   add_foreign_key "user_profiles", "users"
   add_foreign_key "user_view_videos", "users"
   add_foreign_key "user_view_videos", "videos"

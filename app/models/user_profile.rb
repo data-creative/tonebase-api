@@ -9,4 +9,8 @@ class UserProfile < ApplicationRecord
   validates :birth_year, {allow_nil: true, numericality: {only_integer: true}}
 
   serialize(:professions, Array)
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

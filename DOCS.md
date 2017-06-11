@@ -556,6 +556,63 @@ video_id | Integer | References the video being viewed.
 
 
 
+### `Notification`
+
+An informational message about system activity which is auto-generated as a result of that activity occurring.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /notifications
+Show | GET | /notifications/:id
+Destroy | DELETE | /notifications/:id
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+broadcastable_type | string | References the kind of resource which triggered this notification (polymorphic).
+broadcastable_id | Integer | References the resource which triggered this notification (e.g. a video).
+event | String | Describes the kind of event that triggered this notification (e.g. `"NewVideo"`).
+headline | String | The message title a user will see in their inbox.
+url | String | An optional url to redirect a user who clicks on the headline in their inbox.
+
+### `UserNotification`
+
+Enables a user to manage an inbox of notifications by marking each as "read" or "unread".
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Update | PUT | /user_notifications/:id
+
+Example PUT request body:
+
+```` js
+{
+  user_id: 1,
+  notification_id:1,
+  marked_read: true
+}
+````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user receiving the notification.
+notification_id | Integer | References the notification.
+marked_read | Boolean | Whether or not the user has marked the notification as being read. Default value is false.
+
+
+
+
+
+
+
+
 
 
 

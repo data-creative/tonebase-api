@@ -18,6 +18,7 @@ describe "api/v1/users/index.json.jbuilder" do
         :follows, :followers,
         :favorite_videos,
         :recently_viewed_videos,
+        :notifications,
         :created_at, :updated_at
       ])
     end

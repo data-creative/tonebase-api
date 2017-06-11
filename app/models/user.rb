@@ -31,6 +31,9 @@ class User < ApplicationRecord
     group(:video_id).select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at").order("max(user_view_videos.created_at) DESC")
   }, class_name: "UserViewVideo"
 
+  has_many :user_notifications, dependent: :destroy
+  has_many :notifications, through: :user_notifications
+
   ROLES = ["User", "Artist", "Admin"]
 
   validates :email, {presence: true, uniqueness: true}
@@ -67,6 +70,10 @@ class User < ApplicationRecord
 
   def image_url
     profile.try(:image_url) || "https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"
+  end
+
+  def name
+    profile.try(:name) || "Un-named User"
   end
 
   # @deprecated converted to a scope so it can be eager-loaded.

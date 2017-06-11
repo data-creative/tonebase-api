@@ -11,9 +11,11 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   ASSOCIATIONS = [
     :user_profile, :user_music_profile,
-    :follows, :followers,
+    [follows: :user_profile],
+    [followers: :user_profile],
     :favorite_videos,
-    :recent_video_views
+    :recent_video_views,
+    :notifications
   ]
 
   # GET /api/v1/users
