@@ -181,18 +181,19 @@ unless Rails.env.test? #if Rails.env.development?
   # ANNOUNCEMENTS
   #
 
-  Announcement.create(title: "Keep Playing Bros!")
+  Announcement.create(title: "Keep Playing Bros!", broadcast: false)
 
   3.times do |i|
     Announcement.create({
       title: "New Feature #{i}",
       content: "This new feature allows you to do cool things.",
       url: "https://blog.tonebase.com/posts/new-feature-abc",
-      image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+      image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+      broadcast: [true, false].sample
     })
   end
 
-  Announcement.create(title: "Fill out our survey please!", url: "https://surveymonkey.com/surveys/abc")
+  Announcement.create(title: "Fill out our survey please!", url: "https://surveymonkey.com/surveys/abc", broadcast: true)
 
   puts "#{Announcement.count} ANNOUNCEMENTS"
 

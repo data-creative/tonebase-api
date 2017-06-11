@@ -684,7 +684,8 @@ Example POST/PUT request body:
   title: "New Feature ABC",
   content: "This new feature allows you to do cool things.",
   url: "https://blog.tonebase.com/posts/new-feature-abc",
-  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+  image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+  broadcast: false
 }
 ````
 
@@ -696,3 +697,4 @@ title | String | A display title.
 content | Text | The announcement's message body.
 url | String | Where the announcement redirects the user.
 image_url | String | The announcement's image source.
+broadcast | Boolean | Whether the announcement, upon initial creation only, should be broadcast to all users' notification inboxes.

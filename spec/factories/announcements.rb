@@ -4,6 +4,17 @@ FactoryGirl.define do
     content nil
     url nil
     image_url nil
+    broadcast false
+
+    after(:build) do |announcement|
+      announcement.class.skip_callback(:create, :after, :broadcast_to_all_users, raise: false)
+    end
+#
+    trait :with_callbacks do
+      after(:build) do |announcement|
+        announcement.class.set_callback(:create, :after, :broadcast_to_all_users, if: Proc.new{|announcement| announcement.broadcast? })
+      end
+    end
 
     trait :meaningful do
       content "This new feature allows you to do cool things."

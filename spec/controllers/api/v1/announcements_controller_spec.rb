@@ -24,7 +24,8 @@ RSpec.describe Api::V1::AnnouncementsController, type: :controller do
           title: "New Feature ABC",
           content: "This new feature allows you to do cool things.",
           url: "https://blog.tonebase.com/posts/new-feature-abc",
-          image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+          image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+          broadcast: false
         }
       }
     end

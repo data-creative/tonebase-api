@@ -1,5 +1,5 @@
 class Broadcast
-  VALID_EVENTS = ["NewVideo"]
+  VALID_EVENTS = ["NewVideo", "NewAnnouncement"]
 
   attr_accessor :broadcastable, :event, :headline, :url, :users
 
@@ -55,6 +55,8 @@ private
     case event
     when "NewVideo"
       raise ArgumentError.new("Broadcastable must match event type") unless broadcastable.class == Video
+    when "NewAnnouncement"
+      raise ArgumentError.new("Broadcastable must match event type") unless broadcastable.class == Announcement
     else
       raise StandardError.new("OOPS. THAT EVENT IS NOT YET REGISTERED.")
     end
@@ -65,6 +67,6 @@ private
   end
 
   def validate_users
-    raise ArgumentError.new("Users must be users") unless users.class == User::ActiveRecord_Associations_CollectionProxy
+    raise ArgumentError.new("Users must be users") unless [User::ActiveRecord_Associations_CollectionProxy, User::ActiveRecord_Relation].include?(users.class)
   end
 end
