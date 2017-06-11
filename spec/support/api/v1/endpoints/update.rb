@@ -21,7 +21,7 @@ shared_examples_for "an update endpoint" do |model_class, resource_params|
     end
 
     context "with invalid params (wrong id)" do
-      let(:response){  get(:show, params: {format: 'json', id: "OOPS" })  }
+      let(:response){  post(:update, params: {format: 'json', id: "OOPS" })  }
 
       it "should be unsuccessful (not_found)" do
         expect(response.status).to eql(404)

@@ -558,6 +558,8 @@ video_id | Integer | References the video being viewed.
 
 ### `Notification`
 
+An informational message about system activity which is auto-generated as a result of that activity occurring.
+
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -566,16 +568,39 @@ List | GET | /notifications
 Show | GET | /notifications/:id
 Destroy | DELETE | /notifications/:id
 
+
+
+
+
+
+
 ### `UserNotification`
+
+Enables a user to manage an inbox of notifications by marking each as "read" or "unread".
 
 Endpoints:
 
 Action | Request Method | Endpoint URL
 ---	|	---	|	---
-List | GET | /user_notifications
-Create | POST | /user_notifications
 Update | PUT | /user_notifications/:id
 
+Example PUT request body:
+
+```` js
+{
+  user_id: 1,
+  notification_id:1,
+  marked_read: true
+}
+````
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user receiving the notification.
+notification_id | Integer | References the notification.
+marked_read | Boolean | Whether or not the user has marked the notification as being read. Default value is false.
 
 
 
