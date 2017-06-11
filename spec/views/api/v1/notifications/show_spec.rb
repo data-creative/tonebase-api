@@ -7,7 +7,7 @@ describe "api/v1/notifications/show.json.jbuilder" do
     render
   end
 
-  it "displays an advertiser" do
+  it "displays a notification" do
     expect(keys_of(parsed_view)).to match_array([
       :id,
       :broadcastable_type,

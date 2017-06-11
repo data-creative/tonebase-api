@@ -7,10 +7,10 @@ describe "api/v1/notifications/index.json.jbuilder" do
     render
   end
 
-  it "displays advertisers" do
+  it "displays notifications" do
     expect(parsed_view.count).to eql(2)
-    parsed_view.each do |advertiser|
-      expect(keys_of(advertiser)).to match_array([
+    parsed_view.each do |notification|
+      expect(keys_of(notification)).to match_array([
         :id,
         :broadcastable_type,
         :broadcastable_id,
