@@ -22,4 +22,6 @@ json.favorite_videos user.favorite_videos, :id, :title
 
 json.recently_viewed_videos user.recent_video_views, :video_id, :most_recently_viewed_at
 
+json.notifications user.notifications, :id, :broadcastable_type, :broadcastable_id, :event, :headline, :url
+
 json.extract! user, :created_at, :updated_at

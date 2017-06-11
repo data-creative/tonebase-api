@@ -568,11 +568,15 @@ List | GET | /notifications
 Show | GET | /notifications/:id
 Destroy | DELETE | /notifications/:id
 
+Attributes:
 
-
-
-
-
+name | type | description
+--- | --- | ---
+broadcastable_type | string | References the kind of resource which triggered this notification (polymorphic).
+broadcastable_id | Integer | References the resource which triggered this notification (e.g. a video).
+event | String | Describes the kind of event that triggered this notification (e.g. `"NewVideo"`).
+headline | String | The message title a user will see in their inbox.
+url | String | An optional url to redirect a user who clicks on the headline in their inbox.
 
 ### `UserNotification`
 

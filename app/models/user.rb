@@ -32,6 +32,7 @@ class User < ApplicationRecord
   }, class_name: "UserViewVideo"
 
   has_many :user_notifications, dependent: :destroy
+  has_many :notifications, through: :user_notifications
 
   ROLES = ["User", "Artist", "Admin"]
 
