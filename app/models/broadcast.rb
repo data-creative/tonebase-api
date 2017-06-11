@@ -1,6 +1,4 @@
 class Broadcast
-  VALID_EVENTS = ["NewVideo", "NewAnnouncement"]
-
   attr_accessor :broadcastable, :event, :headline, :url, :users
 
   # @param [Hash] options
@@ -48,7 +46,7 @@ private
   end
 
   def validate_event
-    raise ArgumentError.new("Event must be one of: #{VALID_EVENTS}") unless VALID_EVENTS.include?(event)
+    raise ArgumentError.new("Event must be one of: #{Notification::VALID_EVENTS}") unless Notification::VALID_EVENTS.include?(event)
   end
 
   def validate_event_and_broadcastable
