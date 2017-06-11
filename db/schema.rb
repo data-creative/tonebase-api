@@ -56,12 +56,14 @@ ActiveRecord::Schema.define(version: 20170609184440) do
   end
 
   create_table "announcements", force: :cascade do |t|
-    t.string   "title",      null: false
+    t.string   "title",                      null: false
     t.text     "content"
     t.string   "url"
     t.string   "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "broadcast",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["broadcast"], name: "index_announcements_on_broadcast", using: :btree
     t.index ["title"], name: "index_announcements_on_title", unique: true, using: :btree
   end
 

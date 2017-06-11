@@ -8,6 +8,15 @@ describe "api/v1/announcements/show.json.jbuilder" do
   end
 
   it "displays an advertiser" do
-    expect(keys_of(parsed_view)).to match_array([:id, :title, :content, :url, :image_url, :created_at, :updated_at])
+    expect(keys_of(parsed_view)).to match_array([
+      :id,
+      :title,
+      :content,
+      :url,
+      :image_url,
+      :broadcast,
+      :created_at,
+      :updated_at
+    ])
   end
 end

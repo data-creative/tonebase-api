@@ -13,7 +13,7 @@ RSpec.describe Notification, type: :model do
     it { should validate_presence_of(:event) }
     it { should validate_presence_of(:headline) }
 
-    it { should validate_inclusion_of(:event).in_array(["NewVideo"]) }
+    it { should validate_inclusion_of(:event).in_array(["NewVideo", "NewAnnouncement"]) }
 
     # Known issues preventing this test from passing:
     #  https://github.com/thoughtbot/shoulda-matchers/issues/814

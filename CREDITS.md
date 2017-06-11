@@ -52,3 +52,4 @@
   + [Skipping callbacks in specs 2](https://github.com/thoughtbot/factory_girl/issues/931)
   + [Skipping callbacks in specs 3](https://stackoverflow.com/questions/39647150/skip-before-action-and-rails-5)
   + [Non-model Objects in Rails](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
+  + [Conditional Callbacks](http://guides.rubyonrails.org/active_record_callbacks.html#conditional-callbacks)
