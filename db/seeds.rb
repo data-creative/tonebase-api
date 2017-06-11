@@ -154,6 +154,8 @@ unless Rails.env.test? #if Rails.env.development?
   puts "#{VideoPart.count} VIDEO PARTS"
   puts "#{VideoScore.count} VIDEO SCORES"
 
+  puts "#{Notification.count} NOTIFICATIONS"
+  puts "#{UserNotification.count} USER NOTIFICATIONS"
   #
   # FAVORITE VIDEOS
   #

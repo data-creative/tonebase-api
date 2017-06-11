@@ -1,9 +1,13 @@
 class Api::V1::NotificationsController < Api::V1::ApiController
   before_action :set_notification, only: [:show, :destroy]
 
+  ASSOCIATIONS = [
+    [users: :user_profile],
+  ]
+
   # GET /api/v1/notifications
   def index
-    @notifications = Notification.all
+    @notifications = Notification.eager_load(ASSOCIATIONS).all
   end
 
   # GET /api/v1/notifications/:id
@@ -18,6 +22,6 @@ class Api::V1::NotificationsController < Api::V1::ApiController
 private
 
   def set_notification
-    @notification = Notification.find(params[:id])
+    @notification = Notification.eager_load(ASSOCIATIONS).find(params[:id])
   end
 end
