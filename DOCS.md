@@ -195,7 +195,55 @@ Example POST/PUT request body:
 Example GET response:
 
 ```` js
+{
+  "id":1,
+  "title":"Buy a Fendie",
+  "content":"Fendie sitars are the best.",
+  "url":"https://www.fendie.com/promo",
+  "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+  "created_at":"2017-06-12T20:06:01.327Z",
+  "updated_at":"2017-06-12T20:06:11.733Z",
+  "advertiser":{
+    "id":1,
+    "name":"Fendie",
+    "description":"The leader in Sitar manufacturing and distribution.",
+    "url":"https://www.fendie.com/"
+  },
+  "instruments":[
+    {
+      "id":1,
+      "name":"Guitar",
+      "description":"A musical instrument classified as a fretted string instrument with anywhere from four to 18 strings, usually having six."
+    }
+  ]
+}
+````
 
+### `AdInstrument`
+
+Associates ads with instruments.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+ad_id | Integer | References the ad.
+instrument_id | Integer | References the instrument.
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Create | POST | /ads_instruments
+Destroy | DELETE | /ads_instruments/:id
+
+Example POST/PUT request body:
+
+```` js
+{
+  ad_id: 1,
+  instrument_id: 1,
+}
 ````
 
 
@@ -236,41 +284,24 @@ Example POST/PUT request body:
 Example GET response:
 
 ```` js
-
-````
-
-### `AdInstrument`
-
-Associates ads with instruments.
-
-Attributes:
-
-name | type | description
---- | --- | ---
-ad_id | Integer | References the ad.
-instrument_id | Integer | References the instrument.
-
-Endpoints:
-
-Action | Request Method | Endpoint URL
----	|	---	|	---
-Create | POST | /ads_instruments
-Destroy | DELETE | /ads_instruments/:id
-
-Example POST/PUT request body:
-
-```` js
 {
-  ad_id: 1,
-  instrument_id: 1,
+  "id":1,
+  "ad":{
+    "id":1,
+    "title":"Buy a Fendie",
+    "content":"Fendie sitars are the best.",
+    "url":"https://www.fendie.com/promo",
+    "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+  },
+  "start_date":"2017-07-01",
+  "end_date":"2017-07-08",
+  "price":25000,
+  "created_at":"2017-06-12T20:11:50.830Z",
+  "updated_at":"2017-06-12T20:11:50.830Z"
 }
 ````
 
-Example GET response:
 
-```` js
-
-````
 
 
 

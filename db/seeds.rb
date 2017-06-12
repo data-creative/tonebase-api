@@ -24,8 +24,40 @@ unless Rails.env.test? #if Rails.env.development?
     url: "https://www.fendie.com/"
   )
 
+  ad = Ad.where(advertiser: advertiser, title: "Buy a Fendie").first_or_create
+  ad.update_attributes(
+    content: "Fendie sitars are the best.",
+    url: "https://www.fendie.com/promo",
+    image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg"
+  )
 
+  ad.instruments << instrument unless ad.instruments.include?(instrument)
 
+  AdPlacement.where({
+    ad: ad,
+    start_date: "2017-07-01",
+    end_date: "2017-07-07",
+    price: 25000
+  }).first_or_create
+
+  AdPlacement.where({
+    ad: ad,
+    start_date: "2017-08-01",
+    end_date: "2017-08-08",
+    price: 27000
+  }).first_or_create
+
+  AdPlacement.where({
+    ad: ad,
+    start_date: "2017-09-01",
+    end_date: "2017-09-09",
+    price: 30000
+  }).first_or_create
+
+  puts " #{Advertiser.count} ADVERTISERS"
+  puts " #{Ad.count} ADS"
+  puts " #{AdInstrument.count} ADS x INSTRUMENTS"
+  puts " #{AdPlacement.count} AD PLACEMENTS"
 
   #
   # SEED USERS
