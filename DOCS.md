@@ -427,12 +427,108 @@ Example POST/PUT request body:
 Example GET response:
 
 ```` js
-
+{
+  "id":139,
+  "email":"avg.joe@gmail.com",
+  "password":"abc123",
+  "username":"joe123",
+  "confirmed":true,
+  "visible":true,
+  "role":"User",
+  "access_level":"Full",
+  "customer_uuid":"cus_abc123def45678",
+  "oauth":true,
+  "oauth_provider":"Google",
+  "profile":{
+    "first_name":"Joe",
+    "last_name":"Averaggi",
+    "bio":"I love guitar and I'm hoping to get better!",
+    "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+    "hero_url":"https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
+    "birth_year":1993,
+    "professions":["Student"]
+  },
+  "music_profile":{
+    "guitar_owned":true,
+    "guitar_models_owned":["Gibson ABC","Fender XYZ"],
+    "fav_composers":["Bach"],
+    "fav_performers":["Talenti"],
+    "fav_periods":["Classical","Contemporary","Baroque"]
+  },
+  "follows":[
+    {"id":255,"username":"anotherPro15","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":258,"username":"anotherPro18","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":260,"username":"anotherPro20","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":268,"username":"anotherPro28","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"}
+  ],
+  "followers":[],
+  "favorite_videos":[
+    {"id":12,"title":"Finale from Sonata #2"},
+    {"id":15,"title":"Finale from Sonata #5"},
+    {"id":16,"title":"Finale from Sonata #6"}
+  ],
+  "recently_viewed_videos":[
+    {"video_id":18,"viewed_at":"2017-06-12T20:16:56.017Z"},
+    {"video_id":12,"viewed_at":"2017-06-12T20:16:59.130Z"},
+    {"video_id":18,"viewed_at":"2017-06-12T20:16:59.870Z"}
+  ],
+  "notifications":[
+    {
+      "id":17,
+      "broadcastable_type":"Video",
+      "broadcastable_id":16,
+      "event":"NewVideo",
+      "headline":"Another Pro posted a new video. Watch it now!",
+      "url":null
+    }
+  ],
+  "created_at":"2017-06-12T20:16:48.102Z",
+  "updated_at":"2017-06-12T20:16:48.102Z"
+}
 ````
 
 ### `Artist`
 
 Reference [`User`](#user) documentation.
+
+Example GET response:
+
+```` js
+{
+  "id":264,
+  "email":"talenti.pro@gmail.com",
+  "password":"abc123",
+  "username":"talentiPro",
+  "confirmed":true,
+  "visible":true,
+  "role":"Artist",
+  "access_level":"Full",
+  "customer_uuid":null,
+  "oauth":null,
+  "oauth_provider":null,
+  "profile":{
+    "first_name":"Talenti",
+    "last_name":"Pro",
+    "bio":"My music. My passion.",
+    "image_url": "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+    "hero_url": "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg",
+    "birth_year":1975,
+    "professions":["Performer", "Instructor"]
+  },
+  "music_profile":{},
+  "follows":[],
+  "followers":[
+    {"id":142, "username":"another3", "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":178,"username":"another39","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":207,"username":"another68","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+  ],
+  "favorite_videos":[],
+  "recently_viewed_videos":[],
+  "notifications":[],
+  "created_at":"2017-06-12T20:16:48.963Z",
+  "updated_at":"2017-06-12T20:16:48.963Z"
+}
+````
 
 ### `Admin`
 

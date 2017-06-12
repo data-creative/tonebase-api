@@ -52,7 +52,16 @@ FactoryGirl.define do
 
       trait :with_profile do
         after(:create) do |artist, evaluator|
-          create(:user_profile, user: artist, first_name: "Talenti", last_name: "Pro", birth_year: 1975, professions: ["Performer", "Instructor"])
+          create(:user_profile,
+            user: artist,
+            first_name: "Talenti",
+            last_name: "Pro",
+            birth_year: 1975,
+            professions: ["Performer", "Instructor"],
+            bio: "My music. My passion.",
+            image_url: "https://my-bucket.s3.amazonaws.com/my-dir/my-image.jpg",
+            hero_url: "https://my-bucket.s3.amazonaws.com/my-dir/hero-image.jpg"
+          )
         end
       end
 
