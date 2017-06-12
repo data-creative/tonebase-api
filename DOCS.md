@@ -668,7 +668,44 @@ Example POST/PUT request body:
 Example GET response:
 
 ```` js
-
+{
+  "id":13,
+  "title":"Finale from Sonata #3",
+  "description":"The final moments of master composer Maestrelli's most famous piece. Composed in 1820.",
+  "tags":["borouque","maestrelli","g-major"],
+  "parts":[
+    {"source_url":"https://www.youtube.com/watch?v=abc123","number":1,"duration":333},
+    {"source_url":"https://www.youtube.com/watch?v=def456","number":2,"duration":333},
+    {"source_url":"https://www.youtube.com/watch?v=ghi789","number":3,"duration":333}
+  ],
+  "scores":[
+    {"image_url":"https://my-bucket.s3.amazonaws.com/my-dir/score-1-image.jpg","starts_at":25,"ends_at":500},
+    {"image_url":"https://my-bucket.s3.amazonaws.com/my-dir/score-2-image.jpg","starts_at":750,"ends_at":900}
+  ],
+  "artist":{
+    "id":270,
+    "username":"anotherPro30",
+    "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"
+  },
+  "instrument":{
+    "id":1,
+    "name":"Guitar",
+    "description":"A musical instrument classified as a fretted string instrument with anywhere from four to 18 strings, usually having six."
+  },
+  "favorited_by":[
+    {"id":235,"username":"another96","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":232,"username":"another93","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":208,"username":"another69","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"}
+  ],
+  "viewed_by":[
+    {"id":225,"username":"another86","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":194,"username":"another55","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":223,"username":"another84","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":187,"username":"another48","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"}
+  ],
+  "created_at":"2017-06-12T20:16:50.978Z",
+  "updated_at":"2017-06-12T20:16:50.978Z"
+}
 ````
 
 ### `UserFavoriteVideo`
@@ -723,6 +760,16 @@ Example POST/PUT request body:
 {
   user_id: 40,
   video_id: 13
+}
+````
+
+Example GET response:
+
+```` js
+{
+  "user_id":151,
+  "video_id":14,
+  "viewed_at":"2017-06-12T20:16:55.092Z"
 }
 ````
 
