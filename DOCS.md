@@ -812,7 +812,21 @@ Destroy | DELETE | /notifications/:id
 Example GET response:
 
 ```` js
-
+{
+  "id":14,
+  "broadcastable_type":"Video",
+  "broadcastable_id":13,
+  "event":"NewVideo",
+  "headline":"Another Pro posted a new video. Watch it now!",
+  "url":null,
+  "notified_users":[
+    {"id":230,"username":"another91","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":219,"username":"another80","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    {"id":179,"username":"another40","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+  ],
+  "created_at":"2017-06-12T20:16:50.988Z",
+  "updated_at":"2017-06-12T20:16:50.988Z"
+}
 ````
 
 ### `UserNotification`
@@ -883,5 +897,14 @@ Example POST/PUT request body:
 Example GET response:
 
 ```` js
-
+{
+  "id":5,
+  "title":"Fill out our survey please!",
+  "content":null,
+  "url":"https://surveymonkey.com/surveys/abc",
+  "image_url":null,
+  "broadcast":true,
+  "created_at":"2017-06-11T18:16:24.031Z",
+  "updated_at":"2017-06-11T18:16:24.031Z"
+}
 ````
