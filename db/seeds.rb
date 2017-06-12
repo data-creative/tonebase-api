@@ -15,6 +15,19 @@ puts instrument.as_json
 unless Rails.env.test? #if Rails.env.development?
 
   #
+  # SEED ADS & STUFF
+  #
+
+  advertiser = Advertiser.where(name: "Fendie").first_or_create
+  advertiser.update_attributes(
+    description: "The leader in Sitar manufacturing and distribution.",
+    url: "https://www.fendie.com/"
+  )
+
+
+
+
+  #
   # SEED USERS
   #
 

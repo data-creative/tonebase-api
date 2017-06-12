@@ -73,6 +73,13 @@ Each resource contains the attributes `id`, `created_at`, and `updated_at`, in a
 
 A musical instrument.
 
+Attributes:
+
+name | type | description
+--- | --- | ---
+name | String | The instrument name.
+description | Text | A description of the instrument.
+
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -92,16 +99,29 @@ Example POST/PUT request body:
 }
 ````
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-name | String | The instrument name.
-description | Text | A description of the instrument.
+```` js
+{
+  "id":1,
+  "name":"Guitar",
+  "description":"A musical instrument classified as a fretted string instrument with anywhere from four to 18 strings, usually having six.",
+  "created_at":"2017-06-11T18:16:10.778Z",
+  "updated_at":"2017-06-11T18:16:10.791Z"
+}
+````
 
 ### `Advertiser`
 
 An organization seeking a targeted audience for their product advertisement(s).
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+name | String | The organization's name.
+description | Text | A description of the organization.
+url | String | The organization's website.
 
 Endpoints:
 
@@ -123,17 +143,32 @@ Example POST/PUT request body:
 }
 ````
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-name | String | The organization's name.
-description | Text | A description of the organization.
-url | String | The organization's website.
+```` js
+{
+  "id":1,
+  "name":"Fendie",
+  "description":"The leader in Sitar manufacturing and distribution.",
+  "url":"https://www.fendie.com/",
+  "created_at":"2017-06-12T19:58:08.222Z",
+  "updated_at":"2017-06-12T19:58:08.497Z"
+}
+````
 
 ### `Ad`
 
 A message promoting an advertiser's product or service.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+advertiser_id | Integer | References the advertiser who placed this ad.
+title | String | A display title.
+content | Text | The ad's content.
+url | String | Where the ad redirects the user.
+image_url | String | The ad's image source.
 
 Endpoints:
 
@@ -157,19 +192,25 @@ Example POST/PUT request body:
 }
 ````
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-advertiser_id | Integer | References the advertiser who placed this ad.
-title | String | A display title.
-content | Text | The ad's content.
-url | String | Where the ad redirects the user.
-image_url | String | The ad's image source.
+```` js
+
+````
+
 
 ### `AdPlacement`
 
 Describes a period of time during which an ad is visible to users.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+ad_id | Integer | References the ad.
+start_date | Date | The first day an ad should be visible to users.
+end_date | Date | The last day an ad should be visible to users.
+price | Integer (cents USD) | How much the advertiser is paying to run this ad during this period of time.
 
 Endpoints:
 
@@ -192,18 +233,22 @@ Example POST/PUT request body:
 }
 ````
 
+Example GET response:
+
+```` js
+
+````
+
+### `AdInstrument`
+
+Associates ads with instruments.
+
 Attributes:
 
 name | type | description
 --- | --- | ---
 ad_id | Integer | References the ad.
-start_date | Date | The first day an ad should be visible to users.
-end_date | Date | The last day an ad should be visible to users.
-price | Integer (cents USD) | How much the advertiser is paying to run this ad during this period of time.
-
-### `AdInstrument`
-
-Associates ads with instruments.
+instrument_id | Integer | References the instrument.
 
 Endpoints:
 
@@ -221,13 +266,11 @@ Example POST/PUT request body:
 }
 ````
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-ad_id | Integer | References the ad.
-instrument_id | Integer | References the instrument.
+```` js
 
+````
 
 
 
@@ -266,6 +309,43 @@ A user's role can be changed, but a user can not have more than one role at any 
 A user can have varying levels of access to site content and features depending on his/her `access_level`. By default, artists and admins have full access.
 
 During the registration process, a user may provide self-identified demographic information and musical preferences.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+email | String | The user's email address, to be used for authentication and communication.
+password | String | An encrypted version of the user's password used for authentication.
+username | String | The user's unique nickname to be used for identification across the platform.
+confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
+visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
+role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
+access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
+customer_uuid | String | References the payment service's customer resource.
+oauth | Boolean | Indicates if another service authenticates this user.
+oauth_provider | String | The other service which authenticates this user (i.e. `"Google"`, `"Facebook"`, etc.).
+
+`UserProfile` Attributes:
+
+name | type | description
+--- | --- | ---
+first_name | String | The user's first name or nickname.
+last_name | String | The user's last name or surname.
+bio | Text | A description of user interests, skills, and goals.
+image_url | String | The user's profile image source.
+hero_url | String | The user's hero/background image source.
+birth_year | Integer | The user's year of birth.
+professions | Array | A list of the user's professions.
+
+`UserMusicProfile` Attributes:
+
+name | type | description
+--- | --- | ---
+guitar_owned | Boolean | Whether or not the user owns a guitar.
+guitar_models_owned | Array | A list of guitars the user owns.
+fav_composers | Array | A list of the user's favorite music composers.
+fav_performers | Array | A list of the user's favorite music performers.
+fav_periods | Array | A list of the user's favorite music periods.
 
 Endpoints:
 
@@ -313,42 +393,11 @@ Example POST/PUT request body:
 
 > NOTE: for GET requests, `user_profile_attributes` is called `profile`, and `user_music_profile_attributes` is called `music_profile`.
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-email | String | The user's email address, to be used for authentication and communication.
-password | String | An encrypted version of the user's password used for authentication.
-username | String | The user's unique nickname to be used for identification across the platform.
-confirmed | Boolean | Whether or not the user has clicked the link sent to them in a confirmation email. If `true`, the user's email address is verified.
-visible | Boolean | Whether or not the user should be displayed on the site. Indicates if a user or artist is active, or whether he/she has been deactivated. Deactivation allows ToneBase to retain the user record while allowing the user to not participate in the site.
-role | String | The user's role (one of: `"User"`, `"Artist"`, or `"Admin"`).
-access_level | String | Further specifies the actions a user can perform (one of: `"Full"` or `"Limited"`).
-customer_uuid | String | References the payment service's customer resource.
-oauth | Boolean | Indicates if another service authenticates this user.
-oauth_provider | String | The other service which authenticates this user (i.e. `"Google"`, `"Facebook"`, etc.).
+```` js
 
-Profile Attributes:
-
-name | type | description
---- | --- | ---
-first_name | String | The user's first name or nickname.
-last_name | String | The user's last name or surname.
-bio | Text | A description of user interests, skills, and goals.
-image_url | String | The user's profile image source.
-hero_url | String | The user's hero/background image source.
-birth_year | Integer | The user's year of birth.
-professions | Array | A list of the user's professions.
-
-Music Profile Attributes:
-
-name | type | description
---- | --- | ---
-guitar_owned | Boolean | Whether or not the user owns a guitar.
-guitar_models_owned | Array | A list of guitars the user owns.
-fav_composers | Array | A list of the user's favorite music composers.
-fav_performers | Array | A list of the user's favorite music performers.
-fav_periods | Array | A list of the user's favorite music periods.
+````
 
 ### `Artist`
 
@@ -361,6 +410,13 @@ Reference [`User`](#user) documentation.
 ### `UserFollowship`
 
 Allows one user to follow another.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who is following another.
+followed_user_id | Integer | References the user who is followed by another. The followed is most likey an artist.
 
 Endpoints:
 
@@ -377,13 +433,6 @@ Example POST/PUT request body:
   followed_user_id: 1,
 }
 ````
-
-Attributes:
-
-name | type | description
---- | --- | ---
-user_id | Integer | References the user who is following another.
-followed_user_id | Integer | References the user who is followed by another. The followed is most likey an artist.
 
 
 
@@ -430,6 +479,34 @@ followed_user_id | Integer | References the user who is followed by another. The
 
 An audio-visual recording of an artist's music instructions.
 
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user (artist) who posted this video.
+instrument_id | Integer | References the instrument of instruction.
+title | String | A display title.
+description | Text | A description of the video.
+tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
+
+`VideoPart` Attributes:
+
+name | type | description
+--- | --- | ---
+video_id | Integer | References the global video of which it is a part.
+source_url | String | References a video resource on the video service.
+number | Integer | The sort order of this video part (e.g. 1, 2, 3). The "X" in "Part number X of Y".
+duration | Integer (seconds) | The length of the video part in seconds.
+
+`VideoScore` Attributes:
+
+name | type | description
+--- | --- | ---
+video_id | Integer | References the global video of which it is a part.
+image_url | String | References the score's image source.
+starts_at | Integer (seconds) | Begin displaying the score when the global video duration reaches this duration. The minimum should be `1`.
+ends_at | Integer (seconds) | Stop displaying the score after the global video duration reaches this duration. The maximum should be equal to the global video's duration.
+
 Endpoints:
 
 Action | Request Method | Endpoint URL
@@ -461,37 +538,22 @@ Example POST/PUT request body:
 }
 ````
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-user_id | Integer | References the user (artist) who posted this video.
-instrument_id | Integer | References the instrument of instruction.
-title | String | A display title.
-description | Text | A description of the video.
-tags | Array | A list of descriptive tags for further classification. Enables robust video search capabilities.
+```` js
 
-Video Part Attributes:
-
-name | type | description
---- | --- | ---
-video_id | Integer | References the global video of which it is a part.
-source_url | String | References a video resource on the video service.
-number | Integer | The sort order of this video part (e.g. 1, 2, 3). The "X" in "Part number X of Y".
-duration | Integer (seconds) | The length of the video part in seconds.
-
-Video Score Attributes:
-
-name | type | description
---- | --- | ---
-video_id | Integer | References the global video of which it is a part.
-image_url | String | References the score's image source.
-starts_at | Integer (seconds) | Begin displaying the score when the global video duration reaches this duration. The minimum should be `1`.
-ends_at | Integer (seconds) | Stop displaying the score after the global video duration reaches this duration. The maximum should be equal to the global video's duration.
+````
 
 ### `UserFavoriteVideo`
 
 Allows a user to mark a video as being one of their favorites.
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user who likes this video.
+video_id | Integer | References the video being liked.
 
 Endpoints:
 
@@ -509,16 +571,17 @@ Example POST/PUT request body:
 }
 ````
 
+### `UserViewVideo`
+
+An event logged by the client application when a user views a video. The most ideal time to log one of these events is when the user starts viewing the video, else perhaps when the user visits the video show page, but be consistent. Really this resource just provides a benchmark for comparing against in-depth analytics provided by the video service.
+
 Attributes:
 
 name | type | description
 --- | --- | ---
-user_id | Integer | References the user who likes this video.
-video_id | Integer | References the video being liked.
+user_id | Integer | References the user who viewed this video.
+video_id | Integer | References the video being viewed.
 
-### `UserViewVideo`
-
-An event logged by the client application when a user views a video. The most ideal time to log one of these events is when the user starts viewing the video, else perhaps when the user visits the video show page, but be consistent. Really this resource just provides a benchmark for comparing against in-depth analytics provided by the video service.
 
 Endpoints:
 
@@ -535,13 +598,6 @@ Example POST/PUT request body:
   video_id: 13
 }
 ````
-
-Attributes:
-
-name | type | description
---- | --- | ---
-user_id | Integer | References the user who viewed this video.
-video_id | Integer | References the video being viewed.
 
 
 
@@ -560,14 +616,6 @@ video_id | Integer | References the video being viewed.
 
 An informational message about system activity which is auto-generated as a result of that activity occurring.
 
-Endpoints:
-
-Action | Request Method | Endpoint URL
----	|	---	|	---
-List | GET | /notifications
-Show | GET | /notifications/:id
-Destroy | DELETE | /notifications/:id
-
 Attributes:
 
 name | type | description
@@ -578,9 +626,33 @@ event | String | Describes the kind of event that triggered this notification (e
 headline | String | The message title a user will see in their inbox.
 url | String | An optional url to redirect a user who clicks on the headline in their inbox.
 
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /notifications
+Show | GET | /notifications/:id
+Destroy | DELETE | /notifications/:id
+
+Example GET response:
+
+```` js
+
+````
+
 ### `UserNotification`
 
 Enables a user to manage an inbox of notifications by marking each as "read" or "unread".
+
+Attributes:
+
+name | type | description
+--- | --- | ---
+user_id | Integer | References the user receiving the notification.
+notification_id | Integer | References the notification.
+marked_read | Boolean | Whether or not the user has marked the notification as being read. Default value is false.
+
 
 Endpoints:
 
@@ -598,74 +670,19 @@ Example PUT request body:
 }
 ````
 
+### `Announcement`
+
+A message promoting system features, community events, etc.
+
 Attributes:
 
 name | type | description
 --- | --- | ---
-user_id | Integer | References the user receiving the notification.
-notification_id | Integer | References the notification.
-marked_read | Boolean | Whether or not the user has marked the notification as being read. Default value is false.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### `Announcement`
-
-A message promoting system features, community events, etc.
+title | String | A display title.
+content | Text | The announcement's message body.
+url | String | Where the announcement redirects the user.
+image_url | String | The announcement's image source.
+broadcast | Boolean | Whether the announcement, upon initial creation only, should be broadcast to all users' notification inboxes.
 
 Endpoints:
 
@@ -689,12 +706,8 @@ Example POST/PUT request body:
 }
 ````
 
-Attributes:
+Example GET response:
 
-name | type | description
---- | --- | ---
-title | String | A display title.
-content | Text | The announcement's message body.
-url | String | Where the announcement redirects the user.
-image_url | String | The announcement's image source.
-broadcast | Boolean | Whether the announcement, upon initial creation only, should be broadcast to all users' notification inboxes.
+```` js
+
+````
