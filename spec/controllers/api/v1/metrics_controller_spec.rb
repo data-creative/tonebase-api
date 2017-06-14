@@ -14,8 +14,18 @@ RSpec.describe Api::V1::MetricsController, type: :controller do
       expect(response.status).to eql(200)
     end
 
-    it "returns the number of total users" do
-      expect(parsed_response["total"]).to eql(users.count)
+    it "returns the number of total users for each combination of role and access level" do
+      full_users = parsed_response.find{|h| h["role"] == "User" && h["access_level"] == "Full"}
+      expect(full_users["total"]).to eql(1)
+
+      limited_users = parsed_response.find{|h| h["role"] == "User" && h["access_level"] == "Limited"}
+      expect(limited_users["total"]).to eql(1)
+
+      artists = parsed_response.find{|h| h["role"] == "Artist" && h["access_level"] == "Full"}
+      expect(artists["total"]).to eql(1)
+
+      admins = parsed_response.find{|h| h["role"] == "Admin" && h["access_level"] == "Full"}
+      expect(admins["total"]).to eql(1)
     end
   end
 

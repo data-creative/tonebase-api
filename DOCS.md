@@ -958,15 +958,23 @@ N/A | GET | /metrics/users_over_time
 
 #### Total Users
 
+Use this endpoint to display the current number of users registered throughout the system.
+Groups totals by combination of unique role and access level.
+
 Example GET response:
 
 ```` js
-{
-  "total":50505
-}
+[
+  {"role":"User", "access_level":"Limited", "total":51},
+  {"role":"User", "access_level":"Full", "total":50},
+  {"role":"Artist", "access_level":"Full", "total":36},
+  {"role":"Admin", "access_level":"Full", "total":1}
+]
 ````
 
 #### Users over Time
+
+Use this endpoint to display a chart of registrations over time, optionally sorting or grouping by user role and/or access level.
 
 Example GET response:
 
