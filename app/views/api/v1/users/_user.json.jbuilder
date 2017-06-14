@@ -22,6 +22,9 @@ json.favorite_videos user.favorite_videos, :id, :title
 
 json.recently_viewed_videos user.recent_video_views, :video_id, :viewed_at
 
-json.notifications user.notifications, :id, :broadcastable_type, :broadcastable_id, :event, :headline, :url
+json.inbox user.user_notifications do |user_notification|
+  json.extract! user_notification, :id, :marked_read, :created_at, :updated_at
+  json.notification user_notification.notification, :id, :broadcastable_type, :broadcastable_id, :event, :headline, :url
+end
 
 json.extract! user, :created_at, :updated_at

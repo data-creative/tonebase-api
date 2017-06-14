@@ -15,7 +15,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     [followers: :user_profile],
     :favorite_videos,
     :recent_video_views,
-    :notifications
+    [user_notifications: :notification]
   ]
 
   # GET /api/v1/users

@@ -16,6 +16,7 @@ Install the PostgreSQL database management system, if necessary:
 ```` sh
 brew install postgresql
 brew services start postgresql
+createdb
 ````
 
 Install the Ruby language (version 2.2.3), if necessary:

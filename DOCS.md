@@ -472,14 +472,20 @@ Example GET response:
     {"video_id":12,"viewed_at":"2017-06-12T20:16:59.130Z"},
     {"video_id":18,"viewed_at":"2017-06-12T20:16:59.870Z"}
   ],
-  "notifications":[
-    {
-      "id":17,
-      "broadcastable_type":"Video",
-      "broadcastable_id":16,
-      "event":"NewVideo",
-      "headline":"Another Pro posted a new video. Watch it now!",
-      "url":null
+  "inbox":[
+    { // refers to `user_notifications` join entity
+      "id":227,
+      "marked_read":false,
+      "created_at":"2017-06-12T21:16:08.282Z",
+      "updated_at":"2017-06-12T21:16:08.282Z",
+      "notification":{
+        "id":27,
+        "broadcastable_type":"Video",
+        "broadcastable_id":26,
+        "event":"NewVideo",
+        "headline":"Another Pro posted a new video. Watch it now!",
+        "url":null
+      }
     }
   ],
   "created_at":"2017-06-12T20:16:48.102Z",

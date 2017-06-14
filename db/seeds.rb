@@ -201,6 +201,7 @@ unless Rails.env.test? #if Rails.env.development?
 
   puts "#{Notification.count} NOTIFICATIONS"
   puts "#{UserNotification.count} USER NOTIFICATIONS"
+
   #
   # FAVORITE VIDEOS
   #
@@ -220,7 +221,6 @@ unless Rails.env.test? #if Rails.env.development?
   end
 
   puts "#{UserViewVideo.count} VIDEO VIEWS"
-
 
   #
   # ANNOUNCEMENTS
