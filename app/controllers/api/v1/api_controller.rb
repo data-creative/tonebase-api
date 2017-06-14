@@ -20,11 +20,11 @@ private
     render json: {"query": ["should be a named URL parameter included in the request"]}, status: :bad_request
   end
 
-  # @deprecated Because using jbuilder instead.
-  # @param [ApplicationRecord] resource One or more model instances.
-  def render_json(resource)
+  # @note Instead, use jbuilder whenever possible.
+  # @param [ApplicationRecord, Hash, Array] result A response body.
+  def render_json(result)
     respond_to do |format|
-      format.json { render json: resource }
+      format.json { render json: result }
     end
   end
 

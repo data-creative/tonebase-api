@@ -914,3 +914,74 @@ Example GET response:
   "updated_at":"2017-06-11T18:16:24.031Z"
 }
 ````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Resourceless Endpoints
+
+These endpoints are more REST-less than REST-full.
+
+### Metrics
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+N/A | GET | /metrics/users_total
+N/A | GET | /metrics/users_over_time
+
+#### Total Users
+
+Use this endpoint to display the current number of users registered throughout the system.
+Groups totals by combination of unique role and access level.
+
+Example GET response:
+
+```` js
+[
+  {"role":"User", "access_level":"Limited", "total":51},
+  {"role":"User", "access_level":"Full", "total":50},
+  {"role":"Artist", "access_level":"Full", "total":36},
+  {"role":"Admin", "access_level":"Full", "total":1}
+]
+````
+
+#### Users over Time
+
+Use this endpoint to display a chart of registrations over time, optionally sorting or grouping by user role and/or access level.
+
+Example GET response:
+
+```` js
+[
+  {"user_id": 1, "registered_at": "2017-06-11T18:16:24.031Z", "current_role":"Artist", "current_access_level":"Full"},
+  {"user_id": 2, "registered_at": "2017-06-12T18:16:24.031Z", "current_role":"User", "current_access_level":"Limited"},
+  {"user_id": 3, "registered_at": "2017-06-13T18:16:24.031Z", "current_role":"Admin", "current_access_level":"Full"},
+]
+````
