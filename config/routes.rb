@@ -25,6 +25,10 @@ Rails.application.routes.draw do
       resources :announcements, only: [:index, :show, :create, :update, :destroy]
       resources :notifications, only: [:index, :show, :destroy]
       resources :user_notifications, only: [:update]
+
+      namespace :metrics do
+        get "total_users"
+      end
     end
   end
 end

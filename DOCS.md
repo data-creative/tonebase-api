@@ -914,3 +914,66 @@ Example GET response:
   "updated_at":"2017-06-11T18:16:24.031Z"
 }
 ````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Resourceless Endpoints
+
+These endpoints are more REST-less than REST-full.
+
+### Metrics
+
+Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+N/A | GET | /metrics/users-total
+N/A | GET | /metrics/users-over-time
+
+#### Total Users
+
+Example GET response:
+
+```` js
+{
+  "total":50505
+}
+````
+
+#### Users over Time
+
+Example GET response:
+
+```` js
+[
+  {"user_id": 1, "registered_at": "2017-06-11T18:16:24.031Z", "current_role":"Artist", "current_access_level":"Full"},
+  {"user_id": 2, "registered_at": "2017-06-12T18:16:24.031Z", "current_role":"User", "current_access_level":"Limited"},
+  {"user_id": 3, "registered_at": "2017-06-13T18:16:24.031Z", "current_role":"Admin", "current_access_level":"Full"},
+]
+````
