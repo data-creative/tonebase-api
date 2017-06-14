@@ -27,7 +27,8 @@ Rails.application.routes.draw do
       resources :user_notifications, only: [:update]
 
       namespace :metrics do
-        get "total_users"
+        get "users_total"
+        get "users_over_time"
       end
     end
   end

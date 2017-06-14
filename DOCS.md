@@ -953,8 +953,8 @@ Endpoints:
 
 Action | Request Method | Endpoint URL
 ---	|	---	|	---
-N/A | GET | /metrics/users-total
-N/A | GET | /metrics/users-over-time
+N/A | GET | /metrics/users_total
+N/A | GET | /metrics/users_over_time
 
 #### Total Users
 
