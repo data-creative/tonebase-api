@@ -3,7 +3,7 @@ require_relative "../../../../support/api/v1/view"
 
 describe "api/v1/ads/show.json.jbuilder" do
   before(:each) do
-    assign(:ad, create(:ad_with_instrument) )
+    assign(:ad, create(:ad, :with_instruments) )
     render
   end
 
