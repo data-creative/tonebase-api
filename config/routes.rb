@@ -19,6 +19,8 @@ Rails.application.routes.draw do
         scope module: "users" do
           resources :follows, only: [:index, :destroy], param: :followed_user_id
           resources :followers, only: [:index]
+
+          resources :favorite_videos, only: [:index, :destroy], param: :video_id
         end
       end
       resources :user_followships, only: [:create, :destroy]

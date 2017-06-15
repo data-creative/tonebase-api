@@ -765,6 +765,13 @@ Action | Request Method | Endpoint URL
 Create | POST | /user_favorite_videos
 Destroy | DELETE | /user_favorite_videos/:id
 
+Alias Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /users/:user_id/favorite_videos
+Destroy | DELETE | /users/:user_id/favorite_videos/:video_id
+
 Example POST/PUT request body:
 
 ```` js
@@ -773,6 +780,23 @@ Example POST/PUT request body:
   video_id: 13
 }
 ````
+
+Example GET response:
+
+```` js
+[
+  {
+    "favorite_video":{"id":21,"title":"Finale from Sonata #2"},
+    "favorited_at":"2017-06-12T21:16:11.048Z"
+  },
+  {
+    "favorite_video":{"id":22,"title":"Finale from Sonata #22"},
+    "favorited_at":"2017-08-12T21:16:11.048Z"
+  }
+]
+````
+
+
 
 ### `UserViewVideo`
 
