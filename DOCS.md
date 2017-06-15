@@ -562,6 +562,7 @@ Alias Endpoints:
 
 Action | Request Method | Endpoint URL
 ---	|	---	|	---
+List | GET | /users/:user_id/followers/
 List | GET | /users/:user_id/follows/
 Destroy | DELETE | /users/:user_id/follows/:followed_user_id
 

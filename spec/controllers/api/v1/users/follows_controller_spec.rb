@@ -7,7 +7,6 @@ RSpec.describe Api::V1::Users::FollowsController, type: :controller do
 
   let!(:user){ create(:user, :follower) }
   let(:follows){ user.follows }
-  let(:artist){ follows.first}
 
   describe "GET #index" do
     describe "response" do
@@ -32,6 +31,7 @@ RSpec.describe Api::V1::Users::FollowsController, type: :controller do
 
   describe "DELETE #destroy" do
     let(:model_class){ UserFollowship }
+    let(:artist){ follows.first}
 
     context "with valid params" do
       let(:response){ delete(:destroy, params: {user_id: user.id, followed_user_id: artist.id, format: 'json'}) }
