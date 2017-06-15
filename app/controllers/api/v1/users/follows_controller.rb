@@ -2,7 +2,7 @@ class Api::V1::Users::FollowsController < Api::V1::ApiController
   before_action :set_resource, only: [:destroy]
 
   ASSOCIATIONS = [
-    :user_followships
+    [user_followships: [followed_user: :user_profile]]
   ]
 
   # GET /api/v1/users/:user_id/follows

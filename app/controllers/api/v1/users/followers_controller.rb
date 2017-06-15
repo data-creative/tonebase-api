@@ -1,6 +1,6 @@
 class Api::V1::Users::FollowersController < Api::V1::ApiController
   ASSOCIATIONS = [
-    :inverse_user_followships
+    [inverse_user_followships: [user: :user_profile]]
   ]
 
   # GET /api/v1/users/:user_id/followers
