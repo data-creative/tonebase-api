@@ -30,6 +30,15 @@ FactoryGirl.define do
       end
     end
 
+    trait :follower do
+      after(:create) do |user, evaluator|
+        3.times do |i|
+          artist = create(:artist)
+          create(:user_followship, user: user, followed_user: artist)
+        end
+      end
+    end
+
     #
     # FACTORIES
     #
