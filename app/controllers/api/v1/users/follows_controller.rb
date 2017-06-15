@@ -1,9 +1,13 @@
 class Api::V1::Users::FollowsController < Api::V1::ApiController
   before_action :set_resource, only: [:destroy]
 
+  ASSOCIATIONS = [
+    :user_followships
+  ]
+
   # GET /api/v1/users/:user_id/follows
   def index
-    user = User.find(resource_params[:user_id])
+    user = User.eager_load(ASSOCIATIONS).find(resource_params[:user_id])
     render_404 unless user
     @user_followships = user.user_followships
   end
