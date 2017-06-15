@@ -7,10 +7,11 @@ require_relative "../response"
 # @param [Symbol] nested_resource_id_attribute The child resource parameter name.
 # @example DELETE /api/v1/users/:user_id/follows/:followed_user_id
 #
+#   it_behaves_like "a nested destroy endpoint", UserFollowship, :user_id, :followed_user_id do
+#     let!(:resource){ create(:user, :follower) }
+#     let(:nested_resource){ resource.follows.first }
+#   end
 #
-#
-#
-
 shared_examples_for "a nested destroy endpoint" do |model_class, resource_id_attribute, nested_resource_id_attribute|
   describe "response" do
     context "with valid params" do
