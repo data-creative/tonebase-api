@@ -237,6 +237,12 @@ Action | Request Method | Endpoint URL
 Create | POST | /ads_instruments
 Destroy | DELETE | /ads_instruments/:id
 
+Alias Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Destroy | DELETE | /ads/:ad_id/instruments/:instrument_id
+
 Example POST/PUT request body:
 
 ```` js
@@ -558,6 +564,14 @@ Action | Request Method | Endpoint URL
 Create | POST | /user_followships
 Destroy | DELETE | /user_followships/:id
 
+Alias Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /users/:user_id/followers/
+List | GET | /users/:user_id/follows/
+Destroy | DELETE | /users/:user_id/follows/:followed_user_id
+
 Example POST/PUT request body:
 
 ```` js
@@ -567,8 +581,33 @@ Example POST/PUT request body:
 }
 ````
 
+Example GET responses:
 
+```` js
+[
+  {
+    "follower":{"id":320, "username":"another43", "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at":"2017-06-12T21:16:05.693Z"
+  },
+  {
+    "follower":{"id":279, "username":"another2", "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at":"2017-06-12T21:16:06.035Z"
+  }
+]
+````
 
+```` js
+[
+  {
+    "followed_user": {"id":384,"username":"anotherPro6","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at": "2017-06-12T21:16:05.693Z"
+  },
+  {
+    "followed_user": {"id":125,"username":"anotherPro8","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at": "2017-06-18T21:16:05.693Z"
+  }
+]
+````
 
 
 
@@ -732,6 +771,13 @@ Action | Request Method | Endpoint URL
 Create | POST | /user_favorite_videos
 Destroy | DELETE | /user_favorite_videos/:id
 
+Alias Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /users/:user_id/favorite_videos
+Destroy | DELETE | /users/:user_id/favorite_videos/:video_id
+
 Example POST/PUT request body:
 
 ```` js
@@ -740,6 +786,23 @@ Example POST/PUT request body:
   video_id: 13
 }
 ````
+
+Example GET response:
+
+```` js
+[
+  {
+    "favorite_video":{"id":21,"title":"Finale from Sonata #2"},
+    "favorited_at":"2017-06-12T21:16:11.048Z"
+  },
+  {
+    "favorite_video":{"id":22,"title":"Finale from Sonata #22"},
+    "favorited_at":"2017-08-12T21:16:11.048Z"
+  }
+]
+````
+
+
 
 ### `UserViewVideo`
 

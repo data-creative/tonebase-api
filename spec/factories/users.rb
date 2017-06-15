@@ -11,6 +11,10 @@ FactoryGirl.define do
     oauth nil
     oauth_provider nil
 
+    trait :customer do
+      customer_uuid "cus_abc123def45678"
+    end
+
     trait :confirmed do
       confirmed true
     end
@@ -27,6 +31,24 @@ FactoryGirl.define do
     trait :with_profile do
       after(:create) do |user, evaluator|
         create(:user_profile, user: user)
+      end
+    end
+
+    trait :follower do
+      after(:create) do |user, evaluator|
+        3.times do |i|
+          artist = create(:artist)
+          create(:user_followship, user: user, followed_user: artist)
+        end
+      end
+    end
+
+    trait :with_favorite_videos do
+      after(:create) do |user, evaluator|
+        3.times do |i|
+          video = create(:video)
+          create(:user_favorite_video, user: user, video: video)
+        end
       end
     end
 
@@ -86,10 +108,6 @@ FactoryGirl.define do
           create(:user_profile, user: user, first_name: "Tony", last_name: "Administrato")
         end
       end
-    end
-
-    trait :customer do
-      customer_uuid "cus_abc123def45678"
     end
   end
 end
