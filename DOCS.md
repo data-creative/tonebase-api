@@ -575,16 +575,33 @@ Example POST/PUT request body:
 }
 ````
 
-Example GET response:
+Example GET responses:
 
 ```` js
 [
-  {"id":327,"user_id":350,"followed_user_id":399,"created_at":"2017-06-12T21:16:05.827Z","updated_at":"2017-06-12T21:16:05.827Z"},
-  {"id":390,"user_id":350,"followed_user_id":401,"created_at":"2017-06-12T21:16:06.633Z","updated_at":"2017-06-12T21:16:06.633Z"}
+  {
+    "follower":{"id":320, "username":"another43", "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at":"2017-06-12T21:16:05.693Z"
+  },
+  {
+    "follower":{"id":279, "username":"another2", "image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at":"2017-06-12T21:16:06.035Z"
+  }
 ]
 ````
 
-
+```` js
+[
+  {
+    "followed_user": {"id":384,"username":"anotherPro6","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at": "2017-06-12T21:16:05.693Z"
+  },
+  {
+    "followed_user": {"id":125,"username":"anotherPro8","image_url":"https://my-bucket.s3.amazonaws.com/my-dir/default-twitter-egg.png"},
+    "followed_at": "2017-06-18T21:16:05.693Z"
+  }
+]
+````
 
 
 

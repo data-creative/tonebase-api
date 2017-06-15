@@ -11,11 +11,8 @@ describe "api/v1/users/follows/index.json.jbuilder" do
     expect(parsed_view.count).to eql(2)
     parsed_view.each do |resource|
       expect(keys_of(resource)).to match_array([
-        :id,
-        :user_id,
-        :followed_user_id,
-        :created_at,
-        :updated_at
+        :followed_user,
+        :followed_at,
       ])
     end
   end
