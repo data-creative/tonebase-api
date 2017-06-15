@@ -3,7 +3,9 @@ class Api::V1::Users::FollowsController < Api::V1::ApiController
 
   # GET /api/v1/users/:user_id/follows
   def index
-    @user_followships = UserFollowship.where(user_id: resource_params[:user_id])
+    user = User.find(resource_params[:user_id])
+    render_404 unless user
+    @user_followships = user.user_followships
   end
 
   # DELETE /api/v1/users/:user_id/follows/:followed_user_id

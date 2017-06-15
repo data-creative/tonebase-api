@@ -6,10 +6,9 @@ RSpec.describe Api::V1::Users::FollowsController, type: :controller do
   include_context "authenticate requests using valid token"
 
   describe "GET #index" do
-    it_behaves_like "a nested index endpoint" do
+    it_behaves_like "a nested index endpoint", :user_id do
       let(:resource){ create(:user, :follower) }
       let(:nested_resources){ resource.follows }
-      let(:request_params){ {user_id: resource.id} }
     end
   end
 
