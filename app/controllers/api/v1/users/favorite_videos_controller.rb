@@ -1,9 +1,13 @@
 class Api::V1::Users::FavoriteVideosController < Api::V1::ApiController
   before_action :set_resource, only: [:destroy]
 
+  ASSOCIATIONS = [
+    [user_favorite_videos: :video]
+  ]
+
   # GET /api/v1/users/:user_id/favorite_videos
   def index
-    user = User.find(resource_params[:user_id])
+    user = User.eager_load(ASSOCIATIONS).find(resource_params[:user_id])
     render_404 unless user
     @user_favorite_videos = user.user_favorite_videos
   end
