@@ -14,7 +14,8 @@ class Api::V1::FollowsController < Api::V1::ApiController
 private
 
   def set_resource
-    @user_followship = UserFollowship.where(resource_params)
+    @user_followship = UserFollowship.where(resource_params).first
+    render_404 unless @user_followship
   end
 
   def resource_params
