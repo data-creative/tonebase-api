@@ -1,4 +1,4 @@
-class Api::V1::FollowsController < Api::V1::ApiController
+class Api::V1::Users::FollowsController < Api::V1::ApiController
   before_action :set_resource, only: [:destroy]
 
   # GET /api/v1/users/:user_id/follows

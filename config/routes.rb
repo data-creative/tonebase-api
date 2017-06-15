@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show, :create, :update, :destroy] do
         get "search", on: :collection
 
-        resources :follows, only: [:index, :destroy], param: :followed_user_id
+        resources :follows, only: [:index, :destroy], param: :followed_user_id, module: 'users'
       end
       resources :user_followships, only: [:create, :destroy]
 

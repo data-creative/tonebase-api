@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../../../support/api/v1/request'
 require_relative '../../../../support/api/v1/response'
 
-RSpec.describe Api::V1::FollowsController, type: :controller do
+RSpec.describe Api::V1::Users::FollowsController, type: :controller do
   include_context "authenticate requests using valid token"
 
   let!(:user){ create(:user, :follower) }

@@ -54,3 +54,5 @@
   + [Non-model Objects in Rails](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
   + [Conditional Callbacks](http://guides.rubyonrails.org/active_record_callbacks.html#conditional-callbacks)
   + [Nested Resources](http://guides.rubyonrails.org/routing.html#nested-resources)
+  + [Nested Resource Controllers](http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/)
+  + [Nested Resource Controller Routing](http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/#comment-2563440978)
