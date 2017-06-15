@@ -558,6 +558,13 @@ Action | Request Method | Endpoint URL
 Create | POST | /user_followships
 Destroy | DELETE | /user_followships/:id
 
+Alias Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+List | GET | /users/:user_id/follows/
+Destroy | DELETE | /users/:user_id/follows/:followed_user_id
+
 Example POST/PUT request body:
 
 ```` js
@@ -567,6 +574,14 @@ Example POST/PUT request body:
 }
 ````
 
+Example GET response:
+
+```` js
+[
+  {"id":327,"user_id":350,"followed_user_id":399,"created_at":"2017-06-12T21:16:05.827Z","updated_at":"2017-06-12T21:16:05.827Z"},
+  {"id":390,"user_id":350,"followed_user_id":401,"created_at":"2017-06-12T21:16:06.633Z","updated_at":"2017-06-12T21:16:06.633Z"}
+]
+````
 
 
 
