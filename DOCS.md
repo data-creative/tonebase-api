@@ -237,6 +237,12 @@ Action | Request Method | Endpoint URL
 Create | POST | /ads_instruments
 Destroy | DELETE | /ads_instruments/:id
 
+Alias Endpoints:
+
+Action | Request Method | Endpoint URL
+---	|	---	|	---
+Destroy | DELETE | /ads/:ad_id/instruments/:instrument_id
+
 Example POST/PUT request body:
 
 ```` js
