@@ -8,20 +8,27 @@ shared_examples_for "an index endpoint" do |model_class|
       end
     end
 
-    context "without params" do
-      let(:response){  get(:index, params: {format: 'json'})  }
+    context "with invalid pagination params (missing 'per_page')" do
+      let(:response){  get(:index, params: {page: 1, format: 'json'})  }
 
-      it "should be successful (ok)" do
-        expect(response.status).to eql(200)
+      it "should be unsuccessful (bad_request)" do
+        expect(response.status).to eql(400)
       end
 
-      it "should be an array" do
-        expect(parsed_response).to be_kind_of(Array)
+      it "should include a helpful error message" do
+        expect(parsed_response["pagination"]).to include("when supplying pagination parameters, please use both 'page' and 'per_page'")
+      end
+    end
+
+    context "with invalid pagination params (missing 'page')" do
+      let(:response){  get(:index, params: {per_page: 10, format: 'json'})  }
+
+      it "should be unsuccessful (bad_request)" do
+        expect(response.status).to eql(400)
       end
 
-      it "should include all resources" do
-        expect(parsed_response.count).to eql(model_class.count)
-        expect(parsed_response.any?).to be true
+      it "should include a helpful error message" do
+        expect(parsed_response["pagination"]).to include("when supplying pagination parameters, please use both 'page' and 'per_page'")
       end
     end
 

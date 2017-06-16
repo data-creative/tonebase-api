@@ -15,8 +15,8 @@ class Api::V1::VideosController < Api::V1::ApiController
 
     if pagination_params[:page] && pagination_params[:per_page]
       @videos = @videos.paginate(pagination_params)
-    #elsif params[:page] || params[:per_page]
-    #  send client error (400)
+    elsif params[:page] || params[:per_page]
+      render_pagination_400
     end
   end
 

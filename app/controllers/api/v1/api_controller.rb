@@ -16,6 +16,10 @@ private
     render json: {"id": ["not found"]}, status: :not_found
   end
 
+  def render_pagination_400
+    render json: {"pagination": ["when supplying pagination parameters, please use both 'page' and 'per_page'"]}, status: :bad_request
+  end
+
   def render_query_400
     render json: {"query": ["should be a named URL parameter included in the request"]}, status: :bad_request
   end
