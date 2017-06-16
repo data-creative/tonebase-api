@@ -16,10 +16,13 @@ private
     params.permit(:page, :per_page).to_h # call .to_h to avoid deprecation warning. see https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934
   end
 
-  # Call this after assigning @resources in an index endpoint to paginate them.
-  def paginate_resources
+  # Use this in an index action to paginate the desired resources.
+  # Use a corresponding view which references the @resources variable.
+  # @param [Array<ApplicationRecord>] resources A list of resources to be paginated and passed to the view.
+  # @example render_paginated(Video.all)
+  def render_paginated(resources)
     if pagination_params[:page] && pagination_params[:per_page]
-      @resources = @resources.paginate(pagination_params) # re-consider assuming existance of @resources.
+      @resources = resources.paginate(pagination_params)
     elsif params[:page] || params[:per_page]
       render_pagination_400
     end

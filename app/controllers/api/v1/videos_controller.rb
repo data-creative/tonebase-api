@@ -11,8 +11,8 @@ class Api::V1::VideosController < Api::V1::ApiController
 
   # GET /api/v1/videos
   def index
-    @resources = Video.eager_load(ASSOCIATIONS).all
-    paginate_resources
+    videos = Video.eager_load(ASSOCIATIONS).all
+    render_paginated(videos)
   end
 
   # GET /api/v1/videos/:id
