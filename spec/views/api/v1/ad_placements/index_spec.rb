@@ -3,7 +3,7 @@ require_relative "../../../../support/api/v1/views/index"
 
 describe "api/v1/ad_placements/index.json.jbuilder" do
   before(:each) do
-    assign(:ad_placements, create(:ad, :with_placements).placements)
+    assign(:resources, create(:ad, :with_placements).placements)
     render
   end
 

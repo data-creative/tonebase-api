@@ -3,11 +3,11 @@ require_relative "../../../../support/api/v1/view"
 
 describe "api/v1/notifications/index.json.jbuilder" do
   before(:each) do
-    assign(:notifications, [create(:notification), create(:notification)])
+    assign(:resources, [create(:notification), create(:notification)])
     render
   end
 
-  it "displays notifications" do
+  it "displays resources" do
     expect(parsed_view.count).to eql(2)
     parsed_view.each do |notification|
       expect(keys_of(notification)).to match_array([
