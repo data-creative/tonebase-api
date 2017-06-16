@@ -12,8 +12,30 @@ class Api::V1::ApiController < ApplicationController
 
 private
 
+  def pagination_params
+    params.permit(:page, :per_page).to_h # call .to_h to avoid deprecation warning. see https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934
+  end
+
+  # Use this in an index action to paginate the desired resources.
+  # Use a corresponding view which references the @resources variable.
+  # @param [Array<ApplicationRecord>] resources A list of resources to be paginated and passed to the view.
+  # @example render_paginated(Video.all)
+  def render_paginated(resources)
+    if pagination_params[:page] && pagination_params[:per_page]
+      @resources = resources.order(created_at: :asc).paginate(pagination_params)
+    elsif params[:page] || params[:per_page]
+      render_pagination_400
+    else
+      @resources = resources
+    end
+  end
+
   def render_404
     render json: {"id": ["not found"]}, status: :not_found
+  end
+
+  def render_pagination_400
+    render json: {"pagination": ["when supplying pagination parameters, please use both 'page' and 'per_page'"]}, status: :bad_request
   end
 
   def render_query_400

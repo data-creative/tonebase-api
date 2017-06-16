@@ -11,6 +11,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", User
+    it_behaves_like "an index endpoint which paginates", User
 
     context "when a 'role' parameter is specified" do
       let!(:users){ [create(:user), create(:user), create(:artist), create(:admin)] }

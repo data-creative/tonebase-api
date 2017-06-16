@@ -21,6 +21,8 @@ gem 'yard', group: :doc # run `bundle exec yard doc` to parse comments and/or `b
 
 gem 'rack-cors', :require => 'rack/cors' # enable cross-origin requests
 
+gem 'will_paginate', '~> 3.1.1' # enable response pagination, including limit and offset
+
 group :development, :test do
   gem 'pry'
 

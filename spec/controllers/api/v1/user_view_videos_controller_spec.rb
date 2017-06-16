@@ -8,6 +8,7 @@ RSpec.describe Api::V1::UserViewVideosController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", UserViewVideo
+    it_behaves_like "an index endpoint which paginates", UserViewVideo
   end
 
   describe "POST #create" do

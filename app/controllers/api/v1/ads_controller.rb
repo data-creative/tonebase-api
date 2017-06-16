@@ -3,7 +3,8 @@ class Api::V1::AdsController < Api::V1::ApiController
 
   # GET /api/v1/ads
   def index
-    @ads = Ad.all
+    ads = Ad.all
+    render_paginated(ads)
   end
 
   # GET /api/v1/ads/:id

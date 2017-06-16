@@ -21,10 +21,12 @@ class Api::V1::UsersController < Api::V1::ApiController
   # GET /api/v1/users
   def index
     if !params[:role]
-      @users = User.eager_load(ASSOCIATIONS).all
+      users = User.eager_load(ASSOCIATIONS).all
+      render_paginated(users)
     else
       if User::ROLES.include?(params[:role])
-        @users = User.eager_load(ASSOCIATIONS).send(params[:role].underscore.to_sym)
+        users = User.eager_load(ASSOCIATIONS).send(params[:role].underscore.to_sym)
+        render_paginated(users)
       else
         render json: {"role": ["not found"]}, status: :not_found
       end

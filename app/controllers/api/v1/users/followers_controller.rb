@@ -7,7 +7,7 @@ class Api::V1::Users::FollowersController < Api::V1::ApiController
   def index
     user = User.eager_load(ASSOCIATIONS).find(resource_params[:user_id])
     render_404 unless user
-    @user_followships = user.inverse_user_followships
+    render_paginated(user.inverse_user_followships)
   end
 
 private

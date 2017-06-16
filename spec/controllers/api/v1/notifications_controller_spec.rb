@@ -9,6 +9,7 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", Notification
+    it_behaves_like "an index endpoint which paginates", Notification
   end
 
   describe "GET #show" do

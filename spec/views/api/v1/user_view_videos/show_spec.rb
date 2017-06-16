@@ -8,6 +8,6 @@ describe "api/v1/user_view_videos/show.json.jbuilder" do
   end
 
   it "displays a resource" do
-    expect(keys_of(parsed_view)).to match_array([:user_id, :video_id, :viewed_at])
+    expect(keys_of(parsed_view)).to match_array([:id, :user_id, :video_id, :viewed_at])
   end
 end

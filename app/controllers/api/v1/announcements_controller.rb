@@ -3,7 +3,8 @@ class Api::V1::AnnouncementsController < Api::V1::ApiController
 
   # GET /api/v1/announcements
   def index
-    @announcements = Announcement.all
+    announcements = Announcement.all
+    render_paginated(announcements)
   end
 
   # GET /api/v1/announcements/:id

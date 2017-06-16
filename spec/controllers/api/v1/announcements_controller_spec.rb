@@ -11,6 +11,7 @@ RSpec.describe Api::V1::AnnouncementsController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", Announcement
+    it_behaves_like "an index endpoint which paginates", Announcement
   end
 
   describe "GET #show" do

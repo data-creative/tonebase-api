@@ -56,3 +56,4 @@
   + [Nested Resources](http://guides.rubyonrails.org/routing.html#nested-resources)
   + [Nested Resource Controllers](http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/)
   + [Nested Resource Controller Routing](http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/#comment-2563440978)
+  + [Avoid deprecation warnings when parsing controller parameters](https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934)

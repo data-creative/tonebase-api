@@ -3,7 +3,8 @@ class Api::V1::InstrumentsController < Api::V1::ApiController
 
   # GET /api/v1/instruments
   def index
-    @instruments = Instrument.all
+    instruments = Instrument.all
+    render_paginated(instruments)
   end
 
   # GET /api/v1/instruments/:id

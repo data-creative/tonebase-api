@@ -1,1 +1,1 @@
-json.array! @instruments, partial: 'api/v1/instruments/instrument', as: :instrument
+json.array! @resources, partial: 'api/v1/instruments/instrument', as: :instrument

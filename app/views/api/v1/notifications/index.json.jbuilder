@@ -1,1 +1,1 @@
-json.array! @notifications, partial: 'api/v1/notifications/notification', as: :notification
+json.array! @resources, partial: 'api/v1/notifications/notification', as: :notification
