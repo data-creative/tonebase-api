@@ -1,7 +1,5 @@
 class Api::V1::VideosController < Api::V1::ApiController
   before_action :set_video, only: [:show, :update, :destroy]
-  before_action :set_pagination, only: [:index]
-  #after_action :paginate_response, only: [:index]
 
   ASSOCIATIONS = [
     :video_parts, :video_scores,
@@ -14,7 +12,12 @@ class Api::V1::VideosController < Api::V1::ApiController
   # GET /api/v1/videos
   def index
     @videos = Video.eager_load(ASSOCIATIONS).all
-    @videos = @videos.paginate(:page => params[:page], :per_page => params[:limit])
+
+    if pagination_params[:page] && pagination_params[:per_page]
+      @videos = @videos.paginate(pagination_params)
+    #elsif params[:page] || params[:per_page]
+    #  send client error (400)
+    end
   end
 
   # GET /api/v1/videos/:id
@@ -43,11 +46,6 @@ private
     @video = Video.eager_load(ASSOCIATIONS).find(params[:id])
   end
 
-  def set_pagination
-    params[:page] = 1 unless params[:page]
-    params[:limit] = 100 unless params[:limit]
-  end
-
   def video_params
     params.require(:video).permit([
       :user_id, :instrument_id, :title, :description, tags: [],
@@ -56,7 +54,7 @@ private
     ])
   end
 
-  #def paginate_response
-  #
-  #end
+  def pagination_params
+    params.permit(:page, :per_page)
+  end
 end
