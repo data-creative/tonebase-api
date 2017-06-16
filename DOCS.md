@@ -34,7 +34,7 @@ For example, the following requests, in succession will return the first, second
 
     curl https://tonebase-api.herokuapp.com/api/v1/videos?page=3&per_page=5 -H 'Authorization: Token token="abc123"'
 
-By default, the API returns resources in descending order of their creation, so the first page will contain the newest resources and the last page will contain the oldest resources.
+Except where otherwise noted, the API returns resources in ascending order of creation, so the first page will contain the oldest resources and the last page will contain the newest resources.
 
 ## Responses
 
