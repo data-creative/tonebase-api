@@ -7,13 +7,8 @@ describe "api/v1/users/favorite_videos/index.json.jbuilder" do
     render
   end
 
-  it "displays favorite videos" do
-    expect(parsed_view.count).to eql(2)
-    parsed_view.each do |resource|
-      expect(keys_of(resource)).to match_array([
-        :favorite_video,
-        :favorited_at,
-      ])
-    end
-  end
+  it_behaves_like "an index view", 2, [
+    :favorite_video,
+    :favorited_at,
+  ]
 end

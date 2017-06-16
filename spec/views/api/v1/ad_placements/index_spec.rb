@@ -7,5 +7,13 @@ describe "api/v1/ad_placements/index.json.jbuilder" do
     render
   end
 
-  it_behaves_like "an index view", 3, [:id, :ad, :start_date, :end_date, :price, :created_at, :updated_at]
+  it_behaves_like "an index view", 3, [
+    :id,
+    :ad,
+    :start_date,
+    :end_date,
+    :price,
+    :created_at,
+    :updated_at
+  ]
 end

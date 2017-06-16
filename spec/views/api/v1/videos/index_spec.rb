@@ -7,20 +7,18 @@ describe "api/v1/videos/index.json.jbuilder" do
     render
   end
 
-  it "displays resources" do
-    expect(parsed_view.count).to eql(2)
-    parsed_view.each do |video|
-      expect(keys_of(video)).to match_array([
-        :id,
-        :artist,
-        :instrument,
-        :title, :description, :tags,
-        :parts,
-        :scores,
-        :favorited_by,
-        :viewed_by,
-        :created_at, :updated_at
-      ])
-    end
-  end
+  it_behaves_like "an index view", 2, [
+    :id,
+    :artist,
+    :instrument,
+    :title,
+    :description,
+    :tags,
+    :parts,
+    :scores,
+    :favorited_by,
+    :viewed_by,
+    :created_at,
+    :updated_at
+  ]
 end

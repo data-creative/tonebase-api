@@ -7,13 +7,8 @@ describe "api/v1/users/followers/index.json.jbuilder" do
     render
   end
 
-  it "displays resources" do
-    expect(parsed_view.count).to eql(2)
-    parsed_view.each do |resource|
-      expect(keys_of(resource)).to match_array([
-        :follower,
-        :followed_at,
-      ])
-    end
-  end
+  it_behaves_like "an index view", 2, [
+    :follower,
+    :followed_at,
+  ]
 end

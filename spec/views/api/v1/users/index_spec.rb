@@ -7,20 +7,26 @@ describe "api/v1/users/index.json.jbuilder" do
     render
   end
 
-  it "displays resources" do
-    expect(parsed_view.count).to eql(2)
-    parsed_view.each do |user|
-      expect(keys_of(user)).to match_array([
-        :id, :email, :password, :username, :confirmed, :visible, :role, :access_level,
-        :customer_uuid,
-        :oauth, :oauth_provider,
-        :profile, :music_profile,
-        :follows, :followers,
-        :favorite_videos,
-        :recently_viewed_videos,
-        :inbox,
-        :created_at, :updated_at
-      ])
-    end
-  end
+  it_behaves_like "an index view", 2, [
+    :id,
+    :email,
+    :password,
+    :username,
+    :confirmed,
+    :visible,
+    :role,
+    :access_level,
+    :customer_uuid,
+    :oauth,
+    :oauth_provider,
+    :profile,
+    :music_profile,
+    :follows,
+    :followers,
+    :favorite_videos,
+    :recently_viewed_videos,
+    :inbox,
+    :created_at,
+    :updated_at
+  ]
 end

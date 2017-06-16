@@ -7,10 +7,11 @@ describe "api/v1/instruments/index.json.jbuilder" do
     render
   end
 
-  it "displays resources" do
-    expect(parsed_view.count).to eql(2)
-    parsed_view.each do |instrument|
-      expect(keys_of(instrument)).to match_array([:id, :name, :description, :created_at, :updated_at])
-    end
-  end
+  it_behaves_like "an index view", 2, [
+    :id,
+    :name,
+    :description,
+    :created_at,
+    :updated_at
+  ]
 end

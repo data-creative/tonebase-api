@@ -7,19 +7,14 @@ describe "api/v1/announcements/index.json.jbuilder" do
     render
   end
 
-  it "displays resources" do
-    expect(parsed_view.count).to eql(2)
-    parsed_view.each do |announcement|
-      expect(keys_of(announcement)).to match_array([
-        :id,
-        :title,
-        :content,
-        :url,
-        :image_url,
-        :broadcast,
-        :created_at,
-        :updated_at
-      ])
-    end
-  end
+  it_behaves_like "an index view", 2, [
+    :id,
+    :title,
+    :content,
+    :url,
+    :image_url,
+    :broadcast,
+    :created_at,
+    :updated_at
+  ]
 end
