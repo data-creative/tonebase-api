@@ -9,7 +9,7 @@ class Api::V1::Users::FollowsController < Api::V1::ApiController
   def index
     user = User.eager_load(ASSOCIATIONS).find(resource_params[:user_id])
     render_404 unless user
-    @user_followships = user.user_followships
+    render_paginated(user.user_followships)
   end
 
   # DELETE /api/v1/users/:user_id/follows/:followed_user_id

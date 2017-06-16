@@ -1,1 +1,1 @@
-json.array! @announcements, partial: 'api/v1/announcements/announcement', as: :announcement
+json.array! @resources, partial: 'api/v1/announcements/announcement', as: :announcement

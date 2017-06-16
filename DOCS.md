@@ -24,7 +24,7 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 ### Pagination
 
 By default, the API does not paginate responses.
-However you can optionally request paginated responses
+However you can optionally request paginated responses from "List" endpoints
  by specifying **both** the `page` and `per_page` parameters.
 For example, the following requests, in succession will return the first, second, and third pages of users, respectively, given a constant `per_page` value:
 

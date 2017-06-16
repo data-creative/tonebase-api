@@ -3,7 +3,8 @@ class Api::V1::AdPlacementsController < Api::V1::ApiController
 
   # GET /api/v1/ad_placements
   def index
-    @ad_placements = AdPlacement.all
+    ad_placements = AdPlacement.all
+    render_paginated(ad_placements)
   end
 
   # GET /api/v1/ad_placements/:id

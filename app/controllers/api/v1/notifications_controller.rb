@@ -7,7 +7,8 @@ class Api::V1::NotificationsController < Api::V1::ApiController
 
   # GET /api/v1/notifications
   def index
-    @notifications = Notification.eager_load(ASSOCIATIONS).all
+    notifications = Notification.eager_load(ASSOCIATIONS).all
+    render_paginated(notifications)
   end
 
   # GET /api/v1/notifications/:id

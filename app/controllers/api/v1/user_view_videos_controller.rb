@@ -1,7 +1,8 @@
 class Api::V1::UserViewVideosController < Api::V1::ApiController
   # GET /api/v1/user_view_videos
   def index
-    @user_view_videos = UserViewVideo.all
+    user_view_videos = UserViewVideo.all
+    render_paginated(user_view_videos)
   end
 
   # POST /api/v1/user_view_videos

@@ -9,7 +9,7 @@ class Api::V1::Users::FavoriteVideosController < Api::V1::ApiController
   def index
     user = User.eager_load(ASSOCIATIONS).find(resource_params[:user_id])
     render_404 unless user
-    @user_favorite_videos = user.user_favorite_videos
+    render_paginated(user.user_favorite_videos)
   end
 
   # DELETE /api/v1/users/:user_id/favorite_videos/:video_id
