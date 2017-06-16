@@ -12,6 +12,19 @@ class Api::V1::ApiController < ApplicationController
 
 private
 
+  def pagination_params
+    params.permit(:page, :per_page).to_h # call .to_h to avoid deprecation warning. see https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934
+  end
+
+  # Call this after assigning @resources in an index endpoint to paginate them.
+  def paginate_resources
+    if pagination_params[:page] && pagination_params[:per_page]
+      @resources = @resources.paginate(pagination_params) # re-consider assuming existance of @resources.
+    elsif params[:page] || params[:per_page]
+      render_pagination_400
+    end
+  end
+
   def render_404
     render json: {"id": ["not found"]}, status: :not_found
   end

@@ -11,13 +11,8 @@ class Api::V1::VideosController < Api::V1::ApiController
 
   # GET /api/v1/videos
   def index
-    @videos = Video.eager_load(ASSOCIATIONS).all
-
-    if pagination_params[:page] && pagination_params[:per_page]
-      @videos = @videos.paginate(pagination_params)
-    elsif params[:page] || params[:per_page]
-      render_pagination_400
-    end
+    @resources = Video.eager_load(ASSOCIATIONS).all
+    paginate_resources
   end
 
   # GET /api/v1/videos/:id
@@ -52,9 +47,5 @@ private
       video_parts_attributes: [:source_url, :number, :duration],
       video_scores_attributes: [:image_url, :starts_at, :ends_at],
     ])
-  end
-
-  def pagination_params
-    params.permit(:page, :per_page).to_h # call .to_h to avoid deprecation warning. see https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934
   end
 end
