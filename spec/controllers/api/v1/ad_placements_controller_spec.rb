@@ -11,6 +11,7 @@ RSpec.describe Api::V1::AdPlacementsController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", AdPlacement
+    it_behaves_like "an index endpoint which paginates", AdPlacement
   end
 
   describe "GET #show" do

@@ -11,6 +11,7 @@ RSpec.describe Api::V1::InstrumentsController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", Instrument
+    it_behaves_like "an index endpoint which paginates", Instrument
   end
 
   describe "GET #show" do

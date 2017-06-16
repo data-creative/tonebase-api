@@ -11,6 +11,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
 
   describe "GET #index" do
     it_behaves_like "an index endpoint", Video
+    it_behaves_like "an index endpoint which paginates", Video
   end
 
   describe "GET #show" do
