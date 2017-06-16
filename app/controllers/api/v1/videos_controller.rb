@@ -55,6 +55,6 @@ private
   end
 
   def pagination_params
-    params.permit(:page, :per_page)
+    params.permit(:page, :per_page).to_h # call .to_h to avoid deprecation warning. see https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934
   end
 end
