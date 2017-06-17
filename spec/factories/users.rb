@@ -44,8 +44,12 @@ FactoryGirl.define do
     end
 
     trait :with_favorite_videos do
+      transient do
+        number_of_favorite_videos 3
+      end
+
       after(:create) do |user, evaluator|
-        3.times do |i|
+        evaluator.number_of_favorite_videos.times do |i|
           video = create(:video)
           create(:user_favorite_video, user: user, video: video)
         end
