@@ -20,13 +20,6 @@ class User < ApplicationRecord
   alias :video_views :user_view_videos
   alias :views :user_view_videos
   has_many :viewed_videos, -> { distinct }, through: :user_view_videos, source: :video
-  # @deprecated converted to has_many association for eager-loading
-  #scope :recent_video_views, -> {
-  #  joins(:user_view_videos)
-  #    .group(:video_id)
-  #    .select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at")
-  #    .order("max(user_view_videos.created_at) DESC")
-  #}
   has_many :recent_video_views, -> {
     group(:video_id).select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at").order("max(user_view_videos.created_at) DESC")
   }, class_name: "UserViewVideo"
@@ -75,23 +68,4 @@ class User < ApplicationRecord
   def name
     profile.try(:name) || "Un-named User"
   end
-
-  # @deprecated converted to a scope so it can be eager-loaded.
-  # Should correspond with the following query:
-  #
-  #    SELECT
-  #      video_id
-  #      ,max(created_at) as most_recently_viewed_at
-  #    FROM user_view_videos
-  #    where user_id = 123
-  #    GROUP BY video_id
-  #    ORDER BY most_recently_viewed_at DESC
-  #
-  # @return [#<UserViewVideo id: nil, video_id: 852>, #<UserViewVideo id: nil, video_id: 851>, #<UserViewVideo id: nil, video_id: 850>]
-  #def recent_video_views
-  #  video_views
-  #    .group(:video_id)
-  #    .select("video_id, max(user_view_videos.created_at) AS most_recently_viewed_at")
-  #    .order("max(user_view_videos.created_at) DESC")
-  #end
 end

@@ -13,21 +13,25 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint", User
     it_behaves_like "an index endpoint which paginates", User
 
-    it_behaves_like "an index endpoint which validates search", :role, "OOPS"
-
-    it_behaves_like "an index endpoint which searches", :role, "User" do
+    it_behaves_like "an index endpoint which searches", :role, "User", "OOPS" do
       let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.user }
     end
 
-    it_behaves_like "an index endpoint which searches", :role, "Artist" do
+    it_behaves_like "an index endpoint which searches", :role, "Artist", "OOPS" do
       let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.artist }
     end
 
-    it_behaves_like "an index endpoint which searches", :role, "Admin" do
+    it_behaves_like "an index endpoint which searches", :role, "Admin", "OOPS" do
       let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.admin }
+    end
+
+    it_behaves_like "an index endpoint which searches", :email, "search4me@gmail.com", "OOPS" do
+      let(:email){ "search4me@gmail.com" }
+      let(:resources){ [create(:user), create(:user, email: email), create(:user)] }
+      let(:matching_resources){ User.where(email: email) }
     end
   end
 
@@ -166,9 +170,4 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "DELETE #destroy" do
     it_behaves_like "a destroy endpoint", User
   end
-
-=begin
-  let(:email){ "search4me@gmail.com" }
-  let!(:users){ [create(:user), create(:user, email: email), create(:user)] }
-=end
 end
