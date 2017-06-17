@@ -1,10 +1,12 @@
 require_relative "../../response"
 
-# @param [Array<ApplicationRecord>] resources A large list of resources to be filtered based on the search terms.
+# @param [Symbol] attribute_name The name of the search term.
+# @param [String] invalid_search_term An invalid search term which should trigger a validation error.
 # @example
 #
-
-shared_examples_for "an index endpoint which validates search" do |model_class, attribute_name, invalid_search_term|
+#  it_behaves_like "an index endpoint which validates search", :role, "OOPS"
+#
+shared_examples_for "an index endpoint which validates search" do |attribute_name, invalid_search_term|
   describe "response" do
     context "when a '#{attribute_name}' parameter is specified" do
 

@@ -13,11 +13,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint", User
     it_behaves_like "an index endpoint which paginates", User
 
-    it_behaves_like "an index endpoint which validates search", User, :role, "OOPS" do
-      before(:each) do
-        [create(:user), create(:user), create(:artist), create(:admin)]
-      end
-    end
+    it_behaves_like "an index endpoint which validates search", :role, "OOPS"
+
+    #it_behaves_like "an index endpoint which searches", User, :role, "User" do
+    #  before(:each) do
+    #    [create(:user), create(:user), create(:artist), create(:admin)]
+    #  end
+    #end
   end
 
   describe "GET #show" do
