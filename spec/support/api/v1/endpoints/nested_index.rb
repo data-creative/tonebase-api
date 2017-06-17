@@ -1,4 +1,5 @@
 require_relative "../response"
+require_relative './nested_index/pagination' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 
 # @param [ApplicationRecord] resource The parent resource.
 # @param [Array] nested_resources A list of associated child resources.
