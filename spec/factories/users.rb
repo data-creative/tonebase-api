@@ -35,8 +35,12 @@ FactoryGirl.define do
     end
 
     trait :follower do
+      transient do
+        number_of_follows 3
+      end
+
       after(:create) do |user, evaluator|
-        3.times do |i|
+        evaluator.number_of_follows.times do |i|
           artist = create(:artist)
           create(:user_followship, user: user, followed_user: artist)
         end
@@ -92,8 +96,12 @@ FactoryGirl.define do
       end
 
       trait :with_followers do
+        transient do
+          number_of_followers 3
+        end
+
         after(:create) do |artist, evaluator|
-          3.times do |i|
+          evaluator.number_of_followers.times do |i|
             user = create(:user)
             create(:user_followship, user: user, followed_user: artist)
           end
