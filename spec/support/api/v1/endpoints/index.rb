@@ -1,5 +1,5 @@
 require_relative "../response"
-require_relative './index/paginates' # allows controller spec to avoid separately loading this file (for convenience and brevity)
+require_relative './index/pagination' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 
 shared_examples_for "an index endpoint" do |model_class|
   before(:each) do
