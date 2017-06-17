@@ -53,6 +53,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     destroy_and_render_json(@user)
   end
 
+  # @deprecated
   # GET /api/v1/users/search
   # @example GET /api/v1/users/search?query[email]=search4me@gmail.com
   # @example GET /api/v1/users/search?query[role]=Artist&query[first_name]=Talenti
@@ -74,6 +75,7 @@ private
     params.require(:user).permit(PERMITTED_ATTRIBUTES)
   end
 
+  # @deprecated
   def query_params
     params.require(:query).permit(PERMITTED_ATTRIBUTES)
   end

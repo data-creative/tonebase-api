@@ -16,17 +16,17 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint which validates search", :role, "OOPS"
 
     it_behaves_like "an index endpoint which searches", :role, "User" do
-      let!(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
+      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.user }
     end
 
     it_behaves_like "an index endpoint which searches", :role, "Artist" do
-      let!(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
+      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.artist }
     end
 
     it_behaves_like "an index endpoint which searches", :role, "Admin" do
-      let!(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
+      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.admin }
     end
   end
@@ -167,36 +167,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "a destroy endpoint", User
   end
 
-  describe "GET #search" do
-    let(:email){ "search4me@gmail.com" }
-    let!(:users){ [create(:user), create(:user, email: email), create(:user)] }
-
-    context "without any search params" do
-      let(:response){  get(:search, params: {format: 'json'})  }
-
-      it "should be unsuccessful (bad_request)" do
-        expect(response.status).to eql(400)
-      end
-    end
-
-    context "with valid search params" do
-      context "when there are no matching resources" do
-        let(:response){  get(:search, params: {format: 'json', query:{email: "OOPS"}})  }
-
-        it "should be successful (ok) and return an empty array" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.empty?).to eql(true)
-        end
-      end
-
-      context "when there are matching resources" do
-        let(:response){  get(:search, params: {format: 'json', query:{email: email}})  }
-
-        it "should be successful (ok) and return an array of matching resources" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.first["email"]).to eql(email)
-        end
-      end
-    end
-  end
+=begin
+  let(:email){ "search4me@gmail.com" }
+  let!(:users){ [create(:user), create(:user, email: email), create(:user)] }
+=end
 end
