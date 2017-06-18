@@ -1,5 +1,5 @@
 require "rails_helper"
-require_relative "../../../../../support/api/v1/view"
+require_relative "../../../../../support/api/v1/views/index"
 
 describe "api/v1/users/followers/index.json.jbuilder" do
   before(:each) do
@@ -8,6 +8,7 @@ describe "api/v1/users/followers/index.json.jbuilder" do
   end
 
   it_behaves_like "an index view", 2, [
+    :id,
     :follower,
     :followed_at,
   ]
