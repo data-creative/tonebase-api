@@ -1,6 +1,4 @@
 class Video < ApplicationRecord
-  searchkick text_middle: [:title]
-
   after_create :broadcast_new_video_event_to_artist_followers
 
   #

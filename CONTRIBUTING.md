@@ -19,13 +19,6 @@ brew services start postgresql
 createdb
 ````
 
-Install Elasticsearch, if necessary:
-
-```` sh
-brew install elasticsearch
-brew services start elasticsearch
-````
-
 Install the Ruby language (version 2.2.3), if necessary:
 
 ```` sh

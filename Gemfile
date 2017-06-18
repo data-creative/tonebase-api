@@ -23,8 +23,6 @@ gem 'rack-cors', :require => 'rack/cors' # enable cross-origin requests
 
 gem 'will_paginate', '~> 3.1.1' # enable response pagination, including limit and offset
 
-gem 'searchkick' # enable fuzzy searching. requires elasticsearch.
-
 group :development, :test do
   gem 'pry'
 
