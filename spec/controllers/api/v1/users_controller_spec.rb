@@ -35,10 +35,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     it_behaves_like "an index endpoint which searches multiple terms" do
-      #let(:email){ "search4me@gmail.com" }
-      #let(:resources){ [create(:user), create(:user, email: email), create(:user)] }
-      #let(:matching_resources){ User.where(email: email) }
-      
+      let(:search_params){ {role: "User", access_level: "Full"} }
+      let(:matching_resources){ create_list(:full_access_user, 3) }
+      let(:partially_matching_resources){ create_list(:limited_access_user, 3) }
+      let(:nonmatching_resources){ create_list(:artist, 3) }
     end
   end
 
