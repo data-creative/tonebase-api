@@ -20,16 +20,8 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
-    users = if query_params.to_h.any?
-      if fuzzy_search
-        binding.pry
-      else
-        User.eager_load(ASSOCIATIONS).where(query_params)
-      end
-    else
-      User.eager_load(ASSOCIATIONS).all
-    end
-
+    users = User.eager_load(ASSOCIATIONS).all
+    users = users.where(query_params) if query_params.to_h.any?
     render_paginated(users)
   end
 

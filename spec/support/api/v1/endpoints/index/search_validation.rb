@@ -1,5 +1,6 @@
 require_relative "../../response"
 
+# @deprecated because we no longer want to do a pre-check to validate user roles before trying to find matches. the client app is smart enough to not need such a validation.
 # @param [Symbol] attribute_name The name of the searchable attribute.
 # @param [String] invalid_search_term An invalid value of the searchable attribute which should trigger a validation error.
 # @example

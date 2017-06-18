@@ -19,7 +19,17 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
     curl https://tonebase-api.herokuapp.com/api/v1/instruments -H 'Authorization: Token token="abc123"' -H 'Content-Type: application/json' -X POST -d '{"name":"My instrument","description":"Produces musical sounds."}'
 
-    curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me@gmail.com -H 'Authorization: Token token="abc123"'
+### Search
+
+Pass URL parameters to "List" endpoints to further filter the resources returned:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me@gmail.com&role=User -H 'Authorization: Token token="abc123"'
+
+By default, these search terms must match exactly for there to be a "hit".
+
+Optionally supply the parameter `fuzzy=true` to enable a "fuzzy" search whereby a search term like "Pag" would return "Paganini", "Pagalo", etc. When using `fuzzy=true`, the request should only supply a single search term. For example:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me&fuzzy=true -H 'Authorization: Token token="abc123"'
 
 ### Pagination
 

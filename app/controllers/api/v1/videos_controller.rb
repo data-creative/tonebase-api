@@ -12,6 +12,22 @@ class Api::V1::VideosController < Api::V1::ApiController
   # GET /api/v1/videos
   def index
     videos = Video.eager_load(ASSOCIATIONS).all
+
+
+
+
+    #users = if query_params.to_h.any?
+    #  if fuzzy_search
+    #    binding.pry
+    #  else
+    #    User.eager_load(ASSOCIATIONS).where(query_params)
+    #  end
+    #else
+    #  User.eager_load(ASSOCIATIONS).all
+    #end
+
+
+
     render_paginated(videos)
   end
 
