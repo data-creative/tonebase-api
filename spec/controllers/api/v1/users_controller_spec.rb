@@ -33,6 +33,12 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       let(:resources){ [create(:user), create(:user, email: email), create(:user)] }
       let(:matching_resources){ User.where(email: email) }
     end
+
+    it_behaves_like "an index endpoint which fuzzy searches", :email, "search4me", "OOPS" do
+      let(:email){ "search4me@gmail.com" }
+      let(:resources){ [create(:user), create(:user, email: email), create(:user)] }
+      let(:matching_resources){ User.where("email LIKE ?", email) }
+    end
   end
 
   describe "GET #show" do

@@ -1,4 +1,5 @@
 require_relative "../response"
+require_relative './index/fuzzy_search' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 require_relative './index/pagination' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 require_relative './index/search' # allows controller spec to avoid separately loading this file (for convenience and brevity)
 require_relative './index/search_validation' # allows controller spec to avoid separately loading this file (for convenience and brevity)
