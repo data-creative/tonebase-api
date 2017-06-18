@@ -20,17 +20,9 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   # GET /api/v1/users
   def index
-    if !params[:role]
-      users = User.eager_load(ASSOCIATIONS).all
-      render_paginated(users)
-    else
-      if User::ROLES.include?(params[:role])
-        users = User.eager_load(ASSOCIATIONS).send(params[:role].underscore.to_sym)
-        render_paginated(users)
-      else
-        render json: {"role": ["not found"]}, status: :not_found
-      end
-    end
+    users = User.eager_load(ASSOCIATIONS).all
+    users = users.where(query_params) if query_params.to_h.any?
+    render_paginated(users)
   end
 
   # GET /api/v1/users/:id
@@ -53,17 +45,6 @@ class Api::V1::UsersController < Api::V1::ApiController
     destroy_and_render_json(@user)
   end
 
-  # GET /api/v1/users/search
-  # @example GET /api/v1/users/search?query[email]=search4me@gmail.com
-  # @example GET /api/v1/users/search?query[role]=Artist&query[first_name]=Talenti
-  def search
-    begin
-      @users = User.eager_load(ASSOCIATIONS).where(query_params)
-    rescue ActionController::ParameterMissing
-      render_query_400
-    end
-  end
-
 private
 
   def set_user
@@ -75,6 +56,6 @@ private
   end
 
   def query_params
-    params.require(:query).permit(PERMITTED_ATTRIBUTES)
+    params.permit(PERMITTED_ATTRIBUTES)
   end
 end

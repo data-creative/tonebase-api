@@ -13,41 +13,25 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint", User
     it_behaves_like "an index endpoint which paginates", User
 
-    context "when a 'role' parameter is specified" do
-      let!(:users){ [create(:user), create(:user), create(:artist), create(:admin)] }
+    it_behaves_like "an index endpoint which searches", :role, "User", "OOPS" do
+      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
+      let(:matching_resources){ User.user }
+    end
 
-      context "when role=User" do
-        let(:response){  get(:index, params: {format: 'json', role: "User"})  }
+    it_behaves_like "an index endpoint which searches", :role, "Artist", "OOPS" do
+      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
+      let(:matching_resources){ User.artist }
+    end
 
-        it "filters only those users matching the given role" do
-          expect(parsed_response.count).to eql(User.user.count)
-        end
-      end
+    it_behaves_like "an index endpoint which searches", :role, "Admin", "OOPS" do
+      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
+      let(:matching_resources){ User.admin }
+    end
 
-      context "when role=Artist" do
-        let(:response){  get(:index, params: {format: 'json', role: "Artist"})  }
-
-        it "includes only those users matching the given role" do
-          expect(parsed_response.count).to eql(User.artist.count)
-        end
-      end
-
-      context "when role=Admin" do
-        let(:response){  get(:index, params: {format: 'json', role: "Admin"})  }
-
-        it "includes only those users matching the given role" do
-          expect(parsed_response.count).to eql(User.admin.count)
-        end
-      end
-
-      context "when role is invalid" do
-        let(:response){  get(:index, params: {format: 'json', role: "OOPS"})  }
-
-        it "returns an error" do
-          expect(response.code).to eql("404")
-          expect(parsed_response["role"]).to include("not found")
-        end
-      end
+    it_behaves_like "an index endpoint which searches", :email, "search4me@gmail.com", "OOPS" do
+      let(:email){ "search4me@gmail.com" }
+      let(:resources){ [create(:user), create(:user, email: email), create(:user)] }
+      let(:matching_resources){ User.where(email: email) }
     end
   end
 
@@ -185,38 +169,5 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "DELETE #destroy" do
     it_behaves_like "a destroy endpoint", User
-  end
-
-  describe "GET #search" do
-    let(:email){ "search4me@gmail.com" }
-    let!(:users){ [create(:user), create(:user, email: email), create(:user)] }
-
-    context "without any search params" do
-      let(:response){  get(:search, params: {format: 'json'})  }
-
-      it "should be unsuccessful (bad_request)" do
-        expect(response.status).to eql(400)
-      end
-    end
-
-    context "with valid search params" do
-      context "when there are no matching resources" do
-        let(:response){  get(:search, params: {format: 'json', query:{email: "OOPS"}})  }
-
-        it "should be successful (ok) and return an empty array" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.empty?).to eql(true)
-        end
-      end
-
-      context "when there are matching resources" do
-        let(:response){  get(:search, params: {format: 'json', query:{email: email}})  }
-
-        it "should be successful (ok) and return an array of matching resources" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.first["email"]).to eql(email)
-        end
-      end
-    end
   end
 end
