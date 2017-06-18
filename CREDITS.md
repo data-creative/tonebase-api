@@ -61,6 +61,7 @@
   + [Nested Resource Controllers](http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/)
   + [Nested Resource Controller Routing](http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/#comment-2563440978)
   + [Avoid deprecation warnings when parsing controller parameters](https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934)
+  + [Creating a variable number of nested factories](http://arjanvandergaag.nl/blog/factory_girl_tips.html)
   + [Searchkick Partial Matches](https://github.com/ankane/searchkick#partial-matches)
   + [Re-index Searchkick on Production](https://stackoverflow.com/questions/27759036/searchkick-reindex-on-heroku)
   + [ActiveRecord Arrays in PostgreSQL](http://edgeguides.rubyonrails.org/active_record_postgresql.html#array)

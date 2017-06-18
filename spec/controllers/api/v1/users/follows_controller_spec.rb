@@ -9,7 +9,12 @@ RSpec.describe Api::V1::Users::FollowsController, type: :controller do
   describe "GET #index" do
     it_behaves_like "a nested index endpoint", :user_id do
       let(:resource){ create(:user, :follower) }
-      let(:nested_resources){ resource.follows }
+      let(:nested_resources){ resource.user_followships }
+    end
+
+    it_behaves_like "a nested index endpoint which paginates", UserFollowship, :user_id do
+      let(:resource){ create(:user, :follower, number_of_follows: 10) }
+      let(:nested_resources){ resource.user_followships }
     end
   end
 

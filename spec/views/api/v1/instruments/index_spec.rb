@@ -1,5 +1,5 @@
 require "rails_helper"
-require_relative "../../../../support/api/v1/view"
+require_relative "../../../../support/api/v1/views/index"
 
 describe "api/v1/instruments/index.json.jbuilder" do
   before(:each) do

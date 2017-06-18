@@ -9,7 +9,12 @@ RSpec.describe Api::V1::Users::FavoriteVideosController, type: :controller do
   describe "GET #index" do
     it_behaves_like "a nested index endpoint", :user_id do
       let(:resource){ create(:user, :with_favorite_videos) }
-      let(:nested_resources){ resource.favorite_videos }
+      let(:nested_resources){ resource.user_favorite_videos }
+    end
+
+    it_behaves_like "a nested index endpoint which paginates", UserFavoriteVideo, :user_id do
+      let(:resource){ create(:user, :with_favorite_videos, number_of_favorite_videos: 10) }
+      let(:nested_resources){ resource.user_favorite_videos }
     end
   end
 
