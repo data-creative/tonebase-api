@@ -21,17 +21,25 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
 ### Search
 
-Pass URL parameters to "List" endpoints to further filter the resources returned:
+Pass one or more URL parameters to "List" endpoints to further filter the resources returned:
 
     curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me@gmail.com -H 'Authorization: Token token="abc123"'
 
     curl https://tonebase-api.herokuapp.com/api/v1/users?role=User&access_level=Full -H 'Authorization: Token token="abc123"'
 
-By default, these search terms must match exactly for there to be a "hit".
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?title=Finale%20from%20Sonata%20%236 -H 'Authorization: Token token="abc123"'
 
-Optionally supply the parameter `fuzzy=true` to enable a "fuzzy" search whereby a search term like "Pag" would return "Paganini", "Pagalo", etc. When using `fuzzy=true`, the request should only supply a single search term. For example:
+By default, all search terms must match exactly for there to be a "hit".
 
-    curl https://tonebase-api.herokuapp.com/api/v1/videos?title=sonata&fuzzy=true -H 'Authorization: Token token="abc123"'
+To optionally perform a "fuzzy" search whereby "Pag" would return "Paganini", "Pagalo", etc., supply search parameters nested under the `fuzzy` parameter. For example:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[title]=sonata -H 'Authorization: Token token="abc123"'
+
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[tags]=borouque -H 'Authorization: Token token="abc123"'
+
+You can mix fuzzy and non-fuzzy search terms. For example:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/users?role=Artist&fuzzy[name]=Pag -H 'Authorization: Token token="abc123"'
 
 ### Pagination
 
