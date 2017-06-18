@@ -24,7 +24,13 @@ shared_examples_for "an index endpoint which searches" do |attribute_name, match
         it "should be successful (ok) and return an array of matching resources" do
           expect(response.status).to eql(200)
           expect(parsed_response.count).to eql(matching_resources.count)
-          expect(parsed_response.first[attribute_name.to_s]).to eql(matching_value)
+
+          first_attribute_value = parsed_response.first[attribute_name.to_s]
+          if first_attribute_value.is_a?(Array)
+            expect(first_attribute_value).to include(matching_value)
+          else
+            expect(first_attribute_value).to eql(matching_value)
+          end
         end
       end
 

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :video do
     user
     instrument
-    sequence(:title, 99){|n| "Finale from Sonata #{n})" }
+    sequence(:title, 99){|n| "Finale from Sonata #{n}" }
     description "The final moments of master composer Maestrelli's most famous piece. Composed in 1817."
     tags nil
 

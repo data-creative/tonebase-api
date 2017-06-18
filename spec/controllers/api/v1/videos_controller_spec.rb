@@ -19,6 +19,11 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       let(:matching_resources){ Video.where(title: title) }
     end
 
+    it_behaves_like "an index endpoint which searches", :tags, "borouque", "OOPS" do
+      let(:resources){ [create(:video), create(:video, :tagged), create(:video)] }
+      let(:matching_resources){ Video.where("tags LIKE '%borouque%'") }
+    end
+
     #it_behaves_like "an index endpoint which searches multiple terms" do
     #  let(:search_params){ {role: "User", access_level: "Full"} }
     #  let(:matching_resources){ create_list(:full_access_user, 3) }

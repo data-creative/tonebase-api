@@ -9,6 +9,10 @@
   + [Recent Rails Project](https://github.com/s2t2/next-train-api/)
   + [Postico software for PostgreSQL](https://eggerapps.at/postico/)
 
+## PostgreSQL Documentation
+
+  + [PostgreSQL Array Operators](https://www.postgresql.org/docs/current/static/functions-array.html)
+
 ## Rails Documentation
 
   + [ActionController Overview](http://guides.rubyonrails.org/action_controller_overview.html)
@@ -59,3 +63,4 @@
   + [Avoid deprecation warnings when parsing controller parameters](https://github.com/stripe/stripe-ruby/issues/377#issuecomment-287339934)
   + [Searchkick Partial Matches](https://github.com/ankane/searchkick#partial-matches)
   + [Re-index Searchkick on Production](https://stackoverflow.com/questions/27759036/searchkick-reindex-on-heroku)
+  + [ActiveRecord Arrays in PostgreSQL](http://edgeguides.rubyonrails.org/active_record_postgresql.html#array)

@@ -23,6 +23,7 @@ class Api::V1::VideosController < Api::V1::ApiController
   def index
     videos = Video.eager_load(ASSOCIATIONS).all
     videos = videos.where(query_params) if query_params.to_h.any?
+    videos = filter_on_array_inclusion(videos) if array_query_params.any?
     render_paginated(videos)
   end
 
@@ -57,6 +58,17 @@ private
   end
 
   def query_params
-    params.permit(PERMITTED_ATTRIBUTES)
-  end # refactor me!
+    params.permit([:title])
+  end
+
+  def array_query_params
+    params.permit([:tags]).to_h
+  end
+
+  def filter_on_array_inclusion(resources)
+    array_query_params.each do |k,v|
+      resources = resources.where("#{k} ILIKE ?", "%#{v}%")
+    end
+    return resources
+  end
 end

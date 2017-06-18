@@ -63,8 +63,8 @@ private
   end
 
   def query_params
-    params.permit(PERMITTED_ATTRIBUTES)
-  end # refactor me!
+    params.permit([:email, :username, :confirmed, :visible, :role, :access_level, :customer_uuid])
+  end
 
   def fuzzy_search
     ActiveModel::Type::Boolean.new.cast(params["fuzzy"]) == true

@@ -173,13 +173,15 @@ unless Rails.env.test? #if Rails.env.development?
   # VIDEOS
   #
 
-  9.times do |i|
+  15.times do |i|
+    tags = [nil, ["borouque", "maestrelli", "g-major"]].sample
+
     video = Video.create({
       user_id: artist_ids.sample,
       instrument_id: instrument.id,
       title: "Finale from Sonata ##{i}",
       description: "The final moments of master composer Maestrelli's most famous piece. Composed in #{1817 + i}.",
-      tags: ["borouque", "maestrelli", "g-major"]
+      tags: tags
     })
 
     VideoPart.create(video: video, source_url: "https://www.youtube.com/watch?v=abc123", number: 1, duration: 333)
