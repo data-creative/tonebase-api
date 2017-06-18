@@ -2,9 +2,16 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: [:show, :update, :destroy]
 
   PERMITTED_ATTRIBUTES = [
-    :email, :password, :username,
-    :confirmed, :visible, :role, :access_level,
-    :customer_uuid, :oauth, :oauth_provider,
+    :email,
+    :password,
+    :username,
+    :confirmed,
+    :visible,
+    :role,
+    :access_level,
+    :customer_uuid,
+    :oauth,
+    :oauth_provider,
     user_profile_attributes: [:first_name, :last_name, :bio, :image_url, :hero_url, :birth_year, professions:[]],
     user_music_profile_attributes: [:guitar_owned, guitar_models_owned:[], fav_composers:[], fav_performers:[], fav_periods:[]]
   ]
@@ -57,7 +64,7 @@ private
 
   def query_params
     params.permit(PERMITTED_ATTRIBUTES)
-  end
+  end # refactor me!
 
   def fuzzy_search
     ActiveModel::Type::Boolean.new.cast(params["fuzzy"]) == true

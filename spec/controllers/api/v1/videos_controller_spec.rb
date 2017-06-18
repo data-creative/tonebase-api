@@ -12,6 +12,19 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   describe "GET #index" do
     it_behaves_like "an index endpoint", Video
     it_behaves_like "an index endpoint which paginates", Video
+
+    it_behaves_like "an index endpoint which searches", :title, "My Sonata", "OOPS" do
+      let(:title){ "My Sonata" }
+      let(:resources){ [create(:video), create(:video, title: title), create(:video)] }
+      let(:matching_resources){ Video.where(title: title) }
+    end
+
+    #it_behaves_like "an index endpoint which searches multiple terms" do
+    #  let(:search_params){ {role: "User", access_level: "Full"} }
+    #  let(:matching_resources){ create_list(:full_access_user, 3) }
+    #  let(:partially_matching_resources){ create_list(:limited_access_user, 3) }
+    #  let(:nonmatching_resources){ create_list(:artist, 3) }
+    #end
   end
 
   describe "GET #show" do

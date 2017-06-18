@@ -1,6 +1,16 @@
 class Api::V1::VideosController < Api::V1::ApiController
   before_action :set_video, only: [:show, :update, :destroy]
 
+  PERMITTED_ATTRIBUTES = [
+    :user_id,
+    :instrument_id,
+    :title,
+    :description,
+    tags: [],
+    video_parts_attributes: [:source_url, :number, :duration],
+    video_scores_attributes: [:image_url, :starts_at, :ends_at],
+  ]
+
   ASSOCIATIONS = [
     :video_parts, :video_scores,
     [user: :user_profile],
@@ -12,22 +22,7 @@ class Api::V1::VideosController < Api::V1::ApiController
   # GET /api/v1/videos
   def index
     videos = Video.eager_load(ASSOCIATIONS).all
-
-
-
-
-    #users = if query_params.to_h.any?
-    #  if fuzzy_search
-    #    binding.pry
-    #  else
-    #    User.eager_load(ASSOCIATIONS).where(query_params)
-    #  end
-    #else
-    #  User.eager_load(ASSOCIATIONS).all
-    #end
-
-
-
+    videos = videos.where(query_params) if query_params.to_h.any?
     render_paginated(videos)
   end
 
@@ -58,10 +53,10 @@ private
   end
 
   def video_params
-    params.require(:video).permit([
-      :user_id, :instrument_id, :title, :description, tags: [],
-      video_parts_attributes: [:source_url, :number, :duration],
-      video_scores_attributes: [:image_url, :starts_at, :ends_at],
-    ])
+    params.require(:video).permit(PERMITTED_ATTRIBUTES)
   end
+
+  def query_params
+    params.permit(PERMITTED_ATTRIBUTES)
+  end # refactor me!
 end
