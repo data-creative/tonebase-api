@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  searchkick text_middle: [:email]
+  # User.search("joe", fields: [:email], match: :text_middle).first.email
+  # User.search("avg", fields: [:email], match: :text_middle).first.email
+
   has_one :user_profile, inverse_of: :user, dependent: :destroy
   has_one :user_music_profile, inverse_of: :user, dependent: :destroy
   alias :profile :user_profile
