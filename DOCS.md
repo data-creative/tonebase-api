@@ -25,7 +25,7 @@ Pass one or more URL parameters to designated "List" endpoints to further filter
 
     curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me@gmail.com -H 'Authorization: Token token="abc123"'
 
-    curl https://tonebase-api.herokuapp.com/api/v1/users?role=User&access_level=Full -H 'Authorization: Token token="abc123"'
+    curl "https://tonebase-api.herokuapp.com/api/v1/users?role=User&access_level=Full" -H 'Authorization: Token token="abc123"'
 
     curl https://tonebase-api.herokuapp.com/api/v1/videos?title=Finale%20from%20Sonata%20%236 -H 'Authorization: Token token="abc123"'
 
@@ -33,13 +33,13 @@ By default, all search terms must match exactly for there to be a "hit".
 
 To optionally perform a "fuzzy" search whereby "Pag" would return "Paganini", "Pagalo", etc., supply search parameters nested under the `fuzzy` parameter. For example:
 
-    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[title]=sonata -H 'Authorization: Token token="abc123"'
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[title]=sonata -H 'Authorization: Token token="abc123"' --globoff
 
-    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[tags]=borouque -H 'Authorization: Token token="abc123"'
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[tags]=borouque -H 'Authorization: Token token="abc123"' --globoff
 
 You can mix fuzzy and non-fuzzy search terms. For example:
 
-    curl https://tonebase-api.herokuapp.com/api/v1/users?role=Artist&fuzzy[name]=Pag -H 'Authorization: Token token="abc123"'
+    curl "https://tonebase-api.herokuapp.com/api/v1/users?role=Artist&fuzzy[name]=Pag" -H 'Authorization: Token token="abc123"' --globoff
 
 ### Pagination
 
@@ -48,11 +48,11 @@ However you can optionally request paginated responses from "List" endpoints
  by specifying **both** the `page` and `per_page` parameters.
 For example, the following requests, in succession will return the first, second, and third pages of users, respectively, given a constant `per_page` value:
 
-    curl https://tonebase-api.herokuapp.com/api/v1/videos?page=1&per_page=5 -H 'Authorization: Token token="abc123"'
+    curl "https://tonebase-api.herokuapp.com/api/v1/videos?page=1&per_page=5" -H 'Authorization: Token token="abc123"'
 
-    curl https://tonebase-api.herokuapp.com/api/v1/videos?page=2&per_page=5 -H 'Authorization: Token token="abc123"'
+    curl "https://tonebase-api.herokuapp.com/api/v1/videos?page=2&per_page=5" -H 'Authorization: Token token="abc123"'
 
-    curl https://tonebase-api.herokuapp.com/api/v1/videos?page=3&per_page=5 -H 'Authorization: Token token="abc123"'
+    curl "https://tonebase-api.herokuapp.com/api/v1/videos?page=3&per_page=5" -H 'Authorization: Token token="abc123"'
 
 Except where otherwise noted, the API returns resources in ascending order of creation, so the first page will contain the oldest resources and the last page will contain the newest resources.
 
