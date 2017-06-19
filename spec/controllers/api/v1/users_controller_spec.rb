@@ -13,39 +13,34 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint", User
     it_behaves_like "an index endpoint which paginates", User
 
-
-
-
-
-
-
-
-    it_behaves_like "an index endpoint which searches", :role, "User", "OOPS" do
-      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
-      let(:matching_resources){ User.user }
+    it_behaves_like "an index endpoint which filters", User, {role: "User"} do
+      let(:matches){ create_list(:user, 3) }
+      let(:nonmatches){ [create_list(:admin, 3), create_list(:artist, 3)].flatten }
     end
 
-    it_behaves_like "an index endpoint which searches", :role, "Artist", "OOPS" do
-      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
-      let(:matching_resources){ User.artist }
+    it_behaves_like "an index endpoint which filters", User, {role: "Artist"} do
+      let(:matches){ create_list(:artist, 3) }
+      let(:nonmatches){ [create_list(:user, 3), create_list(:admin, 3)].flatten }
     end
 
-    it_behaves_like "an index endpoint which searches", :role, "Admin", "OOPS" do
-      let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
-      let(:matching_resources){ User.admin }
+    it_behaves_like "an index endpoint which filters", User, {role: "Admin"} do
+      let(:matches){ create_list(:admin, 3) }
+      let(:nonmatches){ [create_list(:user, 3), create_list(:artist, 3)].flatten }
     end
 
-    it_behaves_like "an index endpoint which searches", :email, "search4me@gmail.com", "OOPS" do
-      let(:email){ "search4me@gmail.com" }
-      let(:resources){ [create(:user), create(:user, email: email), create(:user)] }
-      let(:matching_resources){ User.where(email: email) }
+    it_behaves_like "an index endpoint which filters", User, {email: "search4me@gmail.com"} do
+      let(:matches){ [ create(:user, email: "search4me@gmail.com") ] }
+      let(:nonmatches){ create_list(:user, 3) }
     end
 
-    it_behaves_like "an index endpoint which searches multiple terms" do
-      let(:search_params){ {role: "User", access_level: "Full"} }
-      let(:matching_resources){ create_list(:full_access_user, 3) }
-      let(:partially_matching_resources){ create_list(:limited_access_user, 3) }
-      let(:nonmatching_resources){ create_list(:artist, 3) }
+    it_behaves_like "an index endpoint which filters", User, {role: "User", access_level: "Full"} do
+      let(:matches){ create_list(:full_access_user, 3) }
+      let(:nonmatches){
+        [
+          create_list(:artist, 3),
+          create_list(:limited_access_user, 3)
+        ].flatten
+      }
     end
 
     it_behaves_like "an index endpoint which filters", User, {first_name: "John", last_name: "Campbell"} do

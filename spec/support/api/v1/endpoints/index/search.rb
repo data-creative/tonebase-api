@@ -1,47 +1,51 @@
 require_relative "../../response"
 
-# @param [Symbol] attribute_name The name of the searchable attribute.
-# @param [String] matching_value A matching value of the searchable attribute.
-# @param [String] nonmatching_value A non-matching value of the searchable attribute.
-# @param [String] matching_resources A list of resources which matches the search terms and should be included in the response.
+# @param [Hash] search_params
+# @param [Array<ApplicationRecord>] matching_resources Resources which match all the search terms.
+# @param [Array<ApplicationRecord>] nonmatching_resources Resources which match none of the search terms.
 # @example
 #
-#   it_behaves_like "an index endpoint which searches", :role, "User", "OOPS" do
-#     let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
-#     let(:matching_resources){ User.user }
+#   it_behaves_like "an index endpoint which filters", Video, {title: "My Sonata"} do
+#     let(:matches){ ["My Sonata"].map{|title|
+#       create(:video, title: title)
+#     }}
+#
+#     let(:nonmatches){ ["Sonata", "Other Sonata", "thirdsonata", "ABC"].map{|title|
+#       create(:video, title: title)
+#     }}
 #   end
 #
-shared_examples_for "an index endpoint which searches" do |attribute_name, matching_value, nonmatching_value|
+#   it_behaves_like "an index endpoint which filters", Video, {fuzzy: {title: "Sonata"}} do
+#     let(:matches){ ["Sonata", "Other Sonata", "thirdsonata"].map{|title|
+#       create(:video, title: title)
+#     }}
+#
+#     let(:nonmatches){ ["ABC"].map{|title|
+#       create(:video, title: title)
+#     }}
+#   end
+#
+shared_examples_for "an index endpoint which filters" do |model_class, request_params|
   describe "response" do
-    context "when a valid '#{attribute_name}' parameter is specified" do
-      before(:each) do
-        resources
-      end
+    let(:response){ get(:index, params: request_params.merge(format: 'json')) }
 
-      context "when there are matching resources" do
-        let(:response){ get(:index, params: {format: 'json', attribute_name.to_sym => matching_value}) }
+    before(:each) do
+      matches
+      nonmatches
+    end
 
-        it "should be successful (ok) and return an array of matching resources" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.count).to eql(matching_resources.count)
+    it "should be successful (ok)" do
+      expect(response.status).to eql(200)
+    end
 
-          first_attribute_value = parsed_response.first[attribute_name.to_s]
-          if first_attribute_value.is_a?(Array)
-            expect(first_attribute_value).to include(matching_value)
-          else
-            expect(first_attribute_value).to eql(matching_value)
-          end
-        end
-      end
+    it "should return an array of matching resources" do
+      expect(parsed_response.count).to eql(matches.count)
+    end
 
-      context "when there are no matching resources" do
-        let(:response){ get(:index, params: {format: 'json', attribute_name.to_sym => nonmatching_value}) }
-
-        it "should be successful (ok) and return an empty array" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.empty?).to eql(true)
-        end
-      end
+    it "should not return any other resources" do
+      expect(defined?(matches).nil?).to eql(false) # expect to have been defined previously
+      expect(defined?(nonmatches).nil?).to eql(false) # expect to have been defined previously
+      expect(model_class.count).to eql(matches.count + nonmatches.count)
     end
   end
 end
