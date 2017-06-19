@@ -1,4 +1,6 @@
 class Api::V1::VideosController < Api::V1::ApiController
+  include Search
+
   before_action :set_video, only: [:show, :update, :destroy]
 
   PERMITTED_ATTRIBUTES = [
@@ -61,19 +63,7 @@ private
     params.permit([:title])
   end
 
-  def filter(resources)
-    resources.where(search_params.to_h)
-  end
-
   def fuzzy_search_params
     params.permit(fuzzy: [:title, :tags])
-  end
-
-  def fuzzy_filter(resources)
-    fuzzy_search_params.to_h["fuzzy"].each do |k,v|
-      resources = resources.where("#{k} ILIKE ?", "%#{v}%")
-    end
-
-    return resources
   end
 end
