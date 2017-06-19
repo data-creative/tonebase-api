@@ -81,11 +81,16 @@ FactoryGirl.define do
       access_level "Full"
 
       trait :with_profile do
+        transient do
+          first_name "Talenti"
+          last_name "Pro"
+        end
+
         after(:create) do |artist, evaluator|
           create(:user_profile,
             user: artist,
-            first_name: "Talenti",
-            last_name: "Pro",
+            first_name: evaluator.first_name,
+            last_name: evaluator.last_name,
             birth_year: 1975,
             professions: ["Performer", "Instructor"],
             bio: "My music. My passion.",

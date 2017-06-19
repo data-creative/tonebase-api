@@ -1,5 +1,17 @@
 class Api::V1::VideosController < Api::V1::ApiController
+  include Search
+
   before_action :set_video, only: [:show, :update, :destroy]
+
+  PERMITTED_ATTRIBUTES = [
+    :user_id,
+    :instrument_id,
+    :title,
+    :description,
+    tags: [],
+    video_parts_attributes: [:source_url, :number, :duration],
+    video_scores_attributes: [:image_url, :starts_at, :ends_at],
+  ]
 
   ASSOCIATIONS = [
     :video_parts, :video_scores,
@@ -12,6 +24,8 @@ class Api::V1::VideosController < Api::V1::ApiController
   # GET /api/v1/videos
   def index
     videos = Video.eager_load(ASSOCIATIONS).all
+    videos = filter(videos) if search_params.to_h.any?
+    videos = fuzzy_filter(videos) if fuzzy_search_params.to_h.any?
     render_paginated(videos)
   end
 
@@ -42,10 +56,14 @@ private
   end
 
   def video_params
-    params.require(:video).permit([
-      :user_id, :instrument_id, :title, :description, tags: [],
-      video_parts_attributes: [:source_url, :number, :duration],
-      video_scores_attributes: [:image_url, :starts_at, :ends_at],
-    ])
+    params.require(:video).permit(PERMITTED_ATTRIBUTES)
+  end
+
+  def search_params
+    params.permit([:title])
+  end
+
+  def fuzzy_search_params
+    params.permit(fuzzy: [:title, :tags])
   end
 end

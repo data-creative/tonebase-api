@@ -50,6 +50,18 @@ class Video < ApplicationRecord
     video_scores.map{|video_score| video_score.serializable_hash(only: [:image_url, :starts_at, :ends_at]) }
   end
 
+  #
+  # CLASS METHODS
+  #
+
+  def self.tagged
+    where("tags IS NOT NULL")
+  end
+
+  def self.untagged
+    where("tags IS NULL")
+  end
+
 private
 
   def broadcast_new_video_event_to_artist_followers

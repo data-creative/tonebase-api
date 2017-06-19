@@ -31,6 +31,30 @@ RSpec.describe Video, type: :model do
     end
   end
 
+  describe "class methods" do
+    describe ".tagged" do
+      before(:each) do
+        create(:video, :tagged)
+        create_list(:video, 5)
+      end
+
+      it "should return videos that have one or more tags" do
+        expect(Video.tagged.count).to eql(1)
+      end
+    end
+
+    describe ".untagged" do
+      before(:each) do
+        create(:video, :tagged)
+        create_list(:video, 5)
+      end
+
+      it "should return videos that have no tags" do
+        expect(Video.untagged.count).to eql(5)
+      end
+    end
+  end
+
   describe "call-backs" do
     describe "after_create " do
       describe "#broadcast_new_video_event_to_artist_followers" do

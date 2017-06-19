@@ -18,8 +18,6 @@ Rails.application.routes.draw do
       resources :ad_instruments, only: [:create, :destroy]
 
       resources :users, only: [:index, :show, :create, :update, :destroy] do
-        get "search", on: :collection
-
         scope module: "users" do
           resources :follows, only: [:index, :destroy], param: :followed_user_id
           resources :followers, only: [:index]

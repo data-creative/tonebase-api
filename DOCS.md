@@ -19,7 +19,27 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
     curl https://tonebase-api.herokuapp.com/api/v1/instruments -H 'Authorization: Token token="abc123"' -H 'Content-Type: application/json' -X POST -d '{"name":"My instrument","description":"Produces musical sounds."}'
 
-    curl https://tonebase-api.herokuapp.com/api/v1/users/search?query[email]=search4me@gmail.com -H 'Authorization: Token token="abc123"' --globoff
+### Search
+
+Pass one or more URL parameters to designated "List" endpoints to further filter the resources returned:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me@gmail.com -H 'Authorization: Token token="abc123"'
+
+    curl https://tonebase-api.herokuapp.com/api/v1/users?role=User&access_level=Full -H 'Authorization: Token token="abc123"'
+
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?title=Finale%20from%20Sonata%20%236 -H 'Authorization: Token token="abc123"'
+
+By default, all search terms must match exactly for there to be a "hit".
+
+To optionally perform a "fuzzy" search whereby "Pag" would return "Paganini", "Pagalo", etc., supply search parameters nested under the `fuzzy` parameter. For example:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[title]=sonata -H 'Authorization: Token token="abc123"'
+
+    curl https://tonebase-api.herokuapp.com/api/v1/videos?fuzzy[tags]=borouque -H 'Authorization: Token token="abc123"'
+
+You can mix fuzzy and non-fuzzy search terms. For example:
+
+    curl https://tonebase-api.herokuapp.com/api/v1/users?role=Artist&fuzzy[name]=Pag -H 'Authorization: Token token="abc123"'
 
 ### Pagination
 
@@ -45,7 +65,7 @@ code | major status | minor status | description
 200 | Success | OK | The resource(s) were returned successfully. Or the resource was updated successfully.
 201 | Success | Created | The resource was created successfully.
 204 | Success | No Content | The resource was destroyed successfully.
-400 | Client Error | Bad Request | Make sure you are passing the correct URL parameters. If you are using a "search" endpoint, make sure you are passing a `query` URL parameter. If you are using pagination parameters, make sure you're using them both!
+400 | Client Error | Bad Request | Make sure you are passing the correct URL parameters. If you are using pagination parameters, make sure you're using them both!
 401 | Client Error | Unauthorized | The API requires you to pass an access token in the headers. Ensure you are passing a valid token.
 404 | Client Error | Not found | The resource wasn't found. Ensure the resource identifier is correct and other parameter values are valid.
 422 | Client Error | Unprocessable | You tried to create or update a resource but something went wrong. Maybe there are validation errors.
@@ -404,12 +424,11 @@ Endpoints:
 
 Action | Request Method | Endpoint URL | Comments
 ---	|	---	| --- | ---
-List | GET | /users | Returns all users by default, regardless of role. Optionally supply a `role` parameter (e.g. `/users?role=User`) to get a subset of users assigned to the specified role.
+List | GET | /users | Returns all users by default. Optionally supply parameters matching user attributes (e.g. `/users?email=search4me@gmail.com` or `/users?role=Artist` or `/users?role=User&access_level=Full`) to get a subset of matching users. This will always return an array of objects, even if there are zero matches or only one match.
 Create | POST | /users | N/A
 Show | GET | /users/:id | N/A
 Update | PUT | /users/:id | N/A
 Destroy | DELETE | /users/:id | N/A
-Search | GET | /users/search | Supply parameters matching user attributes (e.g. `/users/search?query[email]=search4me@gmail.com`) to get a subset of matching users. This will always return an array of objects, even if there is only one match.
 
 Example POST/PUT request body:
 
@@ -697,13 +716,13 @@ ends_at | Integer (seconds) | Stop displaying the score after the global video d
 
 Endpoints:
 
-Action | Request Method | Endpoint URL
----	|	---	|	---
-List | GET | /videos
-Create | POST | /videos
-Show | GET | /videos/:id
-Update | PUT | /videos/:id
-Destroy | DELETE | /videos/:id
+Action | Request Method | Endpoint URL | Comments
+---	|	---	|	--- | ---
+List | GET | /videos | Returns all videos by default. Optionally supply parameters matching video attributes (e.g. `/videos?title=Finale%20from%20Sonata%20%236` or `/videos?fuzzy[title]=sonata` or `/videos?fuzzy[tags]=borouque`) to get a subset of matching videos. This will always return an array of objects, even if there are zero matches or only one match.
+Create | POST | /videos | N/A
+Show | GET | /videos/:id | N/A
+Update | PUT | /videos/:id | N/A
+Destroy | DELETE | /videos/:id | N/A
 
 Example POST/PUT request body:
 

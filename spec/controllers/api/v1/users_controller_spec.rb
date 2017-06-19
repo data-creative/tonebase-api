@@ -13,41 +13,56 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint", User
     it_behaves_like "an index endpoint which paginates", User
 
-    context "when a 'role' parameter is specified" do
-      let!(:users){ [create(:user), create(:user), create(:artist), create(:admin)] }
+    it_behaves_like "an index endpoint which filters", User, {role: "User"} do
+      let(:matches){ create_list(:user, 3) }
+      let(:nonmatches){ [create_list(:admin, 3), create_list(:artist, 3)].flatten }
+    end
 
-      context "when role=User" do
-        let(:response){  get(:index, params: {format: 'json', role: "User"})  }
+    it_behaves_like "an index endpoint which filters", User, {role: "Artist"} do
+      let(:matches){ create_list(:artist, 3) }
+      let(:nonmatches){ [create_list(:user, 3), create_list(:admin, 3)].flatten }
+    end
 
-        it "filters only those users matching the given role" do
-          expect(parsed_response.count).to eql(User.user.count)
-        end
-      end
+    it_behaves_like "an index endpoint which filters", User, {role: "Admin"} do
+      let(:matches){ create_list(:admin, 3) }
+      let(:nonmatches){ [create_list(:user, 3), create_list(:artist, 3)].flatten }
+    end
 
-      context "when role=Artist" do
-        let(:response){  get(:index, params: {format: 'json', role: "Artist"})  }
+    it_behaves_like "an index endpoint which filters", User, {email: "search4me@gmail.com"} do
+      let(:matches){ [ create(:user, email: "search4me@gmail.com") ] }
+      let(:nonmatches){ create_list(:user, 3) }
+    end
 
-        it "includes only those users matching the given role" do
-          expect(parsed_response.count).to eql(User.artist.count)
-        end
-      end
+    it_behaves_like "an index endpoint which filters", User, {role: "User", access_level: "Full"} do
+      let(:matches){ create_list(:full_access_user, 3) }
+      let(:nonmatches){
+        [
+          create_list(:artist, 3),
+          create_list(:limited_access_user, 3)
+        ].flatten
+      }
+    end
 
-      context "when role=Admin" do
-        let(:response){  get(:index, params: {format: 'json', role: "Admin"})  }
+    it_behaves_like "an index endpoint which filters", User, {first_name: "John", last_name: "Campbell"} do
+      let(:matches){[
+        create(:artist, :with_profile, first_name: "John", last_name: "Campbell")
+      ]}
+      let(:nonmatches){[
+        create(:user),
+        create(:artist),
+        create(:artist, :with_profile),
+        create(:artist, :with_profile, first_name: "Johnny", last_name: "Campbell")
+      ]}
+    end
 
-        it "includes only those users matching the given role" do
-          expect(parsed_response.count).to eql(User.admin.count)
-        end
-      end
-
-      context "when role is invalid" do
-        let(:response){  get(:index, params: {format: 'json', role: "OOPS"})  }
-
-        it "returns an error" do
-          expect(response.code).to eql("404")
-          expect(parsed_response["role"]).to include("not found")
-        end
-      end
+    it_behaves_like "an index endpoint which filters", User, {role: "Artist", fuzzy: {name: "pag"}} do
+      let(:matches){[
+        create(:artist, :with_profile, last_name: "Page"),
+        create(:artist, :with_profile, last_name: "Pagani"),
+        create(:artist, :with_profile, last_name: "Sappagio"),
+        create(:artist, :with_profile, first_name: "Paggrono")
+      ]}
+      let(:nonmatches){ [create(:user), create(:artist), create(:artist, :with_profile)] }
     end
   end
 
@@ -185,38 +200,5 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "DELETE #destroy" do
     it_behaves_like "a destroy endpoint", User
-  end
-
-  describe "GET #search" do
-    let(:email){ "search4me@gmail.com" }
-    let!(:users){ [create(:user), create(:user, email: email), create(:user)] }
-
-    context "without any search params" do
-      let(:response){  get(:search, params: {format: 'json'})  }
-
-      it "should be unsuccessful (bad_request)" do
-        expect(response.status).to eql(400)
-      end
-    end
-
-    context "with valid search params" do
-      context "when there are no matching resources" do
-        let(:response){  get(:search, params: {format: 'json', query:{email: "OOPS"}})  }
-
-        it "should be successful (ok) and return an empty array" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.empty?).to eql(true)
-        end
-      end
-
-      context "when there are matching resources" do
-        let(:response){  get(:search, params: {format: 'json', query:{email: email}})  }
-
-        it "should be successful (ok) and return an array of matching resources" do
-          expect(response.status).to eql(200)
-          expect(parsed_response.first["email"]).to eql(email)
-        end
-      end
-    end
   end
 end
