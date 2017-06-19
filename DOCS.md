@@ -21,7 +21,7 @@ The API only fulfills authorized requests. To send an authorized request, pass a
 
 ### Search
 
-Pass one or more URL parameters to "List" endpoints to further filter the resources returned:
+Pass one or more URL parameters to designated "List" endpoints to further filter the resources returned:
 
     curl https://tonebase-api.herokuapp.com/api/v1/users?email=search4me@gmail.com -H 'Authorization: Token token="abc123"'
 
@@ -424,7 +424,7 @@ Endpoints:
 
 Action | Request Method | Endpoint URL | Comments
 ---	|	---	| --- | ---
-List | GET | /users | Returns all users by default. Optionally supply parameters matching user attributes (e.g. `/users?email=search4me@gmail.com` or `/users?role=Artist`) to get a subset of matching users. This will always return an array of objects, even if there are zero matches or only one match.
+List | GET | /users | Returns all users by default. Optionally supply parameters matching user attributes (e.g. `/users?email=search4me@gmail.com` or `/users?role=Artist` or `/users?role=User&access_level=Full`) to get a subset of matching users. This will always return an array of objects, even if there are zero matches or only one match.
 Create | POST | /users | N/A
 Show | GET | /users/:id | N/A
 Update | PUT | /users/:id | N/A
@@ -716,13 +716,13 @@ ends_at | Integer (seconds) | Stop displaying the score after the global video d
 
 Endpoints:
 
-Action | Request Method | Endpoint URL
----	|	---	|	---
-List | GET | /videos
-Create | POST | /videos
-Show | GET | /videos/:id
-Update | PUT | /videos/:id
-Destroy | DELETE | /videos/:id
+Action | Request Method | Endpoint URL | Comments
+---	|	---	|	--- | ---
+List | GET | /videos | Returns all videos by default. Optionally supply parameters matching video attributes (e.g. `/videos?title=Finale%20from%20Sonata%20%236` or `/videos?fuzzy[title]=sonata` or `/videos?fuzzy[tags]=borouque`) to get a subset of matching videos. This will always return an array of objects, even if there are zero matches or only one match.
+Create | POST | /videos | N/A
+Show | GET | /videos/:id | N/A
+Update | PUT | /videos/:id | N/A
+Destroy | DELETE | /videos/:id | N/A
 
 Example POST/PUT request body:
 

@@ -14,23 +14,13 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     it_behaves_like "an index endpoint which paginates", Video
 
     it_behaves_like "an index endpoint which filters", Video, {title: "My Sonata"} do
-      let(:matches){ ["My Sonata"].map{|title|
-        create(:video, title: title)
-      }}
-
-      let(:nonmatches){ ["Sonata", "Other Sonata", "thirdsonata", "ABC"].map{|title|
-        create(:video, title: title)
-      }}
+      let(:matches){ ["My Sonata"].map{|title| create(:video, title: title)} }
+      let(:nonmatches){ ["Sonata", "Other Sonata", "thirdsonata", "ABC"].map{|title| create(:video, title: title)} }
     end
 
-    it_behaves_like "an index endpoint which filters", Video, {fuzzy: {title: "Sonata"}} do
-      let(:matches){ ["Sonata", "Other Sonata", "thirdsonata"].map{|title|
-        create(:video, title: title)
-      }}
-
-      let(:nonmatches){ ["ABC"].map{|title|
-        create(:video, title: title)
-      }}
+    it_behaves_like "an index endpoint which filters", Video, {fuzzy: {title: "sonata"}} do
+      let(:matches){ ["Sonata", "Other Sonata", "thirdsonata"].map{|title| create(:video, title: title)} }
+      let(:nonmatches){ ["My Video"].map{|title| create(:video, title: title)} }
     end
   end
 
