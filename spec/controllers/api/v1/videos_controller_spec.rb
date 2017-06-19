@@ -22,6 +22,16 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       let(:matches){ ["Sonata", "Other Sonata", "thirdsonata"].map{|title| create(:video, title: title)} }
       let(:nonmatches){ ["My Video"].map{|title| create(:video, title: title)} }
     end
+
+    it_behaves_like "an index endpoint which filters", Video, {fuzzy: {tags: "borouque"}} do
+      let(:matches){[
+          ["Borouque","g-major","xyz"],
+          ["abc", "late borouque"],
+          ["borouque"]
+        ].map{|tags| create(:video, tags: tags) }
+      }
+      let(:nonmatches){ [create(:video), create(:video), create(:video, tags: ["g-major", "fun times"])] }
+    end
   end
 
   describe "GET #show" do
