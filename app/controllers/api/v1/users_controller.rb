@@ -29,7 +29,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   def index
     users = User.eager_load(ASSOCIATIONS).all
     users = filter(users) if search_params.to_h.any?
-    #users = fuzzy_filter(users) if fuzzy_search_params.to_h.any?
+    users = fuzzy_filter(users) if fuzzy_search_params.to_h.any?
     render_paginated(users)
   end
 
@@ -71,15 +71,19 @@ private
     resources.where(search_params.to_h)
   end
 
-  #def fuzzy_search_params
-  #  params.permit(fuzzy: [:name])
-  #end
+  def fuzzy_search_params
+    params.permit(fuzzy: [:name])
+  end
 
-  #def fuzzy_filter(resources)
-  #  fuzzy_search_params.to_h["fuzzy"].each do |k,v|
-  #    resources = resources.where("#{k} ILIKE ?", "%#{v}%")
-  #  end
-#
-  #  return resources
-  #end
+  def fuzzy_filter(resources)
+    fuzzy_search_params.to_h["fuzzy"].each do |k,v|
+      if k == "name"
+        resources = resources.where("user_profiles.first_name ILIKE :name OR user_profiles.last_name ILIKE :name", name: "%#{v}%")
+      else
+        resources = resources.where("#{k} ILIKE ?", "%#{v}%")
+      end
+    end
+
+    return resources
+  end
 end

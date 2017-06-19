@@ -13,6 +13,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it_behaves_like "an index endpoint", User
     it_behaves_like "an index endpoint which paginates", User
 
+
+
+
+
+
+
+
     it_behaves_like "an index endpoint which searches", :role, "User", "OOPS" do
       let(:resources){ [create(:user), create(:user), create(:artist), create(:admin)] }
       let(:matching_resources){ User.user }
@@ -39,6 +46,16 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       let(:matching_resources){ create_list(:full_access_user, 3) }
       let(:partially_matching_resources){ create_list(:limited_access_user, 3) }
       let(:nonmatching_resources){ create_list(:artist, 3) }
+    end
+
+    it_behaves_like "an index endpoint which filters", User, {role: "Artist", fuzzy: {name: "pag"}} do
+      let(:matches){[
+        create(:artist, :with_profile, last_name: "Page"),
+        create(:artist, :with_profile, last_name: "Pagani"),
+        create(:artist, :with_profile, last_name: "Sappagio"),
+        create(:artist, :with_profile, first_name: "Paggrono")
+      ]}
+      let(:nonmatches){ [create(:user), create(:artist), create(:artist, :with_profile)] }
     end
   end
 
