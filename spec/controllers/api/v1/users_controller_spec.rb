@@ -48,6 +48,18 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       let(:nonmatching_resources){ create_list(:artist, 3) }
     end
 
+    it_behaves_like "an index endpoint which filters", User, {first_name: "John", last_name: "Campbell"} do
+      let(:matches){[
+        create(:artist, :with_profile, first_name: "John", last_name: "Campbell")
+      ]}
+      let(:nonmatches){[
+        create(:user),
+        create(:artist),
+        create(:artist, :with_profile),
+        create(:artist, :with_profile, first_name: "Johnny", last_name: "Campbell")
+      ]}
+    end
+
     it_behaves_like "an index endpoint which filters", User, {role: "Artist", fuzzy: {name: "pag"}} do
       let(:matches){[
         create(:artist, :with_profile, last_name: "Page"),
