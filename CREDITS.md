@@ -65,3 +65,4 @@
   + [Searchkick Partial Matches](https://github.com/ankane/searchkick#partial-matches)
   + [Re-index Searchkick on Production](https://stackoverflow.com/questions/27759036/searchkick-reindex-on-heroku)
   + [ActiveRecord Arrays in PostgreSQL](http://edgeguides.rubyonrails.org/active_record_postgresql.html#array)
+  + [Running into issues with PG Arrays](https://github.com/rails/rails/issues/29498)

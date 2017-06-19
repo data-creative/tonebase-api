@@ -3,8 +3,27 @@ require_relative "../../response"
 # @param [Hash] search_params
 # @param [Array<ApplicationRecord>] matching_resources Resources which match all the search terms.
 # @param [Array<ApplicationRecord>] nonmatching_resources Resources which match none of the search terms.
-# @param [Array<ApplicationRecord>, nil] partially_matching_resources Resources which match one but not all search terms.
 # @example
+#
+#   it_behaves_like "an index endpoint which filters", Video, {title: "My Sonata"} do
+#     let(:matches){ ["My Sonata"].map{|title|
+#       create(:video, title: title)
+#     }}
+#
+#     let(:nonmatches){ ["Sonata", "Other Sonata", "thirdsonata", "ABC"].map{|title|
+#       create(:video, title: title)
+#     }}
+#   end
+#
+#   it_behaves_like "an index endpoint which filters", Video, {fuzzy: {title: "Sonata"}} do
+#     let(:matches){ ["Sonata", "Other Sonata", "thirdsonata"].map{|title|
+#       create(:video, title: title)
+#     }}
+#
+#     let(:nonmatches){ ["ABC"].map{|title|
+#       create(:video, title: title)
+#     }}
+#   end
 #
 shared_examples_for "an index endpoint which filters" do |model_class, request_params|
   describe "response" do
