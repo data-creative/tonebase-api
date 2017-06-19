@@ -22,8 +22,8 @@ class Api::V1::VideosController < Api::V1::ApiController
   # GET /api/v1/videos
   def index
     videos = Video.eager_load(ASSOCIATIONS).all
-    videos = videos.where(query_params) if query_params.to_h.any?
-    videos = filter_on_array_inclusion(videos) if array_query_params.any?
+    videos = filter(videos) if search_params.to_h.any?
+    #videos = fuzzy_filter(videos) if fuzzy_search_params.to_h.any?
     render_paginated(videos)
   end
 
@@ -57,16 +57,20 @@ private
     params.require(:video).permit(PERMITTED_ATTRIBUTES)
   end
 
-  def query_params
+  def search_params
     params.permit([:title])
   end
 
-  def array_query_params
-    params.permit([:tags]).to_h
+  def filter(resources)
+    resources.where(search_params.to_h)
   end
 
-  def filter_on_array_inclusion(resources)
-    array_query_params.each do |k,v|
+  def fuzzy_search_params
+    params.require(:fuzzy).permit([:title, :tags])
+  end
+
+  def fuzzy_filter(resources)
+    fuzzy_search_params.to_h.each do |k,v|
       resources = resources.where("#{k} ILIKE ?", "%#{v}%")
     end
     return resources
