@@ -8,7 +8,7 @@ class CreateUserProfiles < ActiveRecord::Migration[5.0]
       t.string :image_url
       t.string :hero_url
       t.integer :birth_year
-      t.text :professions ###, array: true, default: []
+      t.text :professions, array: true, default: []
 
       t.timestamps
     end
