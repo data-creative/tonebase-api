@@ -109,12 +109,12 @@ ActiveRecord::Schema.define(version: 20170609184440) do
   create_table "user_music_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.boolean  "guitar_owned"
-    t.text     "guitar_models_owned"
-    t.text     "fav_composers"
-    t.text     "fav_performers"
-    t.text     "fav_periods"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.text     "guitar_models_owned", default: [],              array: true
+    t.text     "fav_composers",       default: [],              array: true
+    t.text     "fav_performers",      default: [],              array: true
+    t.text     "fav_periods",         default: [],              array: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["user_id"], name: "index_user_music_profiles_on_user_id", unique: true, using: :btree
   end
 
@@ -132,15 +132,15 @@ ActiveRecord::Schema.define(version: 20170609184440) do
 
   create_table "user_profiles", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "first_name",  null: false
-    t.string   "last_name",   null: false
+    t.string   "first_name",               null: false
+    t.string   "last_name",                null: false
     t.text     "bio"
     t.string   "image_url"
     t.string   "hero_url"
     t.integer  "birth_year"
-    t.text     "professions"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "professions", default: [],              array: true
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
   end
 
@@ -200,12 +200,13 @@ ActiveRecord::Schema.define(version: 20170609184440) do
   create_table "videos", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "instrument_id"
-    t.string   "title",         null: false
-    t.text     "description",   null: false
-    t.text     "tags"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "title",                      null: false
+    t.text     "description",                null: false
+    t.text     "tags",          default: [],              array: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["instrument_id"], name: "index_videos_on_instrument_id", using: :btree
+    t.index ["tags"], name: "index_videos_on_tags", using: :btree
     t.index ["title"], name: "index_videos_on_title", using: :btree
     t.index ["user_id", "title"], name: "index_videos_on_user_id_and_title", unique: true, using: :btree
     t.index ["user_id"], name: "index_videos_on_user_id", using: :btree

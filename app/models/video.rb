@@ -36,8 +36,6 @@ class Video < ApplicationRecord
   validates :title, {presence: true, uniqueness: {scope: :user_id}}
   validates :description, {presence: true}
 
-  serialize(:tags, Array)
-
   # Corresponds with the name used by accepts_nested_attributes_for.
   # Work-around to enable generic "create" endpoint spec to validate persistance of nested resources.
   def video_parts_attributes
