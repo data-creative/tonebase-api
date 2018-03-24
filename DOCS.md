@@ -80,7 +80,7 @@ When there are Client Errors, the API also returns descriptive error messages, s
   + `{"advertiser": ["can't be blank", "must exist"]}`
   + `{"price": ["can't be blank", "is not a number"]}`
   + `{"role": ["can't be blank", "is not included in the list"]}`
-  + `{"pagination": ["when supplying pagination parameters, please use both 'page' and 'per_page'"]}``
+  + `{"pagination": ["when supplying pagination parameters, please use both 'page' and 'per_page'"]}`
 
 ## Resources
 
